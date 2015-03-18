@@ -12,16 +12,15 @@ testCheckedCaseGenProf()
 }
 
 
-\references{
-in press
-}
-\author{
-Karim mezhoud
-}
 
-\value{
-Value
-}
 \examples{
-testCheckedCaseGenProf()
+\dontrun{
+##Load Session
+load(paste(path.package("canceR"),"/data/brca_tcga73genes.RData", sep=""))
+## Select Case from Breast Cancer
+##myGlobalEnv$curselectCases <- 9
+##Select Genetic Profile from Breast Cancer
+##myGlobalEnv$curselectGenProfs <- 4
+##testCheckedCaseGenProf()
+}
 }

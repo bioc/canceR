@@ -41,7 +41,7 @@ dialogOptionGSEAlm <- function(k, ClinicalData){
     
 
     #####################
-   
+#    
 #     tkgrid(frameCoVariables)
 #     tkgrid.configure(frameCoVariables, sticky="new")
 #     
@@ -60,6 +60,7 @@ dialogOptionGSEAlm <- function(k, ClinicalData){
 #         labelI <- tklabel(frameCoVariables,text= names(ClinicalData[i]))
 #         tkgrid(labelI,cbi)
 #     }
+
     OnOK <- function(){
         
         ######################

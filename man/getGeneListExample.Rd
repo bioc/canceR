@@ -2,21 +2,16 @@
 \alias{getGeneListExample}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-getGeneListExample
+get Gene List from examples
 }
 \description{
-get example of gene list.
+User can select one from available gene list
 }
-\usage{
-getGeneListExample()
-}
-%- maybe also 'usage' for other objects documented here.
-\value{
-Value
-}
+
 \examples{
 
-
-getGeneListExample()
-
+## Not run
+##library(canceR)
+##getGeneListExample()
+## End(Not run)
 }

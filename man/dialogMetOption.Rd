@@ -1,30 +1,37 @@
 \name{dialogMetOption}
 \alias{dialogMetOption}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-dialogMetOption
+dialog box to specify Methylation rate threshold of silencing genes.
 }
 \description{
-Specifying Methylation Option.
+dialog box to specify Methylation rate threshold of silencing genes.
 }
-\usage{
-dialogMetOption(ProfData, k)
-}
-%- maybe also 'usage' for other objects documented here.
+
+
 \arguments{
   \item{ProfData}{
-%%     ~~Describe \code{ProfData} here~~
+
 }
-  \item{k}{
-%%     ~~Describe \code{k} here~~
+  \item{k: integer}{
+
 }
 }
-\value{
-Value
+
+\seealso{
+getMetDataMultipleGenes
 }
+
 \examples{
-
-
-dialogMetOption()
-
+## Not run
+##Load Session
+##load(paste(path.package("canceR"),"/data/brca_tcga73genes.RData", sep=""))
+## Select Case from Prostate Cancer
+##myGlobalEnv$curselectCases <- 19
+##Select Genetic Profile from Prostate Cancer
+##myGlobalEnv$curselectGenProfs <- 17
+## get  Methylation data for 73 Genes list
+##getMetDataMultipleGenes()
+##dialogMetOption(myGlobalEnv$ProfData,1)
+## End(Not run)
 }

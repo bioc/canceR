@@ -1,21 +1,18 @@
 \name{about}
 \alias{about}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-About canceR
+get brief information and help.
 }
 \description{
-Help
-}
-\usage{
-about()
+This function is run by the botton "Help" in strating window.
 }
 
-\value{
-Value
-}
+
+
 \examples{
-
-about()
-
+## Not run
+#library(canceR)
+##canceR::about()
+## End(Not run)
 }

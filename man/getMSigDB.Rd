@@ -25,7 +25,9 @@ Value
 }
 \examples{
 
-
+\dontrun{
+library(canceR)
+##load(paste(path.package("canceR"),"/data/brca_tcgaGSEAlm1021.RData", sep=""))
 getMSigDB()
-
+}
 }

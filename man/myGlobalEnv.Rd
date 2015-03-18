@@ -15,9 +15,8 @@ Global environment to store canceR variables.
 
 \keyword{datasets}
 
-\value{
-Value
-}
+
 \examples{
-myGlobalEnv()
+library(canceR)
+myGlobalEnv
 }

@@ -2,19 +2,18 @@
 \alias{setWorkspace}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-setWorkspace
-}
-\description{
 Setting work Directory and output folders.
 }
-\usage{
-setWorkspace()
+\description{
+At starting window, user needs to set work directory for output data. The function is foud in File menu.  
 }
+
 
 \examples{
+\dontrun{
+library(canceR)
 setWorkspace()
+}
 }
 
-\value{
-setWorkspace()
-}
+

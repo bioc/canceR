@@ -29,8 +29,9 @@ cbioportal
 Value
 }
 \examples{
-
-
-canceRHelp()
+## Nor run
+##library(canceR)
+##getClinicalData()
+## End(Not run)
 
 }

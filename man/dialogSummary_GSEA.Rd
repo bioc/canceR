@@ -2,10 +2,10 @@
 \alias{dialogSummary_GSEA}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-dialogSummary_GSEA
+Dialog Box to specify phenotype (variable) used in last GSEA-R to get Summary Results.
 }
 \description{
-dialogSummary_GSEA
+This function ask the user to specify the phenotype (variable).
 }
 \usage{
 dialogSummary_GSEA(Variable, returnValOnCancel = "ID_CANCEL")
@@ -19,12 +19,14 @@ dialogSummary_GSEA(Variable, returnValOnCancel = "ID_CANCEL")
 %%     ~~Describe \code{returnValOnCancel} here~~
 }
 }
-\value{
-Value
-}
+
 \examples{
+\dontrun{
+library(canceR)
+## Load workspace
+load(paste(path.package("canceR"),"/data/ucec_tcga_pubGSEA1021.RData", sep=""))
+##Run.GSEA()
+##getSummaryGSEA()
 
-
-dialogSummary_GSEA()
-
+}
 }

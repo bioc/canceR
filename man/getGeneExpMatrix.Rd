@@ -16,7 +16,8 @@ Value
 }
 \examples{
 
-
-getGeneExpMatrix()
-
+## Not run
+library(canceR)
+#getGeneExpMatrix()
+## End(Not run)
 }

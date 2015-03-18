@@ -2,21 +2,17 @@
 \alias{dialogSelectFiles_GSEA}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-dialogSelectFiles_GSEA
+Dialog Box to  Select GCT, CLS, GMT and output Files for GSEA-R (Broad Institute) 
 }
 \description{
-Select needed files for GSEA
-}
-\usage{
-dialogSelectFiles_GSEA()
+This function select GCT, CLS, GMT and output Files for GSEA-R.
 }
 
-\value{
-Value
-}
 \examples{
-
-
-dialogSelectFiles_GSEA
-
+## Not run
+library(canceR)
+## Load workspace
+load(paste(path.package("canceR"),"/data/ucec_tcga_pubGSEA1021.RData", sep=""))
+##dialogSelectFiles_GSEA()
+## End(Not run)
 }

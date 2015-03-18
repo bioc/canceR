@@ -8,15 +8,10 @@ canceRHelp
 Help
 
 }
-\usage{
-canceRHelp()
-}
-\value{
-Value
-}
+
 \examples{
-
-
+\dontrun{
+library(canceR)
 canceRHelp()
-
+}
 }

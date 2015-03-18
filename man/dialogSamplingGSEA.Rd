@@ -2,7 +2,7 @@
 \alias{dialogSamplingGSEA}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-dialogSamplingGSEA
+Dialog  Box for Sampling patients from expression profile data used for GSEA-R (Broad Institute)
 }
 \description{
 Samoling Cases  from cbioportal for GSEA.
@@ -10,25 +10,26 @@ Samoling Cases  from cbioportal for GSEA.
 \usage{
 dialogSamplingGSEA(Lchecked_Cases, entryWidth = 10, returnValOnCancel = "ID_CANCEL")
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{Lchecked_Cases}{
-%%     ~~Describe \code{Lchecked_Cases} here~~
+\code{Number of checked Cases} 
 }
   \item{entryWidth}{
-%%     ~~Describe \code{entryWidth} here~~
+     \code{entryWidth=10} 
 }
   \item{returnValOnCancel}{
-%%     ~~Describe \code{returnValOnCancel} here~~
+\code{returnValOnCancel="ID_CANCEL"}
 }
 }
 
-\value{
-Value
-}
+
 \examples{
-
-
-dialogSamplingGSEA()
-
+\dontrun{
+##library(canceR)
+## Load workspace
+##load(paste(path.package("canceR"),"/data/ucec_tcga_pubGSEA1021.RData", sep=""))
+##Run.GSEA()
+##dialogSamplingGSEA(1,entryWidth=10,returnValOnCancel = "ID_CANCEL")
+}
 }

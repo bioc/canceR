@@ -11,8 +11,10 @@ Get  successively trees of genes list for multiple cases
 Value
 }
 \examples{
-
-getGenesTree_MultipleCases()
-
+## Not run
+##library(canceR)
+##load(paste(path.package("canceR"),"/data/brca_tcgaClassifier223.RData", sep=""))
+##getGenesTree_MultipleCases()
+## End(Not run)
 }
 

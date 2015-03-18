@@ -9,12 +9,6 @@
 %% Reduce the size of Vignette.pdf file
 %tools::compactPDF("/home/mezhoud/CGDS-R/canceR/vignettes/canceR.pdf", gs_quality="ebook")
 
-
-%% synchronize Github
-%%git remote add origin git@github.com:kmezhoud/canceR.git
-%%git pull origin master
-%%git push -u origin master
-
 \documentclass[a4paper]{article}
 %\usepackage[OT1]{fontenc}
 \usepackage{zi4}

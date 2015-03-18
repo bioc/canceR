@@ -2,20 +2,15 @@
 \alias{getGeneList}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-getGeneList
+get Gene List from file.
 }
 \description{
-get gene list from file.
-}
-\usage{
-getGeneList()
+User needs to specify which gene is interesting to get genomic cancer data. The gene must be with Symbol and one gene by line.
 }
 
-\value{
-Value
-}
 \examples{
-
-getGeneList()
-
+## Not run
+library(canceR)
+##getGeneList()
+## End(Not run)
 }

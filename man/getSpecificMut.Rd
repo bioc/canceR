@@ -1,23 +1,26 @@
 \name{getSpecificMut}
 \alias{getSpecificMut}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-getSpecificMut
+get Specific Mutation using Amino Acid changes.
 }
 \description{
-getSpecificMut
+This function search only mutation with specific Amino Acid changes using Regular Expression. User needs to specify Amino Acid change in dialog box.
 }
 
-\usage{
-getSpecificMut()
+\seealso{
+dilogSpecificMut
 }
-%- maybe also 'usage' for other objects documented here.
-\value{
-Value
-}
+
 \examples{
-
-
-getSpecificMut()
-
+\dontrun{
+##Load Session
+##load(paste(path.package("canceR"),"/data/brca_tcga73genes.RData", sep=""))
+## Select Case
+##myGlobalEnv$curselectCases <- 2
+##Select Genetic Profile
+##myGlobalEnv$curselectGenProfs <- 9
+## get Specific Mutation data for 73 Genes list
+##getSpecificMut()
+}
 }

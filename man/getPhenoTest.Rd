@@ -1,21 +1,26 @@
 \name{getPhenoTest}
 \alias{getPhenoTest}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-getPhenoTest
+Associate Phenotypes (variables) from Clinical data to gene expression profile.
 }
 \description{
 see phenoTest package
 }
-\usage{
-getPhenoTest()
-}
-\value{
-Value
-}
+
+
 \examples{
+\dontrun{
+#library(canceR)
+#library(Biobase)
+#library(phenoTest)
+## Load workspace
+#load(paste(path.package("canceR"),"/data/prad_michPhenoTest1021.RData", sep=""))
 
-
-getPhenoTest()
-
+#getPhenoTest()
+## Empty Survival raviables
+## Select DSF_STATUS for categorical variable
+## Select PSA Level for Numeric variale
+## BH 
+}
 }

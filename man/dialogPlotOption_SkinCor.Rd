@@ -1,26 +1,26 @@
 \name{dialogPlotOption_SkinCor}
 \alias{dialogPlotOption_SkinCor}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 dialogPlotOption_SkinCor
 }
 \description{
 Specifying Skin and Correlation Options.
 }
-\usage{
-dialogPlotOption_SkinCor()
-}
-%- maybe also 'usage' for other objects documented here.
+
+
 
 \seealso{
 cgdsr package
 }
-\value{
-Value
-}
+
 \examples{
+\dontrun{
+library(canceR)
+##Load workspace
+load(paste(path.package("canceR"),"/data/ucec_tcga_pubGSEA1021.RData", sep=""))
+plot_2Genes_1GenProf()
 
-
-dialogPlotOption_skinCor()
-
+##dialogPlotOption_SkinCor(2)
+}
 }

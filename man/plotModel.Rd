@@ -5,7 +5,7 @@
 plot Model
 }
 \description{
-model ploting with tcltk
+model plotting with tcltk
 }
 \usage{
 plotModel(plotCommand, title = "TITLE", hscale = 1, vscale = 1)
@@ -26,9 +26,13 @@ plotModel(plotCommand, title = "TITLE", hscale = 1, vscale = 1)
 }
 }
 
-\value{
-Value
-}
+
 \examples{
-plotModel(plotCommand, title = "TITLE", hscale = 1, vscale = 1)
+\dontrun{
+##library(canceR)
+## Load workspace
+##load(paste(path.package("canceR"),"/data/gbm_tcgaPlotTwoGenProf.RData", sep=""))
+##plot_1Gene_2GenProfs()
+##use default options
+}
 }

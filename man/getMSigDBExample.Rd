@@ -20,7 +20,8 @@ Value
 }
 \examples{
 
-
+\dontrun{
+library(canceR)
 getMSigDBExample()
-
+}
 }

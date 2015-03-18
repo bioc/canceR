@@ -16,7 +16,8 @@ Value
 }
 \examples{
 
-
-getGCTCLSExample()
-
+\dontrun{
+library(canceR)
+##getGCTCLSExample()
+}
 }

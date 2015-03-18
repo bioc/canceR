@@ -16,5 +16,8 @@ Match_GeneList_MSigDB()
 Value
 }
 \examples{
-Match_GeneList_MSigDB()
+##not run
+##library(canceR)
+##Match_GeneList_MSigDB()
+## End(Not run)
 }

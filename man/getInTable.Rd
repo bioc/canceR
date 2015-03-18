@@ -25,7 +25,8 @@ Value
 
 \examples{
 
-
-getInTable()
-
+## Not run
+##library(canceR)
+##getInTable(matrix(2,3,4))
+## end(Not run)
 }

@@ -42,7 +42,16 @@ geteSet <- function(){
                     
                     Case<- myGlobalEnv$CasesRefStudies[myGlobalEnv$curselectCases[k]]
                     
-                    ProfData<- getProfileData(myGlobalEnv$cgds,myGlobalEnv$GeneList, GenProf,Case)
+                    
+                    
+                    if(length(myGlobalEnv$GeneList)>500){
+                        ProfData <- getMegaProfData(myGlobalEnv$GeneList,k )
+                    } else{
+                        ProfData<-getProfileData(myGlobalEnv$cgds,myGlobalEnv$GeneList, GenProf,Case)
+                        print(ncol(ProfData))
+                    }
+                    
+                    #ProfData<- getProfileData(myGlobalEnv$cgds,myGlobalEnv$GeneList, GenProf,Case)
                     #ProfData <-rbind.na(colnames(ProfData), ProfData)
                     
                     print("getting Profile Data and removing all NAs rows...")

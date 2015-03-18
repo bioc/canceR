@@ -13,16 +13,16 @@ displayInTable(tclarray, title = "", height = -1, width = -1, nrow = -1, ncol = 
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{tclarray}{
-%%     ~~Describe \code{tclarray} here~~
+ \code{tclarray=Matrix} 
 }
   \item{title}{
-%%     ~~Describe \code{title} here~~
+\code{title="Title"} 
 }
   \item{height}{
-%%     ~~Describe \code{height} here~~
+\code{height=ncol(Matrix)}
 }
   \item{width}{
-%%     ~~Describe \code{width} here~~
+\code{width= nrow(Matrix)} 
 }
   \item{nrow}{
 %%     ~~Describe \code{nrow} here~~
@@ -31,11 +31,10 @@ displayInTable(tclarray, title = "", height = -1, width = -1, nrow = -1, ncol = 
 %%     ~~Describe \code{ncol} here~~
 }
 }
-\value{
-Value
-}
+
 \examples{
-
-displayInTable()
-
+## Not run
+##library(canceR)
+##displayInTable()
+## End(Not run)
 }

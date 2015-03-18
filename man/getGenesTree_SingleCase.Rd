@@ -15,8 +15,9 @@ getGenesTree_SingleCase()
 Value
 }
 \examples{
-
-
-getGenesTree_SingleCase()
-
+## Not run
+##library(canceR)
+##load(paste(path.package("canceR"),"/data/brca_tcgaClassifier223.RData", sep=""))
+##getGenesTree_SingleCase()
+##end(Not run)
 }

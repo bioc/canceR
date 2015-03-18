@@ -34,11 +34,9 @@ getGSEAlm_Diseases <-function(){
         
         
         DiseasesType <- 0
-        
         SamplingProfsData<-0 
-        ProfDataAll=0
-        ProfData=0
-        LengthGenProfs=0
+        ProfData<-0
+        LengthGenProfs<-0
         LengthCases=0
         for (i in 1:Lchecked_Studies){
             
@@ -92,7 +90,7 @@ getGSEAlm_Diseases <-function(){
                     if(!exists(deparse(substitute(myGlobalEnv$GenesDetails)))) {
                         ProfData <- t(t(ProfData))
                         ## Display AssyData with Tcl Table
-                        title=paste(myGlobalEnv$StudyRefGenProf[k],":",myGlobalEnv$GenProfChoice[k])
+                        title=paste(myGlobalEnv$StudyChoice[k],":",myGlobalEnv$GenProfsStudies[myGlobalEnv$curselectGenProfs][k])
                         getInTable(ProfData,title)
                         
                         
@@ -115,6 +113,10 @@ getGSEAlm_Diseases <-function(){
                     
                     SamplingProfsData <- cbind(SamplingProfsData,SamplingProfData)
                     print(paste ("sampling data from study:", k))
+                    
+                    ### ONly for example brca_tcga73genes.RData
+                    ##myGlobalEnv$StudyRefGenProf <- c("brca_tcga", "prad_tcga")
+
                     ##Extracting Disease Type
                     DiseaseType<- as.matrix(rep(myGlobalEnv$StudyRefGenProf[k],times=myGlobalEnv$ReturnDialogGeneClasses[1]))
                     DiseasesType <- c(DiseasesType, DiseaseType)  

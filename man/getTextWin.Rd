@@ -32,8 +32,8 @@ Karim Mezhoud
 
 
 \examples{
-
-
-getTextWin()
-
+## Not run
+##library(canceR)
+##getTextWin()
+## end(Notrun)
 }

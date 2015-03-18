@@ -35,10 +35,10 @@ Example of gene expression matrix
 \source{
 cbioportal
 }
-\value{
-Value
-}
+
 \keyword{datasets}
 \examples{
-GeneExpMatrix()
+## Not run
+##canceRHelp()
+## End(Not run)
 }

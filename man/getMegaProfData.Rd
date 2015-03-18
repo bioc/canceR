@@ -23,7 +23,9 @@ getMegaProfData(MegaGeneList, k)
 Value
 }
 \examples{
-
-getMegaProfData()
-
+\dontrun{
+##library(canceR)
+##load(paste(path.package("canceR"),"/data/brca_tcgaGSEAlm1021.RData", sep=""))
+##getMegaProfData(myGlobaEnv$MegaGeneList,1)
+}
 }

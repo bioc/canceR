@@ -15,7 +15,7 @@ Value
 }
 \examples{
 
-
-getClinicalDataMatrix()
-
+## Not run
+##getClinicalDataMatrix()
+## End(Not run)
 }

@@ -2,10 +2,10 @@
 \alias{modalDialog}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Model dialogue
+ Dialog box to specify Gene Symbol.
 }
 \description{
-Model Dialogue
+This function get Profile Data for one gene Symbol.
 }
 \usage{
 modalDialog(title, question, entryInit, entryWidth = 40, returnValOnCancel = "ID_CANCEL")
@@ -29,10 +29,19 @@ modalDialog(title, question, entryInit, entryWidth = 40, returnValOnCancel = "ID
 }
 }
 
-\value{
-Value
+\seealso{
+getProfilesDataSingleGene
 }
 
 \examples{
-modalDialog("title", "question", "entryInit", entryWidth = 40, returnValOnCancel = "ID_CANCEL")
+\dontrun{
+##Load Session
+##load(paste(path.package("canceR"),"/data/brca_tcga73genes.RData", sep=""))
+## Select Case from Breast Cancer
+##myGlobalEnv$curselectCases <- 9
+##Select Genetic Profile from Breast Cancer
+##myGlobalEnv$curselectGenProfs <- 4
+## get Specific Mutation data for 73 Genes list
+##getProfilesDataSingleGene()
+}
 }

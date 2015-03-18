@@ -1,29 +1,27 @@
 \name{canceR_Vignette}
 \alias{canceR_Vignette}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-canceR_Vignette
+Get Vignette 
 }
 \description{
-CanceR Manual
+This function open the canceR Vignette pdf file from Help menu.
 }
 \usage{
 canceR_Vignette()
 }
-%- maybe also 'usage' for other objects documented here.
+
 
 \references{
-In press
+canceR: A Graphical User Interface for accessing and modeling the MSKCC Cancer Genomics Data.
 }
 \author{
-Karim mezhoud
+Karim Mezhoud Nuclear Safety Department, Nuclear Science Center. Tunisia
 }
-\value{
-Value
-}
+
 \examples{
+\dontrun{
+canceR_Vignette()
 
-
-canceR_vignette()
-
+}
 }

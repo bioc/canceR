@@ -14,8 +14,8 @@ getMSigDBfile()
 Value
 }
 \examples{
-
-
+\dontrun{
+library(canceR)
 getMSigDBfile()
-
+}
 }

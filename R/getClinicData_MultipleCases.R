@@ -13,8 +13,8 @@ getClinicData_MultipleCases<- function(getSummaryGSEAExists){
     ClinicalDataSub <-NULL
     ClinicalDataSub_All <- NULL
     
-    if(!exists("curselectCases", envir = myGlobalEnv)){
-        msgNoCases <- "Select at list one Case"
+    if(length(grep("curselectCases",ls(myGlobalEnv)))==0){
+        msgNoCases <- "Select at less one Case"
         tkmessageBox(message=msgNoCases)
         stop(msgNoCases)
     }

@@ -1,19 +1,18 @@
 \name{plot_2Genes_1GenProf}
 \alias{plot_2Genes_1GenProf}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
-plot_2Genes_1GenProf
+plot correlation of two genes expressions.
 }
 \description{
 Plotting the correlation between two genes.
 }
-\usage{
-plot_2Genes_1GenProf()
-}
-%- maybe also 'usage' for other objects documented here.
-\value{
-Value
-}
+
 \examples{
-plot_2Genes_1GenProf()
+\dontrun{
+##library(canceR)
+## Load workspace
+##load(paste(path.package("canceR"),"/data/ucec_tcga_pubGSEA1021.RData", sep=""))
+##plot_2Genes_1GenProf()
+}
 }

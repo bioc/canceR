@@ -2,26 +2,24 @@
 \alias{getGenesClassifier}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-getGenesClassifier
+Ranking Genes by Diseases.
 }
 \description{
 refers to geNetClassifier package.
 }
-\usage{
-getGenesClassifier()
-}
-%- maybe also 'usage' for other objects documented here.
 
 \seealso{
-geNetClassifier
+geNetClassifier package
 }
 
-\value{
-Value
-}
+
 \examples{
-
-
-getGenesClassifier()
-
+## Not run
+##library(canceR)
+##library(Biobase)
+##library(geNetClassifier)
+## Load workspace
+#load(paste(path.package("canceR"),"/data/brca_tcgaClassifier223.RData", sep=""))
+##getGenesClassifier()
+## End(Not run)
 }

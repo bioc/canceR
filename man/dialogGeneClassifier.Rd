@@ -1,6 +1,6 @@
 \name{dialogGeneClassifier}
 \alias{dialogGeneClassifier}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 dialogGeneClassifier
 }
@@ -10,24 +10,27 @@ Dialog box to get gene classifier options.
 \usage{
 dialogGeneClassifier(Lchecked_Cases, entryWidth = 10, returnValOnCancel = "ID_CANCEL")
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{Lchecked_Cases}{
-%%     ~~Describe \code{Lchecked_Cases} here~~
+\code{Number of checked Cases} 
 }
   \item{entryWidth}{
-%%     ~~Describe \code{entryWidth} here~~
+ \code{10} 
 }
   \item{returnValOnCancel}{
-%%     ~~Describe \code{returnValOnCancel} here~~
+\code{"ID_CANCEL"} 
 }
 }
-\value{
-Value
-}
+
 \examples{
-
-
-dialogGeneClassifier()
-
+## Not run
+library(canceR)
+library(Biobase)
+library(geNetClassifier)
+## Load workspace
+load(paste(path.package("canceR"),"/data/brca_tcgaClassifier223.RData", sep=""))
+##getGenesClassifier()
+##dialogGeneClassifier
+## End(Not run)
 }

@@ -2,10 +2,10 @@
 \alias{dialogMut}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-dialogue box to specify Animo acid changes using regular expression 
+dialog box to specify Animo Acid changes using regular expression 
 }
 \description{
-dialogue box to specify Animo acid changes using regular expression
+dialog box to specify Animo Acid changes using regular expression.
 }
 \usage{
 dialogMut(title, question, entryInit, entryWidth = 40, returnValOnCancel = "ID_CANCEL")
@@ -16,24 +16,33 @@ dialogMut(title, question, entryInit, entryWidth = 40, returnValOnCancel = "ID_C
 %%     ~~Describe \code{title} here~~
 }
   \item{question}{
-%%     ~~Describe \code{question} here~~
+ \code{question= enter gene Symbol} 
 }
   \item{entryInit}{
-%%     ~~Describe \code{entryInit} here~~
+        \code{entryInit= P53} 
 }
   \item{entryWidth}{
-%%     ~~Describe \code{entryWidth} here~~
+\code{entryWidth = 10} 
 }
   \item{returnValOnCancel}{
-%%     ~~Describe \code{returnValOnCancel} here~~
+     \code{returnValOnCancel= ID_CANCEL} h
 }
 }
-\value{
-Value
+
+\seealso{
+getMutData
 }
 \examples{
-
-
-dialogMut()
-
+\dontrun{
+## library(canceR)
+##Load Session
+##load(paste(path.package("canceR"),"/data/brca_tcga73genes.RData", sep=""))
+## Select Case
+myGlobalEnv$curselectCases <- 2
+##Select Genetic Profile
+myGlobalEnv$curselectGenProfs <- 9
+## get Mutation data for 73 Genes list
+##getMutData()
+##dialogMut("title", "question", "entryInit", entryWidth = 40, returnValOnCancel = "ID_CANCEL")
+}
 }

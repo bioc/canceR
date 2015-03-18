@@ -2,31 +2,37 @@
 \alias{dialogOptionPhenoTest}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-dialogOptionPhenoTest
+Dialog Box to specify  Variables for PhenoTest function.
 }
 \description{
 Specifying PhenoTest Options.
 }
-\usage{
-dialogOptionPhenoTest(eSet)
-}
-%- maybe also 'usage' for other objects documented here.
+
+
 \arguments{
   \item{eSet}{
-%%     ~~Describe \code{eSet} here~~
+ Expression Set function to built eSet from gene expression and clinical data.
 }
 }
 
 \seealso{
 PhenoTest package
 }
-\value{
-Value
-}
+
 
 \examples{
+\dontrun{
+library(canceR)
+library(Biobase)
+library(phenoTest)
+## Load workspace
+load(paste(path.package("canceR"),"/data/prad_michPhenoTest1021.RData", sep=""))
 
-
-dialogOptionPhenoTest()
-
+getPhenoTest()
+## Empty Survival raviables
+## Select DSF_STATUS for categorical variable
+## Select PSA Level for Numeric variale
+## BH 
+##dialogOptionPhenoTest()
+}
 }
