@@ -1,14 +1,33 @@
-##set myGlobalEnv
-
 myGlobalEnv <- new.env(parent = emptyenv())
-
+#' main function
+#' @usage
+#' canceR()
+#'
+#' @return open the starting windows with cancer studies
+#' @export
+#'
+#' @examples
+#' myGlobalEnv <- new.env(parent = emptyenv())
+#' \dontrun{
+#' canceR()
+#'}
+#' @import tkrplot
+#' @import cgdsr
+#' @import tcltk
+#' @import tcltk2
+#' 
+#'@importFrom graphics axis image layout legend lines par plot points text
+#'@importFrom stats as.formula cor density dist hclust median na.exclude p.adjust pnorm sd setNames window
+#'@importFrom utils browseURL capture.output memory.limit read.table write.table read.delim
+#'
+#'
 canceR <- function(){
     
     ## Create project
     cgds<-CGDS("http://www.cbioportal.org/public-portal/")
     myGlobalEnv$cgds <- cgds
     ## Get all Cancer Studies using column 2 (description)
-    Studies <- getCancerStudies(cgds)[,2]
+    Studies <- getCancerStudies.CGDS(cgds)[,2]
     myGlobalEnv$Studies <- Studies
     
     ## first dialog START or CANCEL

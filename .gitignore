@@ -4,3 +4,8 @@
 .Rbuildignore
 .directory
 info.svx
+<<<<<<< HEAD
+=======
+Results
+.DS_Store
+>>>>>>> master

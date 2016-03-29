@@ -1,3 +1,15 @@
+#' The  main function to run GSEA-R from Broad Institute
+#' @usage
+#' Run.GSEA()
+#' 
+#' @return A vector with sampling size
+#' @export
+#'
+#' @examples
+#' load(paste(path.package("canceR"),"/data/ucec_tcga_pubGSEA1021.RData", sep=""))
+#' \dontrun{
+#' Run.GSEA()
+#' }
 Run.GSEA <- function(){
 #   if (!require("GSEABase")) {
 #     source("http://bioconductor.org/biocLite.R")
@@ -60,7 +72,7 @@ GSEA.Analyze.Sets(
   
   directory           = myGlobalEnv$fname.Output,        # Directory where to store output and results (default: "")
    topgs = 20,                              # number of top scoring gene sets used for analysis
-   non.interactive.run = F,
+   non.interactive.run = FALSE,
    height = 16,
    width = 16
 )
