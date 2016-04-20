@@ -12,5 +12,5 @@
     function() {
         tkgrab.release(window)
         helpIndex <- file.path(system.file(package="canceR"),"canceR.html")
-        if (interactive() browseURL(helpIndex))
+        if (interactive()) browseURL(helpIndex)
     }
