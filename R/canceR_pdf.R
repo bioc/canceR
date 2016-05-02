@@ -15,5 +15,5 @@
     function() {
         tkgrab.release(window)
         ViggIndex <- file.path(system.file("extdata",package="canceR"),"canceR.pdf")
-        Biobase::openPDF (ViggIndex) # opens the pdf
+        if (interactive()) Biobase::openPDF (ViggIndex) # opens the pdf
     }
