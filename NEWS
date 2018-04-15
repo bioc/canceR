@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.11.01 (15 April 2018)
+--------------------------------------------
++ rm gamma = 1.5 argument for grDevices::rainbow function
+
 CHANGES IN VERSION 1.7.04 (17 April 2017)
 --------------------------------------------
 get Manual from Bioconductor.org
