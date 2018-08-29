@@ -85,9 +85,10 @@ run \texttt{R} and write theses lines in console to install dependancies.
 install.packages("RCurl", "XML")
 install.packages(c("cgdsr",  "tkrplot",  "Formula", "RSvgDevice","RCurl" ))
 ## dependencies from Bioconductor 
-source("http://bioconductor.org/biocLite.R")
-biocLite("GSEABase", "GSEAlm","geNetClassifier","Biobase", "phenoTest") 
-biocLite("canceR")
+if (!requireNamespace("BiocManager", quietly=TRUE))
+    install.packages("BiocManager")
+BiocManager::install("GSEABase", "GSEAlm","geNetClassifier","Biobase", "phenoTest") 
+BiocManager::install("canceR")
 library(canceR)
 canceR()
 \end{Sinput}
