@@ -13,8 +13,8 @@
 Run.GSEA <- function(){
 #   if (!require("GSEABase")) {
 #     if (!requireNamespace("BiocManager", quietly=TRUE))
-    #     install.packages("BiocManager")
-#     BiocManager::install("GSEABase")
+#    install.packages("BioManager")
+#    BiocManager::install("GSEABase")
 #     library("GSEABase")
 #   }
   #source("dialogSelectFiles_GSEA.R")

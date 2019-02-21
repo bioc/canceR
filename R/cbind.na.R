@@ -3,15 +3,15 @@
 #' @param ... ...
 #' @param deparse.level  1
 #' 
-#'
+#' 
 #' @return a data frame with merged columns
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#'col1 <- c("a","b","c","d")
-#'col2 <- c("A", "B", "C")
-#'col3 <- cbind.na(col1, col2)
+#' col1 <- c("a","b","c","d")
+#' col2 <- c("A", "B", "C")
+#' col3 <- cbind.na(col1, col2)
 #'}
 #'
 #'
