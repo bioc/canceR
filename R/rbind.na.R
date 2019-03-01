@@ -1,6 +1,6 @@
 #' bind non equal row
 #' @usage rbind.na(..., deparse.level = 1) 
-#' @param ... ...
+#' @param ... two rows row1, row2
 #' @param deparse.level  1
 #' 
 #'

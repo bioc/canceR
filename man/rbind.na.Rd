@@ -7,7 +7,7 @@
 rbind.na(..., deparse.level = 1)
 }
 \arguments{
-\item{...}{...}
+\item{...}{two rows row1, row2}
 
 \item{deparse.level}{1}
 }

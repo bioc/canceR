@@ -7,9 +7,9 @@
 cbind.na(..., deparse.level = 1)
 }
 \arguments{
-\item{...}{...}
+\item{...}{two columns col1, col2}
 
-\item{deparse.level}{1}
+\item{deparse.level}{1 is default}
 }
 \value{
 a data frame with merged columns

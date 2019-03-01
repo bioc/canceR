@@ -1,17 +1,18 @@
 #' bind non equal colunm
-#' @usage cbind.na(..., deparse.level = 1) 
-#' @param ... ...
-#' @param deparse.level  1
 #' 
-#'
+#' @usage cbind.na(..., deparse.level = 1) 
+#' @param ...  two columns col1, col2
+#' @param deparse.level  1 is default
+#' 
+#' 
 #' @return a data frame with merged columns
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#'col1 <- c("a","b","c","d")
-#'col2 <- c("A", "B", "C")
-#'col3 <- cbind.na(col1, col2)
+#' col1 <- c("a","b","c","d")
+#' col2 <- c("A", "B", "C")
+#' col3 <- cbind.na(col1, col2)
 #'}
 #'
 #'
