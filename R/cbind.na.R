@@ -1,13 +1,14 @@
 #' bind non equal colunm
 #' 
 #' @usage cbind.na(..., deparse.level = 1) 
-#' @param ...  two columns col1, col2
-#' @param deparse.level  1 is default
-#' 
+#' @param ...  (generalized) vectors or matrices. 
+#' @param deparse.level  integer controlling the construction of labels in 
+#' the case of non-matrix-like arguments (for the default method):
+#' deparse.level = 0 constructs no labels; the default,
+#' deparse.level = 1 or 2 constructs labels from the argument names.
 #' 
 #' @return a data frame with merged columns
-#' @export
-#'
+#' 
 #' @examples
 #' \dontrun{
 #' col1 <- c("a","b","c","d")
@@ -16,7 +17,7 @@
 #'}
 #'
 #'
-cbind.na <- function (..., deparse.level = 1) 
+cbind.na <- function(..., deparse.level = 1) 
 {
     na <- nargs() - (!missing(deparse.level))    
     deparse.level <- as.integer(deparse.level)

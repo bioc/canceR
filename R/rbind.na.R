@@ -1,11 +1,13 @@
 #' bind non equal row
-#' @usage rbind.na(..., deparse.level = 1) 
-#' @param ... two rows row1, row2
-#' @param deparse.level  1
 #' 
+#' @usage rbind.na(..., deparse.level = 1) 
+#' @param ...  (generalized) vectors or matrices. 
+#' @param deparse.level  integer controlling the construction of labels in 
+#' the case of non-matrix-like arguments (for the default method):
+#' deparse.level = 0 constructs no labels; the default,
+#' deparse.level = 1 or 2 constructs labels from the argument names.
 #'
 #' @return a data frame with merged rows
-#' @export
 #'
 #' @examples
 #' \dontrun{
@@ -15,7 +17,7 @@
 #'}
 #'
 #'
-rbind.na <- function (..., deparse.level = 1) 
+rbind.na <- function(..., deparse.level = 1) 
 {
     na <- nargs() - (!missing(deparse.level))
     deparse.level <- as.integer(deparse.level)
