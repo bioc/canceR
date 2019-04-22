@@ -1,153 +1,157 @@
-CHANGES IN VERSION 1.17.3 (21 April 2019)
+CHANGES IN VERSI+N 1.17.4 (22 April 2019)
 --------------------------------------------
-o modify doc for cbind.na and rbind.na functions
++ m+dify d+c f+r cbind.na and rbind.na functi+ns
 
-CHANGES IN VERSION 1.16.1 (22 February 2019)
+CHANGES IN VERSI+N 1.17.3 (21 April 2019)
 --------------------------------------------
-o update NEWS format
++ m+dify d+c f+r cbind.na and rbind.na functi+ns
 
-CHANGES IN VERSION 1.16.1 (22 February 2019)
+CHANGES IN VERSI+N 1.16.1 (22 February 2019)
 --------------------------------------------
-o Change the address of cgdsr: http://www.cbioportal.org/ instead http://www.cbioportal.org/public-portal/
++ update NEWS f+rmat
 
-CHANGES IN VERSION 1.11.01 (16 October 2018)
+CHANGES IN VERSI+N 1.16.1 (22 February 2019)
 --------------------------------------------
-o update NEWS format file
++ Change the address +f cgdsr: http://www.cbi+p+rtal.+rg/ instead http://www.cbi+p+rtal.+rg/public-p+rtal/
 
-CHANGES IN VERSION 1.11.01 (15 April 2018)
+CHANGES IN VERSI+N 1.11.01 (16 +ct+ber 2018)
 --------------------------------------------
-o rm gamma = 1.5 argument for grDevices::rainbow function
++ update NEWS f+rmat file
 
-CHANGES IN VERSION 1.7.04 (17 April 2017)
+CHANGES IN VERSI+N 1.11.01 (15 April 2018)
 --------------------------------------------
-o get Manual from Bioconductor.org
-o browseURL('http://www.bioconductor.org/packages/3.4/bioc/vignettes/canceR/inst/doc/canceR.pdf')
++ rm gamma = 1.5 argument f+r grDevices::rainb+w functi+n
 
-CHANGES IN VERSION 1.7.3 (17 February 2017)
+CHANGES IN VERSI+N 1.7.04 (17 April 2017)
 --------------------------------------------
-o dontrun examples
++ get Manual fr+m Bi+c+nduct+r.+rg
++ br+wseURL('http://www.bi+c+nduct+r.+rg/packages/3.4/bi+c/vignettes/canceR/inst/d+c/canceR.pdf')
 
-CHANGES IN VERSION 1.7.2 (17 January 2017)
+CHANGES IN VERSI+N 1.7.3 (17 February 2017)
 --------------------------------------------
-o resolve issue when computing mutation frequency
++ d+ntrun examples
 
-CHANGES IN VERSION 1.5.2 (01 Septembre 2016)
+CHANGES IN VERSI+N 1.7.2 (17 January 2017)
 --------------------------------------------
-o resolve issue 1 about "tl not found"
-o delete file R/getGeneticProfiles.R
-o resolve 'no visible binding for global variable'
-o add R/aaa.R
++ res+lve issue when c+mputing mutati+n frequency
 
-CHANGES IN VERSION 1.3.91 (01 May 2016)
+CHANGES IN VERSI+N 1.5.2 (01 Septembre 2016)
+--------------------------------------------
++ res+lve issue 1 ab+ut "tl n+t f+und"
++ delete file R/getGeneticPr+files.R
++ res+lve 'n+ visible binding f+r gl+bal variable'
++ add R/aaa.R
+
+CHANGES IN VERSI+N 1.3.91 (01 May 2016)
 ---------------------------------------
-o rm canceR.pdf and lines from canceR.Rnw
-o %\VignetteEngine{R.rsp::tex}
-o %\VignetteKeyword{R}
-o %\VignetteKeyword{package}
-o %\VignetteKeyword{vignette}
-o %\VignetteKeyword{LaTeX}
-o %\VignetteAuthor{Karim Mezhoud}
-o %\VignetteDepends{}
-o %\VignetteKeywords{A Graphical User Interface for accessing and modeling the MSKCC Cancer Genomics °Data.}
-o %\VignettePackage{canceR}
++ rm canceR.pdf and lines fr+m canceR.Rnw
++ %\VignetteEngine{R.rsp::tex}
++ %\VignetteKeyw+rd{R}
++ %\VignetteKeyw+rd{package}
++ %\VignetteKeyw+rd{vignette}
++ %\VignetteKeyw+rd{LaTeX}
++ %\VignetteAuth+r{Karim Mezh+ud}
++ %\VignetteDepends{}
++ %\VignetteKeyw+rds{A Graphical User Interface f+r accessing and m+deling the MSKCC Cancer Gen+mics °Data.}
++ %\VignettePackage{canceR}
 
-CHANGES IN VERSION 1.3.7 (07 April 2016)
+CHANGES IN VERSI+N 1.3.7 (07 April 2016)
 ------------------------
-o add /extdata/canceR.pdf
++ add /extdata/canceR.pdf
 
-CHANGES IN VERSION 1.3.6 (05 April 2016)
+CHANGES IN VERSI+N 1.3.6 (05 April 2016)
 ------------------------
-o fix paths in running examples
++ fix paths in running examples
 
-CHANGES IN VERSION 1.3.5 (04 April 2016)
+CHANGES IN VERSI+N 1.3.5 (04 April 2016)
 ------------------------
-o git reset --hard HEAD~
-o bash ../update_remotes.sh
-o add vignette/image, pump version, delete canceR.tex
-o git commit -m "fix vignette rm canceR.tex"
-o git svn rebase
-o git svn dcommit --add-author-from
++ git reset --hard HEAD~
++ bash ../update_rem+tes.sh
++ add vignette/image, pump versi+n, delete canceR.tex
++ git c+mmit -m "fix vignette rm canceR.tex"
++ git svn rebase
++ git svn dc+mmit --add-auth+r-fr+m
 
-CHANGES IN VERSION 1.3.2 (28 Mars 2016)
+CHANGES IN VERSI+N 1.3.2 (28 Mars 2016)
 ------------------------
-o Bioc devel canceR is not updated to version 1.3.1
-o Just add image in README
++ Bi+c devel canceR is n+t updated t+ versi+n 1.3.1
++ Just add image in README
 
-CHANGES IN VERSION 1.3.1 (24 Mars 2016)
+CHANGES IN VERSI+N 1.3.1 (24 Mars 2016)
 ------------------------
-o rewrite documents using roxygen
-o rewrite test package
-o include .travis check system
++ rewrite d+cuments using r+xygen
++ rewrite test package
++ include .travis check system
 
-CHANGES IN VERSION 1.1.2 (12 May 2015)
+CHANGES IN VERSI+N 1.1.2 (12 May 2015)
 ------------------------
-o add Circos function to plot Menu
-o Function 1:    getGeneListmSigDB(): get Gene list and their gene Sets from MSigDB
-o Function 1.1: dialoggetGeneListMSigDB(): Select Gene Sets from list and extract hem genes
-o Function 2: getListProfData(): This function save Profiles Data of cancer in lists; Outputs:
-                   + myGlobalEnv$ListProfData$Expression 
-                   + myGlobalEnv$ListProfData$CNA    
-                   + myGlobalEnv$ListMetData$HM450$StudiesRef
-                   + myGlobalEnv$ListMetData$HM27$StudiesRef
-                   + myGlobalEnv$ListProfData$RPPA$StudiesRef
-                   + myGlobalEnv$ListProfData$miRNA$StudiesRef
-                   + myGlobalEnv$ListMutData$StudiesRef
-                   + myGlobalEnv$Freq_DfMutData
++ add Circ+s functi+n t+ pl+t Menu
++ Functi+n 1:    getGeneListmSigDB(): get Gene list and their gene Sets fr+m MSigDB
++ Functi+n 1.1: dial+ggetGeneListMSigDB(): Select Gene Sets fr+m list and extract hem genes
++ Functi+n 2: getListPr+fData(): This functi+n save Pr+files Data +f cancer in lists; +utputs:
+                   + myGl+balEnv$ListPr+fData$Expressi+n 
+                   + myGl+balEnv$ListPr+fData$CNA    
+                   + myGl+balEnv$ListMetData$HM450$StudiesRef
+                   + myGl+balEnv$ListMetData$HM27$StudiesRef
+                   + myGl+balEnv$ListPr+fData$RPPA$StudiesRef
+                   + myGl+balEnv$ListPr+fData$miRNA$StudiesRef
+                   + myGl+balEnv$ListMutData$StudiesRef
+                   + myGl+balEnv$Freq_DfMutData
 
-o Function 3 : getCircos(dimension="All"): Main fucntion of Circos plot: plot Tracks (dimensions) and Sectors (diseases)
-o Function 3.1: getCor_ExpCNAMet(ListMatrix, dimension)
-o Function 3.2: dialogOptionCircos(): specifing which dimension and Threshold gene dimensions levels will be plot.
++ Functi+n 3 : getCirc+s(dimensi+n="All"): Main fucnti+n +f Circ+s pl+t: pl+t Tracks (dimensi+ns) and Sect+rs (diseases)
++ Functi+n 3.1: getC+r_ExpCNAMet(ListMatrix, dimensi+n)
++ Functi+n 3.2: dial+g+pti+nCirc+s(): specifing which dimensi+n and Thresh+ld gene dimensi+ns levels will be pl+t.
 
-o  dialogMetOption(): add "Circos" argument to make the difference between getMetDataMultipleGene() and getListMetData()
-o  getGeneList(): add rm("GeneListMSigDB"", envir="myGlobalEnv")
++  dial+gMet+pti+n(): add "Circ+s" argument t+ make the difference between getMetDataMultipleGene() and getListMetData()
++  getGeneList(): add rm("GeneListMSigDB"", envir="myGl+balEnv")
 
-CHANGES IN VERSION 1.1.1 (27 April 2015)
+CHANGES IN VERSI+N 1.1.1 (27 April 2015)
 ------------------------
-o  Survival plot
-+ add getSurvival(Coxph) and getSurvival.Rd file
-+ getOptionGSEAlm(s, ClinicalData): add line 105
-    - ###only for Survival plot
-    - myGlobalEnv$variable <- as.formula(sprintf("Surv(OS_MONTHS,OS_STATUS)~%s", coVariables))
-o cancer.latex file: add Survival plot paragraph
-+ add image in /image folder: KM.png, Coxph.png
-+ getCasesGenProfs(): add getSurvival in Plot menu
++  Survival pl+t
++ add getSurvival(C+xph) and getSurvival.Rd file
++ get+pti+nGSEAlm(s, ClinicalData): add line 105
+    - ###+nly f+r Survival pl+t
+    - myGl+balEnv$variable <- as.f+rmula(sprintf("Surv(+S_M+NTHS,+S_STATUS)~%s", c+Variables))
++ cancer.latex file: add Survival pl+t paragraph
++ add image in /image f+lder: KM.png, C+xph.png
++ getCasesGenPr+fs(): add getSurvival in Pl+t menu
 
 
-CHANGES IN VERSION 1.0.0 (17 April 2015)
+CHANGES IN VERSI+N 1.0.0 (17 April 2015)
 -------------------------
 
-o Release
++ Release
 
-CHANGES IN VERSION 0.99.3
+CHANGES IN VERSI+N 0.99.3
 -------------------------
 
-    o getProfilesDataMultipleGenes: line 78: Test only Genetic Profiles having mRNA expression to get Profile Data.
-    o  getMutData(): line 96  change .GlobalEnv to myGlobalEnv)
-    o  getProfDataMultipleGenes(): line 7 add testCheckedCaseGenProf()
+    + getPr+filesDataMultipleGenes: line 78: Test +nly Genetic Pr+files having mRNA expressi+n t+ get Pr+file Data.
+    +  getMutData(): line 96  change .Gl+balEnv t+ myGl+balEnv)
+    +  getPr+fDataMultipleGenes(): line 7 add testCheckedCaseGenPr+f()
 
-CHANGES IN VERSION 0.99.2
+CHANGES IN VERSI+N 0.99.2
 -------------------------
 
-    o Add documentation for RUN.GSEA() function
-    o Remove dependency of RSvgDevice. This package is not available for Windows OS.
+    + Add d+cumentati+n f+r RUN.GSEA() functi+n
+    + Rem+ve dependency +f RSvgDevice. This package is n+t available f+r Wind+ws +S.
 
-CHANGES IN VERSION 0.99.1
+CHANGES IN VERSI+N 0.99.1
 -------------------------
 
-    o Add examples in documents
+    + Add examples in d+cuments
 
 SIGNIFICANT USER-VISIBLE CHANGES
 
-    o Add documentation for RUN.GSEA() function
+    + Add d+cumentati+n f+r RUN.GSEA() functi+n
 
-    o Remove dependency of RSvgDevice. This package is not available for Windows OS.
+    + Rem+ve dependency +f RSvgDevice. This package is n+t available f+r Wind+ws +S.
 
-CHANGES IN VERSION 0.99.1
+CHANGES IN VERSI+N 0.99.1
 --------------------------
 
 SIGNIFICANT USER-VISIBLE CHANGES
 
-    + Add examples in documents
+    + Add examples in d+cuments
 
 NEW FEATURES
 
