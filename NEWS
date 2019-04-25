@@ -1,3 +1,9 @@
+CHANGES IN VERSION 1.16.05 (25 April 2019)
+--------------------------------------------
++ remove /data/datalist
++ import from grDevice saveplot and dev.new
++ setting built pdf with --compact-vignettes=both
+
 CHANGES IN VERSION 1.16.04 (20 April 2019)
 --------------------------------------------
 + update cbind.na and rbind.na documents
@@ -8,7 +14,8 @@ CHANGES IN VERSION 1.16.02 (04 April 2019)
 
 CHANGES IN VERSION 1.16.01 (01 March 2019)
 --------------------------------------------
-+ Change the address of cgdsr: http://www.cbioportal.org/ instead http://www.cbioportal.org/public-portal/
++ Change the address of cgdsr: http://www.cbioportal.org/ instead
+http://www.cbioportal.org/public-portal/
 
 CHANGES IN VERSION 1.11.01 (16 October 2018)
 --------------------------------------------
