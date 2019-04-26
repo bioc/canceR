@@ -77,7 +77,7 @@ plotModel <- function(plotCommand, title= "TITLE",hscale=1, vscale=1 ){
         if(myGlobalEnv$graph=="SVG"){
             #library(RSvgDevice) Doesn't work with windows OS
             #RSvgDevice::devSVG(fileName,width = 600 / 300, height = 600 / 300)
-            devSVG(fileName,width = 600 / 300, height = 600 / 300)
+            RSvgDevice::devSVG(fileName,width = 600 / 300, height = 600 / 300)
             plotCommand()
             graphics.off()
         } else if (myGlobalEnv$graph=="JPG"){
