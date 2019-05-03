@@ -1,4 +1,10 @@
 #' bind non equal row
+#' @usage rbind.na(..., deparse.level = 1) 
+#' @param ...  (generalized) vectors or matrices. 
+#' @param deparse.level  integer controlling the construction of labels in 
+#' the case of non-matrix-like arguments (for the default method):
+#' deparse.level = 0 constructs no labels; the default,
+#' deparse.level = 1 or 2 constructs labels from the argument names.
 #' 
 #' @usage rbind.na(..., deparse.level = 1) 
 #' @param ...  (generalized) vectors or matrices. 

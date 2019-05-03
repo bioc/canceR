@@ -7,8 +7,9 @@
 #' deparse.level = 0 constructs no labels; the default,
 #' deparse.level = 1 or 2 constructs labels from the argument names.
 #' 
-#' @return a data frame with merged columns
 #' 
+#' @return a data frame with merged columns
+#'
 #' @examples
 #' \dontrun{
 #' col1 <- c("a","b","c","d")
