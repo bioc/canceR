@@ -18,7 +18,8 @@
 \SweaveOpts{concordance=TRUE}
 %\input{canceR-concordance}
 %\SweaveOpts{concordance=TRUE}
-
+\VignetteIndexEntry{canceR}
+\VignetteEngine{R.rsp::rsp}
 
 \title{canceR: A Graphical User Interface for accessing and modeling the Cancer Genomics Data of MSKCC}
 \author{Karim Mezhoud}

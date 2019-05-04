@@ -1,6 +1,12 @@
+ CHANGES IN VERSION 1.18.1 (04 May 2019)
+--------------------------------------------
++ remove .txt file from /data
++ remove documents of clinicalData and GeneExpMatrix datasets
++ import grDevices package
++ remove /extdata/gct_cls/
+
  CHANGES IN VERSION 1.17.6 (30 April 2019)
 --------------------------------------------
-<<<<<<< HEAD
  + update NEWS format file
  + Remove dependency of RSvgDevice. This package is not available for Windows os.
  + Remove GSEA.1.0.R from /data folder
