@@ -19,12 +19,12 @@
 %\input{canceR-concordance}
 %\SweaveOpts{concordance=TRUE}
 \VignetteIndexEntry{canceR}
-\VignetteEngine{R.rsp::rsp}
+\VignetteEngine{R.rsp}
 
 
 \title{canceR: A Graphical User Interface for accessing and modeling the Cancer Genomics Data of MSKCC}
 \author{Karim Mezhoud}
-\date{April 25, 2019}
+\date{05 May, 2019}
 \maketitle
 
 

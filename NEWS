@@ -1,4 +1,10 @@
-CHANGES IN VERSION 1.17.61 (02 May 2019)
+CHANGES IN VERSION 1.19.02 (05 May 2019)
+--------------------------------------------
++ remove /extdata/gct_cls
++ do not import grDevices::quartz
++ add empty line in test functions
+
+CHANGES IN VERSION 1.19.01 (02 May 2019)
 --------------------------------------------
 + remove .txt file from /data.
 + import grDevices package
