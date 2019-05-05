@@ -1,4 +1,9 @@
- CHANGES IN VERSION 1.18.1 (04 May 2019)
+CHANGES IN VERSION 1.18.2 (05 May 2019)
+--------------------------------------------
++ add empty line in the end for test functions
++ do not import grDevices::quartz
+
+CHANGES IN VERSION 1.18.1 (04 May 2019)
 --------------------------------------------
 + remove .txt file from /data
 + remove documents of clinicalData and GeneExpMatrix datasets
