@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.18.3 (06 May 2019)
+--------------------------------------------
++ comment %\VignetteEngine{R.rsp}
++ update NAMESPACE
+
 CHANGES IN VERSION 1.18.2 (05 May 2019)
 --------------------------------------------
 + add empty line in the end for test functions
