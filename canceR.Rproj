@@ -15,5 +15,5 @@ RootDocument: vignettes/canceR.tex
 
 BuildType: Package
 PackageUseDevtools: Yes
-PackageInstallArgs: --no-multiarch --with-keep.source --compact-vignettes=both
+PackageInstallArgs: --no-multiarch
 PackageRoxygenize: rd,collate,namespace
