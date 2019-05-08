@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.19.03 (08 May 2019)
+--------------------------------------------
++ compress RData files to RDS and move them from /data to /extdata/rdata
++ update running examples
+
 CHANGES IN VERSION 1.19.02 (05 May 2019)
 --------------------------------------------
 + remove /extdata/gct_cls
