@@ -209,7 +209,7 @@ getGSEAlm_Variables <-function(){
 #                         }
                         
                         print("Computing of pVals using gsealmPerm function ...")
-                        pVals <-GSEAlm::gsealmPerm(myGlobalEnv$eSet,myGlobalEnv$coVariables,myGlobalEnv$mSigDB_forGeneList,nperm= myGlobalEnv$permutVal, na.rm=TRUE)
+                        pVals <- gsealmPerm(myGlobalEnv$eSet,myGlobalEnv$coVariables,myGlobalEnv$mSigDB_forGeneList,nperm= myGlobalEnv$permutVal, na.rm=TRUE)
                         
 
                        print(paste("End computing of pVals of:", myGlobalEnv$StudyRefCase[k]))
