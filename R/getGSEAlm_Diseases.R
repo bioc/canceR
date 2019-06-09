@@ -9,7 +9,7 @@
 #'  \dontrun{
 #'  getGSEAlm_Diseases
 #' }
-#' @importFrom GSEAlm gsealmPerm
+#'@importFrom stats model.matrix
 #' 
 getGSEAlm_Diseases <-function(){
     
@@ -198,7 +198,7 @@ getGSEAlm_Diseases <-function(){
 #         }
         
          print("Computing of pVals using gsealmPerm function ...")
-         pVals <-GSEAlm::gsealmPerm(myGlobalEnv$eSetClassifier,myGlobalEnv$coVariables,myGlobalEnv$mSigDB_forGeneList,nperm= myGlobalEnv$permutVal, na.rm=TRUE)
+         pVals <- gsealmPerm(myGlobalEnv$eSetClassifier,myGlobalEnv$coVariables,myGlobalEnv$mSigDB_forGeneList,nperm= myGlobalEnv$permutVal, na.rm=TRUE)
 
 
 
