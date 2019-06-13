@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.19.05 (13 June 2019)
+--------------------------------------------
++ move vignette to inst/doc
+
 CHANGES IN VERSION 1.19.04 (09 June 2019)
 --------------------------------------------
 + omit GSEAlm dependency
