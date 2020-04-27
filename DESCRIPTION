@@ -1,7 +1,7 @@
 Package: canceR
 Type: Package
 Title: A Graphical User Interface for accessing and modeling the Cancer Genomics Data of MSKCC
-Version: 1.22.0
+Version: 1.23.0
 Date: 2019-06-13
 Author: Karim Mezhoud.
     Nuclear Safety & Security Department.
