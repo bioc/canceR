@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.28.01 (03 Mars 2022)
+--------------------------------------------
++ Update DESCRIPTION
++ start to convert vignette from Rnd to Rmd
+
 CHANGES IN VERSION 1.19.05 (13 June 2019)
 --------------------------------------------
 + move vignette to inst/doc
