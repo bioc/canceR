@@ -1,9 +1,7 @@
-## ----style, echo = FALSE, results = 'asis'------------------------------------
-BiocStyle::markdown()
-
-## ----setup, include=FALSE-----------------------------------------------------
-knitr::opts_chunk$set(echo = TRUE)
-BiocStyle::markdown()
+## ----style, echo=FALSE, results="asis", message=FALSE-------------------------
+knitr::opts_chunk$set(tidy = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
 
 ## ----eval=FALSE---------------------------------------------------------------
 #  install.packages("RCurl", "XML")

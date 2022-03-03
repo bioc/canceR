@@ -1,3 +1,9 @@
+CHANGES IN VERSION 1.28.02 (04 Mars 2022)
+--------------------------------------------
++ Add bugReports link, add Views in DESCRIPTION
++ Link HTML vignette to Help Menu
++ Link to report Issues in github
+
 CHANGES IN VERSION 1.28.01 (03 Mars 2022)
 --------------------------------------------
 + Update DESCRIPTION
