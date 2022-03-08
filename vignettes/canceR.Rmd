@@ -4,15 +4,15 @@ subtitle: ""
 author: "Karim Mezhoud"
 date: "`r Sys.Date()`"
 output:
- #rmarkdown::html_vignette:
-  #urlcolor: blue
-  #   fig_caption: yes
-  #   fig_height: 8
-  #   fig_width: 14
-  #   highlight: tango
-  #   number_sections: yes
-  #   toc: true
-  # html_document: 
+ # rmarkdown::html_vignette:
+ #   urlcolor: blue
+ #   fig_caption: yes
+ #   fig_height: 8
+ #   fig_width: 14
+ #   highlight: tango
+ #   number_sections: yes
+ #   toc: true
+  # html_document:
   #   code_folding: show
   #   fig_caption: yes
   #   fig_height: 8
@@ -49,13 +49,13 @@ knitr::opts_chunk$set(tidy = FALSE,
 # Introduction
 
 `canceR` is  a graphical user friendly interface to explore, compare, and analyse all available Cancer Data (Clinical data, Gene Mutation, Gene Methylation, Gene Expression, Protein Phosphorylation, Copy Number Alteration) hosted by the Computational Biology Center (cBio) at Memorial-Sloan-Kettering Cancer Center (MSKCC). `canceR` implements functions from various packages:
-1. to acces, explore and extract Genomics Cancers Data Base of MSKCC (`cgdsr`,[@Cerami2012,@Gao2013]),
+1. to acces, explore and extract Genomics Cancers Data Base of MSKCC (`cgdsr`,[@Cerami2012],[@Gao2013]),
 
 2. to associate phenotypes with gene expression (`phenoTest`, [@Planet2013]),
 
 3. to predict which biological process or pathway or immune system are significantly different under the phenotypes and which genes are associated (`GSEA-R`~[Subramanian2005,Subramanian2007]),
 
-4. to predict the most up/down regulated gene sets belonging to one of MSigDB collections~[Subramanian2005] (`GSEAlm`,[@Oron2008]),
+4. to predict the most up/down regulated gene sets belonging to one of MSigDB collections~[@Subramanian2005] (`GSEAlm`,[@Oron2008]),
 
 5. to classify genes by diseases (`geNetClassifier`,[@Aibar2013]), or
 
@@ -80,9 +80,12 @@ knitr::opts_chunk$set(tidy = FALSE,
 * nuWin32 (for Windows) http://sourceforge.net/projects/getgnuwin32/?source=typ_redirect
 
 For Debian distribution (GNU/Linux)
-```{setup, include=FALSE}
-sudo apt-get insall ("r-cran-tcltk2","r-cran-tkrplot")
-sudo apt-get install(✬Tk-table✬, ✬BWidget✬)
+
+
+
+```{bash eval = FALSE}
+sudo apt-get insall r-cran-tcltk2   r-cran-tkrplot
+sudo apt-get install tk-table BWidget
 sudo apt-get install libcurl4-openssl-dev
 sudo apt-get install r-cran-xml
 ```
@@ -91,8 +94,9 @@ For Windows distribution
 
 [LibXml2](http://sourceforge.net/projects/gnuwin32/files/): parser for XML 
 
-For OS X distribution X11: graphics device
-run R and write theses lines in console to install dependancies.
+For OS X distribution [XQuartz](https://www.xquartz.org/): graphics device
+
+run R and write theses lines in console to install dependencies.
 
 ```{r eval=FALSE}
 install.packages("RCurl", "XML")
@@ -134,7 +138,7 @@ canceR package uses input files to compute models and generates output files for
 
 # Main Window
 
-After selecting studies and pressing on `Get Cases and Genetic Profiles` Button, the main window appears (Figure~\@ref(fig:mainWindow.png)) and displays the progress of loading data of selected studies. The Main Window has a Toolbar with Menus (see following paragraphs). It is subdivised in two columns. The first column lists Cases for all selected studies. The first line of every study indicates its Index and its short description. The remain lines enumerate Cases with short description of data type and the number of samples. The second list box shows selected Cases. Similarly, the second column displays informations of Genetic Profiles.
+After selecting studies and pressing on `Get Cases and Genetic Profiles` Button, the main window appears (Figure~\@ref(fig:mainWindow.png)) and displays the progress of loading data of selected studies. The Main Window has a Toolbar with Menus (see following paragraphs). It is subdivised in two columns. The first column lists Cases for all selected studies. The first line of every study indicates its Index and its short description. The remain lines enumerate Cases with short description of data type and the number of samples. The second list box shows selected Cases. Similarly, the second column displays information of Genetic Profiles.
 User can select a single or multiple lines with attention to correspond the Case with appropriate Genetic Profile.
 
 ![(#fig:mainWindow.png) Main Window of canceR package. 1, Toolbar, 2, list box of loaded Cases; 3, list box of selected Cases; 4, list box of loaded Genetic Profiles; 5, list box of selected Genetic Profiles](image/mainWindow.png)
