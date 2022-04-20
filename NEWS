@@ -1,3 +1,8 @@
+CHANGES IN VERSION 1.29.01 (20 April 2022)
+--------------------------------------------
++ omit tcltk2
++ get cgdsr from github
+
 CHANGES IN VERSION 1.19.05 (13 June 2019)
 --------------------------------------------
 + move vignette to inst/doc
