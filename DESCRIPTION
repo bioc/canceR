@@ -1,8 +1,8 @@
 Package: canceR
 Type: Package
 Title: A Graphical User Interface for accessing and modeling the Cancer Genomics Data of MSKCC
-Version: 1.29.01
-Date: 2022-04-20
+Version: 1.29.02
+Date: 2022-04-21
 Author: Karim Mezhoud.
     Nuclear Safety & Security Department.
     Nuclear Science Center of Tunisia.
@@ -17,7 +17,8 @@ License: GPL-2
 LazyLoad: yes
 Depends:
     R (>= 3.4),
-    tcltk
+    tcltk,
+    cgdsr
 Imports:
     GSEABase,
     tkrplot,
@@ -37,7 +38,8 @@ Imports:
 Suggests:
     testthat (>= 0.10.0),
     R.rsp
-Remotes: cBioPortal/cgdsr
+Remotes: 
+    github::cBioPortal/cgdsr
 VignetteBuilder: R.rsp
 biocViews: GUI, GeneExpression, Software
 RoxygenNote: 6.1.1
