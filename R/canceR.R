@@ -13,11 +13,14 @@ myGlobalEnv <- new.env(parent = emptyenv())
 #'}
 #' @import tkrplot
 #' @import tcltk
+#' @import cBioPortalData
+#' @import R.oo
 #' 
 #'@importFrom graphics axis image layout legend lines par plot points text
 #'@importFrom stats as.formula cor density dist hclust median na.exclude p.adjust pnorm sd setNames window
 #'@importFrom utils browseURL capture.output memory.limit read.table write.table read.delim
 #'@importFrom grDevices colors dev.cur dev.off graphics.off jpeg pdf png rainbow dev.new savePlot
+#'@importFrom R.methodsS3 setMethodS3
 #'
 
 canceR <- function(){

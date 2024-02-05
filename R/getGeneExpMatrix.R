@@ -3,7 +3,7 @@
 #' @export
 #' @return dataframe of gene expression
 #' @examples 
-#' readRDS(paste(path.package("canceR"),"/extdata/rdata/brca_tcga73genes.rds"", sep=""))
+#' readRDS(paste(path.package("canceR"),"/extdata/rdata/brca_tcga73genes.rds", sep=""))
 #' \dontrun{
 #' getGeneExpMatrix()
 #' }
