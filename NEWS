@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.36.3 (18 February 2024)
+--------------------------------------------
++ update welcome panel. get all studies
+
 CHANGES IN VERSION 1.36.2 (05 February 2024)
 --------------------------------------------
 + Start migration to the new WebAPI of cBioPortal

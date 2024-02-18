@@ -142,13 +142,23 @@ getCasesGenProfs <- function(){
     #Define Frame and LISTBOX
     #frameOverall <- tkframe(myGlobalEnv$ttCasesGenProfs)
     #frame1 <- tkframe(myGlobalEnv$ttCasesGenProfs,relief="groove",borderwidth=5, height = 100, width = 500)
-    myGlobalEnv$tc<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=15, width= 68 ,selectmode="multiple",xscrollcommand=function(...)tkset(xscr1,...),yscrollcommand=function(...)tkset(yscr1,...),background="white")
-    myGlobalEnv$tl<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=15, width= 68 ,selectmode="multiple",xscrollcommand=function(...)tkset(xscr2,...),yscrollcommand=function(...)tkset(yscr2,...),background="white")
+    myGlobalEnv$tc<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=15, width= 68 ,
+                              selectmode="multiple",
+                              xscrollcommand=function(...)tkset(xscr1,...),
+                              yscrollcommand=function(...)tkset(yscr1,...),background="white")
+    myGlobalEnv$tl<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=15, width= 68,
+                              selectmode="multiple",xscrollcommand=function(...)tkset(xscr2,...),
+                              yscrollcommand=function(...)tkset(yscr2,...),background="white")
     
-    tInfoC<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=2, width= 68,selectmode="multiple",xscrollcommand=function(...)tkset(xscr1Info,...),background="white")
+    tInfoC<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=2, width= 68,
+                      selectmode="multiple",
+                      xscrollcommand=function(...)tkset(xscr1Info,...),
+                      background="white")
     #tkconfigure(tInfoC, foreground="blue", font=policeInfo)
     
-    tInfoG<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=2, width= 68,selectmode="multiple",xscrollcommand=function(...)tkset(xscr2Info,...),background="white")
+    tInfoG<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=2, width= 68,
+                      selectmode="multiple",xscrollcommand=function(...)tkset(xscr2Info,...),
+                      background="white")
     #tkconfigure(tInfoG, foreground="blue", font=policeInfo)
     
     
@@ -175,8 +185,7 @@ getCasesGenProfs <- function(){
     
     
     
-    loadSelectedCases <- function()
-    {  
+    loadSelectedCases <- function(){  
         curselectCases <- as.numeric(tkcurselection(myGlobalEnv$tc))+1
         lcurselectCases <- length(curselectCases)
         
@@ -188,8 +197,6 @@ getCasesGenProfs <- function(){
             tkmessageBox(message=msgSelectCase)
             
         } else {
-            
-            
             ## correspond each case  to its study
             StudyRefCase = 0
             for( k in 1: lcurselectCases){
@@ -201,8 +208,6 @@ getCasesGenProfs <- function(){
                 StudyRefCase <- cbind(StudyRefCase,myGlobalEnv$checked_Studies_forCases[h])
             }
             myGlobalEnv$StudyRefCase <-StudyRefCase[-1]
-            
-            
             
             #redefine curselectCases
             myGlobalEnv$curselectCases <- as.numeric(tkcurselection(myGlobalEnv$tc))+1
@@ -284,9 +289,11 @@ getCasesGenProfs <- function(){
         }
     }
     
-    LoadCases.but <-tkbutton(myGlobalEnv$ttCasesGenProfs,text="   Load selected Cases   ",command=loadSelectedCases)
+    LoadCases.but <-tkbutton(myGlobalEnv$ttCasesGenProfs, text="   Load selected Cases   ",
+                             command=loadSelectedCases)
     
-    LoadGenProf.but <-tkbutton(myGlobalEnv$ttCasesGenProfs,text="   Load selected Genetic Profiles   ",command=loadSelectedGenProfs)
+    LoadGenProf.but <-tkbutton(myGlobalEnv$ttCasesGenProfs, text="   Load selected Genetic Profiles   ",
+                               command=loadSelectedGenProfs)
     
     
     

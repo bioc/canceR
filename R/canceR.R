@@ -27,12 +27,16 @@ canceR <- function(){
     
     #if (!require("cgdsr")) devtools::install_version("cgdsr",version="1.3")
     
-    ## Create project
-    cgds<-CGDS("http://www.cbioportal.org/")
-    myGlobalEnv$cgds <- cgds
+    ## connect to cBioPortal API
+    myGlobalEnv$cgds <- cBioPortal(
+        hostname = "www.cbioportal.org",
+        protocol = "https",
+        api = "/api/v2/api-docs"
+    )
+
     ## Get all Cancer Studies using column 2 (description)
-    Studies <- getCancerStudies.CGDS(cgds)[,2]
-    myGlobalEnv$Studies <- Studies
+    myGlobalEnv$Studies <- cBioPortalData::getStudies(myGlobalEnv$cgds) 
+    myGlobalEnv$Studies_name <- myGlobalEnv$Studies |> pull('name')
     
     ## first dialog START or CANCEL
     myGlobalEnv$ttMain <- tktoplevel()
@@ -76,24 +80,27 @@ canceR <- function(){
     
     loadAllStudies <- function(){
         #delete last search by key words
-        if(exists("Li", envir = myGlobalEnv)){
-            #Sys.chmod(getwd(), mode = "0777", use_umask = TRUE)
-            
-            rm(Li, envir=myGlobalEnv)
+        if(exists("n_studies", envir = myGlobalEnv)){
+            rm(n_studies, envir=myGlobalEnv)
+            rm(Studies_name, envir=myGlobalEnv)
+        }else if(exists("Matched_index", envir = myGlobalEnv)){
+            rm(Matched_index, envir=myGlobalEnv)
+            rm(matched_studies, envir = myGlobalEnv)
         }
         
-        A <- length(Studies)
-        myGlobalEnv$A <- A
+        myGlobalEnv$n_studies <- nrow(myGlobalEnv$Studies)
+        myGlobalEnv$Studies_name <- myGlobalEnv$Studies$name
         
-        nbrStudies <- paste("Query result: ",A,
-                            " Studies were loaded. Select one or more Studies to get Data Profiles.",sep="")
+        nbrStudies <- paste("Query result: ", myGlobalEnv$n_studies,
+                            " Studies were loaded. Select one or more Studies to get Data Profiles.",
+                            sep="")
         #tkgrid(tklabel(myGlobalEnv$ttMain,text= nbrStudies ))
         ##Insert ListBox
-        tkdelete(tlMain,0,150)
+        tkdelete(tlMain,0,600)
         tkdelete(tlInfo,0,1)
-        for (i in (1:A))
+        for(s in myGlobalEnv$Studies_name)
         {
-            tkinsert(tlMain,"end",Studies[i])
+            tkinsert(tlMain,"end", s )
         }
         # Default selection.  Indexing starts at zero.
         tkselection.set(tlMain,2) 
@@ -108,36 +115,35 @@ canceR <- function(){
     
     loadMatchStudies <- function(Word){
         #delete last load of all Studies
-        if(exists("A", envir = myGlobalEnv)){
-            #Sys.chmod(getwd(), mode = "0777", use_umask = TRUE)  
-            rm(A, envir=myGlobalEnv)
+        if(exists("n_studies", envir = myGlobalEnv)){
+            rm(n_studies, envir=myGlobalEnv)
+            rm(Studies_name, envir=myGlobalEnv)
+        }else if(exists("Matched_index", envir = myGlobalEnv)){
+            rm(Matched_index, envir=myGlobalEnv)
+            rm(matched_studies, envir = myGlobalEnv)
         }
         # select raw with matched "string"
-        StudyIndex <- grep(Word, Studies, ignore.case=TRUE) 
-        myGlobalEnv$StudyIndex <- StudyIndex
+        myGlobalEnv$Matched_index <- grep(Word, myGlobalEnv$Studies$name, ignore.case=TRUE) 
         
-        match_Study_All <- getCancerStudies(myGlobalEnv$cgds)[myGlobalEnv$StudyIndex, 2]
-        myGlobalEnv$match_Study_All <- match_Study_All
+        #myGlobalEnv$matched_studies <- myGlobalEnv$Studies[myGlobalEnv$Matched_index, "name"] |> pull()
+        myGlobalEnv$matched_studies <- myGlobalEnv$Studies$name[myGlobalEnv$Matched_index]
         
         ##Count the nomber of Matched Studies and return the number.
-        Li <- length(StudyIndex) 
-        myGlobalEnv$Li <- Li
-        nbrMatchedStudies <- paste("Query result: ",
-                                   Li, " Studies were Matched. Select one or more to get its features.",sep="")
-        #tkgrid(tklabel(myGlobalEnv$ttMain,text= nbrMatchedStudies ))
-        tkdelete(tlMain,0,150)
+       nbrMatchedStudies_msg <- paste("Query result: ",
+                                   length(myGlobalEnv$Matched_index), 
+                                   " Studies were Matched. Select one or more to get its features.",
+                                   sep="")
+        #tkgrid(tklabel(myGlobalEnv$ttMain,text= nbrMatchedStudies_msg ))
+        tkdelete(tlMain,0,600)
         tkdelete(tlInfo,0,1)
-        for (i in (1:Li))
-        { 
-            tkinsert(tlMain,"end",match_Study_All[i])
+        for( m in myGlobalEnv$matched_studies){ 
+            tkinsert(tlMain,"end", m)
         }
         tkselection.set(tlMain,2)  # Default selection.  Indexing starts at zero.
         
-        tkinsert(tlInfo,"end",text= nbrMatchedStudies)
+        tkinsert(tlInfo,"end",text= nbrMatchedStudies_msg)
         tkdelete(tlInfo,0)
     }
-    
-    
     
     launchDialog <- function() {
         Word <- modalDialog("Search Studies", "Search by Key Word", "")
@@ -149,8 +155,6 @@ canceR <- function(){
     
     loadMatchStudies.button <- tkbutton(myGlobalEnv$ttMain,
                                         text = "Search by key words", command = launchDialog)
-    
-    
     
     tkgrid(loadAllStudies.button,loadMatchStudies.button, column=0)
     tkgrid.configure(loadAllStudies.button, sticky="w")
@@ -185,26 +189,22 @@ canceR <- function(){
     ##listbox Info
     
     loadCasesGenProfs <- function(){ 
-        if(exists("A", envir = myGlobalEnv)){
-            StudyChoice <- Studies[as.numeric(tkcurselection(tlMain))+1]
-            myGlobalEnv$StudyChoice <- StudyChoice
-            checked_StudyIndex <- as.numeric(tkcurselection(tlMain))+1
-            myGlobalEnv$checked_StudyIndex <- checked_StudyIndex
+        if(exists("n_studies", envir = myGlobalEnv)){
+            myGlobalEnv$StudyChoice <- myGlobalEnv$Studies_name[as.numeric(tkcurselection(tlMain))+1]
+            myGlobalEnv$checked_StudyIndex <- as.numeric(tkcurselection(tlMain))+1
             
-        } else if (exists("Li", envir=myGlobalEnv)){
-            StudyChoice <- myGlobalEnv$match_Study_All[as.numeric(tkcurselection(tlMain))+1]
-            myGlobalEnv$StudyChoice <- StudyChoice
-            checked_StudyIndex <- myGlobalEnv$StudyIndex[as.numeric(tkcurselection(tlMain))+1]
-            myGlobalEnv$checked_StudyIndex <- checked_StudyIndex
+        } else if (exists("matched_studies", envir=myGlobalEnv)){
+            myGlobalEnv$StudyChoice <- myGlobalEnv$matched_studies[as.numeric(tkcurselection(tlMain))+1]
+            myGlobalEnv$checked_StudyIndex <- myGlobalEnv$StudyIndex[as.numeric(tkcurselection(tlMain))+1]
         }
         
         #Identify checked Studies and its Index in cgds
-        checked_Studies <- getCancerStudies(myGlobalEnv$cgds)[checked_StudyIndex,1] 
-        myGlobalEnv$checked_Studies <- checked_Studies
+        myGlobalEnv$checked_Studies_id <- myGlobalEnv$Studies[myGlobalEnv$checked_StudyIndex,"studyId"] 
+
         ###tkmessageBox if No Study was selected
-        if(length(myGlobalEnv$checked_Studies) ==0){
+        if(length(myGlobalEnv$checked_Studies_id) ==0){
             msgStudies <- paste("You need to select at less one Study")
-            tkmessageBox(title = "Greetings from R TclTk",message=msgStudies,icon = "Info" )
+            tkmessageBox(title = "Greetings from R TclTk", message=msgStudies, icon = "Info" )
         } else {
             
             getCasesGenProfs()

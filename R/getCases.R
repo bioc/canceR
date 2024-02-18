@@ -23,7 +23,7 @@ getCases <- function(){
     
     
     #get Study Index 
-    StudiesRef <- getCancerStudies.CGDS(myGlobalEnv$cgds)[,1]
+    StudiesRef <- myGlobalEnv$Studies |> pull("studyId")
     #checked_StudyIndex
     checked_StudyIndex_forCases <- myGlobalEnv$checked_StudyIndex
     myGlobalEnv$checked_StudyIndex_forCases <- checked_StudyIndex_forCases
