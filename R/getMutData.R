@@ -18,35 +18,35 @@ getMutData <- function(){
    
         testCheckedCaseGenProf()
        
-        Lchecked_Studies <- myGlobalEnv$curselectCases
-        Lchecked_Cases <- length(myGlobalEnv$curselectCases_forStudy)
-        Lchecked_GenProf <- length(myGlobalEnv$curselectGenProfs_forStudy)
+        Lchecked_Studies <- ENV$curselectCases
+        Lchecked_Cases <- length(ENV$curselectCases_forStudy)
+        Lchecked_GenProf <- length(ENV$curselectGenProfs_forStudy)
         
         MutData=0
         MutData_All <-NULL
         MutDataSub<-0
         MutDataSub_All <- NULL
         
-        for(c in 1:length(myGlobalEnv$curselectCases)){
+        for(c in 1:length(ENV$curselectCases)){
             
-            GenProf<-myGlobalEnv$GenProfsRefStudies[myGlobalEnv$curselectGenProfs[c]]
+            GenProf<-ENV$GenProfsRefStudies[ENV$curselectGenProfs[c]]
             if (length(grep("mutation", GenProf))==0){
                 msgNoMut <- "Select Mutation data from Genetics Profiles"
                 tkmessageBox(message = msgNoMut, icon='info')
                 break
             }
-            Case<- myGlobalEnv$CasesRefStudies[myGlobalEnv$curselectCases[c]]
+            Case<- ENV$CasesRefStudies[ENV$curselectCases[c]]
          
-            MutData <- getMutationData(myGlobalEnv$cgds,Case, GenProf, myGlobalEnv$GeneList)
+            MutData <- getMutationData(ENV$cgds,Case, GenProf, ENV$GeneList)
             
             if(length(MutData[,1])==0){
-                msgNoMutData=paste("No Mutation Data are Available for\n", myGlobalEnv$CasesStudies[myGlobalEnv$curselectCases[c]+1])
-                tkmessageBox(message=msgNoMutData, title= paste(myGlobalEnv$StudyRefCase[c],myGlobalEnv$CasesStudies[myGlobalEnv$curselectCases[c]+1], myGlobalEnv$GenProfsStudies[myGlobalEnv$curselectGenProfs[c]+1], sep=": "))
+                msgNoMutData=paste("No Mutation Data are Available for\n", ENV$CasesStudies[ENV$curselectCases[c]+1])
+                tkmessageBox(message=msgNoMutData, title= paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+1], ENV$GenProfsStudies[ENV$curselectGenProfs[c]+1], sep=": "))
                 
                 
             } else{
                 ttMutData_cb <- tktoplevel()
-                tktitle(ttMutData_cb) <- paste(myGlobalEnv$StudyRefCase[c],myGlobalEnv$CasesStudies[myGlobalEnv$curselectCases[c]+1], myGlobalEnv$GenProfsStudies[myGlobalEnv$curselectGenProfs[c]+1], sep=": ")
+                tktitle(ttMutData_cb) <- paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+1], ENV$GenProfsStudies[ENV$curselectGenProfs[c]+1], sep=": ")
                             
                 cbAll <- tkcheckbutton(ttMutData_cb)
                 cbAllValue <- tclVar("0")
@@ -75,7 +75,7 @@ getMutData <- function(){
                     cbAllVal <- as.character(tclvalue(cbAllValue))
                     if(cbAllVal =="1"){
                         
-                        title=paste(myGlobalEnv$StudyRefCase[c],myGlobalEnv$CasesStudies[myGlobalEnv$curselectCases[c]+1], myGlobalEnv$GenProfsStudies[myGlobalEnv$curselectGenProfs[c]+1], sep=": ")
+                        title=paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+1], ENV$GenProfsStudies[ENV$curselectGenProfs[c]+1], sep=": ")
                         getInTable(MutData, title=title)
                        
                     } else{
@@ -101,14 +101,14 @@ getMutData <- function(){
                         #MutDataSub_All[[c]]<<- MutDataSub
                         Sys.chmod(getwd(), mode = "0777", use_umask = TRUE)
                         #MutDataSub_All[[c]]<<- as.data.frame.array(MutDataSub, envir=.GlobalEnv)
-                        #myGlobalEnv$MutDataSub_All[[c]] <- as.list.data.frame(MutDataSub, envir=myGlobalEnv)
+                        #ENV$MutDataSub_All[[c]] <- as.list.data.frame(MutDataSub, envir=ENV)
                         
                         
                         name <- paste("MutDataSub", c, sep="")
                         #Sys.chmod(getwd(), mode = "0777", use_umask = TRUE)
-                        assign(name, MutDataSub, envir=myGlobalEnv)
+                        assign(name, MutDataSub, envir=ENV)
                         
-                        title=paste(myGlobalEnv$StudyRefCase[c],myGlobalEnv$CasesStudies[myGlobalEnv$curselectCases[c]+1], myGlobalEnv$GenProfsStudies[myGlobalEnv$curselectGenProfs[c]+1], sep=": ")
+                        title=paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+1], ENV$GenProfsStudies[ENV$curselectGenProfs[c]+1], sep=": ")
                         getInTable(MutDataSub, title=title)
                       
                     }

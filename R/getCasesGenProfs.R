@@ -208,11 +208,11 @@ getCasesGenProfs <- function(){
             StudyRefCase = 0
             for( k in 1: lcurselectCases){
                 h<-1
-                while (curselectCases[k] >  (ENV$LCases[h]+1)){
-                    curselectCases[k] <- curselectCases[k] - ENV$LCases[h] - 1
+                while (curselectCases[k] >  (ENV$n_Cases[h]+1)){
+                    curselectCases[k] <- curselectCases[k] - ENV$n_Cases[h] - 1
                     h<- h+1
                 }  
-                StudyRefCase <- cbind(StudyRefCase,ENV$checked_Studies_forCases[h])
+                StudyRefCase <- cbind(StudyRefCase,ENV$checked_Studies_id[h])
             }
             ENV$StudyRefCase <-StudyRefCase[-1]
             
@@ -222,17 +222,17 @@ getCasesGenProfs <- function(){
             
             ##loop converting curselectCases value of case to index value of the same case
             
-            LCases_sum<-0
+            n_Cases_sum<-0
             
             for( j in 1:lcurselectCases){
-                for (i in 1:(ENV$lchecked_Studies_forCases)){
+                for (i in seq(length(ENV$checked_Studies_id))){
                     
-                    if (curselectCases[j] < (LCases_sum + ENV$LCases[i]+ i)){
+                    if (curselectCases[j] < (n_Cases_sum + ENV$n_Cases[i]+ i)){
                         curselectCases[j] <- curselectCases[j]  - 1
                         break
                     } 
                     
-                    LCases_sum<- LCases_sum+ENV$LCases[i]+1
+                    n_Cases_sum<- n_Cases_sum+ENV$n_Cases[i]+1
                 }
             }
             ENV$curselectCases_forStudy<-curselectCases
@@ -261,29 +261,29 @@ getCasesGenProfs <- function(){
             for( k in 1: lcurselectGenProfs){
                 h=1
                 
-                while (curselectGenProfs[k] >  (ENV$LGenProfs[h]+1)){
-                    curselectGenProfs[k] = curselectGenProfs[k] - ENV$LGenProfs[h] - 1
+                while (curselectGenProfs[k] >  (ENV$n_GenProfs[h]+1)){
+                    curselectGenProfs[k] = curselectGenProfs[k] - ENV$n_GenProfs[h] - 1
                     h= h+1
                 } 
                 #Cancer Reference (StudyRefGenProf) were compared before to get Profile Data
-                StudyRefGenProf = cbind(StudyRefGenProf, ENV$checked_Studies_forGenProf[h]) 
+                StudyRefGenProf = cbind(StudyRefGenProf, ENV$checked_Studies_id[h]) 
             }
             
             ENV$StudyRefGenProf<-StudyRefGenProf[-1]
             
             
             ##loop converting curselectGenProfs value of Genetic profile to index value of the same genetic profile in cgds
-            LGenProfs_sum<-0
+            n_GenProfs_sum<-0
             
             for( j in 1: lcurselectGenProfs){
-                for (i in 1:(ENV$lchecked_Studies_forGenProf)){
+                for (i in seq(length(ENV$checked_Studies_id))){
                     
                     
-                    if (curselectGenProfs[j] < (LGenProfs_sum + ENV$LGenProfs[i]+i)){
+                    if (curselectGenProfs[j] < (n_GenProfs_sum + ENV$n_GenProfs[i]+i)){
                         curselectGenProfs[j] <- curselectGenProfs[j] - 1
                         break
                     } 
-                    LGenProfs_sum<- LGenProfs_sum+ENV$LGenProfs[i]+1
+                    n_GenProfs_sum<- n_GenProfs_sum+ENV$n_GenProfs[i]+1
                 }
                 
             }

@@ -87,8 +87,7 @@ setMethodS3("test","CGDS", function(x, ...) {
                 studyId = "gbm_tcga_pub",
                 genes = c("NF1", "TP53", "ABL1"),
                 by = "hugoGeneSymbol",
-                molecularProfileIds = "gbm_tcga_pub_mrna"
-            )  |> 
+                molecularProfileIds = "gbm_tcga_pub_mrna")|>
                 unname() |>
                 as.data.frame() |>
                 select("hugoGeneSymbol","patientId", "value") |>

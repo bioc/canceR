@@ -26,24 +26,24 @@ getGCT_CLSfiles <- function(){
     }
     
     
-    Lchecked_Studies <- myGlobalEnv$lchecked_Studies_forCases
-    Lchecked_Cases <- length(myGlobalEnv$curselectCases)
-    Lchecked_GenProf <- length(myGlobalEnv$curselectGenProfs)
+    Lchecked_Studies <- ENV$lchecked_Studies_forCases
+    Lchecked_Cases <- length(ENV$curselectCases)
+    Lchecked_GenProf <- length(ENV$curselectGenProfs)
     
     
     
     LengthGenProfs<-0
     LengthCases<-0
     for (i in 1:Lchecked_Studies){
-        Si =myGlobalEnv$checked_StudyIndex[i]
-        progressBar_ProfilesData <- tkProgressBar(title = myGlobalEnv$Studies[Si], min = 0,
+        Si =ENV$checked_StudyIndex[i]
+        progressBar_ProfilesData <- tkProgressBar(title = ENV$Studies[Si], min = 0,
                                                   max = Lchecked_GenProf, width = 400)
         
         
         LastLengthGenProfs = LengthGenProfs
-        LengthGenProfs = LengthGenProfs + myGlobalEnv$LGenProfs[i]+1
+        LengthGenProfs = LengthGenProfs + ENV$LGenProfs[i]+1
         LastLengthCases = LengthCases
-        LengthCases= LengthCases + myGlobalEnv$LCases[i]+1
+        LengthCases= LengthCases + ENV$LCases[i]+1
         
         
         
@@ -55,11 +55,11 @@ getGCT_CLSfiles <- function(){
             setTkProgressBar(progressBar_ProfilesData, k, label=paste( round(k/Lchecked_GenProf*100, 0),
                                                                        "% of Profiles Data"))
             
-            if (myGlobalEnv$curselectGenProfs[k] <= LengthGenProfs && myGlobalEnv$curselectGenProfs[k]>LastLengthGenProfs){    
+            if (ENV$curselectGenProfs[k] <= LengthGenProfs && ENV$curselectGenProfs[k]>LastLengthGenProfs){    
                 
-                GenProf<-myGlobalEnv$GenProfsRefStudies[myGlobalEnv$curselectGenProfs[k]]
+                GenProf<-ENV$GenProfsRefStudies[ENV$curselectGenProfs[k]]
                 
-                Case<-myGlobalEnv$CasesRefStudies[myGlobalEnv$curselectCases[k]]
+                Case<-ENV$CasesRefStudies[ENV$curselectCases[k]]
                 
                 
                 ReturnDialogSamplingGSEA<- dialogSamplingGSEA(Lchecked_GenProf)
@@ -68,12 +68,12 @@ getGCT_CLSfiles <- function(){
                     stop()
                 }else{ 
                     
-                    if(length(myGlobalEnv$GeneList)>500){
-                        ProfData <- getMegaProfData(myGlobalEnv$GeneList,k )
+                    if(length(ENV$GeneList)>500){
+                        ProfData <- getMegaProfData(ENV$GeneList,k )
                     } else{
-                        msgSmallGeneList <- paste("The request has only", length(myGlobalEnv$GeneList)," genes. The GSEA should be not robust. It is better to run GSEA with 1000 genes or more.", sep=" ")
+                        msgSmallGeneList <- paste("The request has only", length(ENV$GeneList)," genes. The GSEA should be not robust. It is better to run GSEA with 1000 genes or more.", sep=" ")
                         tkmessageBox(message=msgSmallGeneList, icon="info")
-                        ProfData<-getProfileData(myGlobalEnv$cgds,myGlobalEnv$GeneList, GenProf,Case)
+                        ProfData<-getProfileData(ENV$cgds,ENV$GeneList, GenProf,Case)
                     }
                     
                     ##Convert data frame to numeric structure
@@ -109,7 +109,7 @@ getGCT_CLSfiles <- function(){
                     }
                     
                     ##remove all NAs columns only for CNA profile Data
-                    #if(length(grep("cna",myGlobalEnv$CaseChoice[k], ignore.case = TRUE))!=0){
+                    #if(length(grep("cna",ENV$CaseChoice[k], ignore.case = TRUE))!=0){
                     #ProfData<- ProfData[,-which( apply( !( apply(ProfData,1,is.na) ),1,sum)==0 )]
                     #}
                     
@@ -168,7 +168,7 @@ getGCT_CLSfiles <- function(){
                     }
                     
                     
-                    Table_Title<- paste("SD_",myGlobalEnv$StudyRefCase[k],"_","GenProf_",myGlobalEnv$curselectGenProfs_forStudy[k],"_","CASE_",myGlobalEnv$curselectCases_forStudy[k],".gct")
+                    Table_Title<- paste("SD_",ENV$StudyRefCase[k],"_","GenProf_",ENV$curselectGenProfs_forStudy[k],"_","CASE_",ENV$curselectCases_forStudy[k],".gct")
                     getInTable(AssayData, Table_Title)
                     
                     
@@ -195,7 +195,7 @@ getGCT_CLSfiles <- function(){
                     AssayData[1,1] <- "#1.2"
                     AssayData[2,1] <- nrow
                     AssayData[2,2] <- ncol
-                    fileName<-paste("SD_",myGlobalEnv$StudyRefCase[k],"_","GenProf_",myGlobalEnv$curselectGenProfs_forStudy[k],"_","CASE_",myGlobalEnv$curselectCases_forStudy[k],"_",gsub(".txt","",basename(myGlobalEnv$GeneListfile)) ,".gct", sep="")
+                    fileName<-paste("SD_",ENV$StudyRefCase[k],"_","GenProf_",ENV$curselectGenProfs_forStudy[k],"_","CASE_",ENV$curselectCases_forStudy[k],"_",gsub(".txt","",basename(ENV$GeneListfile)) ,".gct", sep="")
                     
                     Sys.chmod(getwd(), mode = "0777", use_umask = TRUE)
                     setwd(paste(getwd(),"/Results/gct_cls", sep=""))
@@ -207,7 +207,7 @@ getGCT_CLSfiles <- function(){
                     if(sum(grep("[A-Za-z]",PhenoData))==0){
                         
                         
-                        fileName<-paste("SD_",myGlobalEnv$StudyRefCase[k],"_","GenProf_",myGlobalEnv$curselectGenProfs_forStudy[k],"_","CASE_",myGlobalEnv$curselectCases_forStudy[k],"_",colnames(merge[1]),"_",gsub(".txt","",basename(myGlobalEnv$GeneListfile)) ,".cls", sep="")
+                        fileName<-paste("SD_",ENV$StudyRefCase[k],"_","GenProf_",ENV$curselectGenProfs_forStudy[k],"_","CASE_",ENV$curselectCases_forStudy[k],"_",colnames(merge[1]),"_",gsub(".txt","",basename(ENV$GeneListfile)) ,".cls", sep="")
                         
                         sink(fileName)
                         cat("#numeric")
@@ -242,7 +242,7 @@ getGCT_CLSfiles <- function(){
                             
                             Sys.chmod(getwd(), mode = "0777", use_umask = TRUE)
                             
-                            fileName<-paste("SD_",myGlobalEnv$StudyRefCase[k],"_","GenProf_",myGlobalEnv$curselectGenProfs_forStudy[k],"_","CASE_",myGlobalEnv$curselectCases_forStudy[k],"_",colnames(merge[1]),"_",gsub(".txt","",basename(myGlobalEnv$GeneListfile)),".cls", sep="")
+                            fileName<-paste("SD_",ENV$StudyRefCase[k],"_","GenProf_",ENV$curselectGenProfs_forStudy[k],"_","CASE_",ENV$curselectCases_forStudy[k],"_",colnames(merge[1]),"_",gsub(".txt","",basename(ENV$GeneListfile)),".cls", sep="")
                             
                             sink(fileName)
                             cat(paste(nbrOfSample, nbrOfClasses, "1", sep=" "))
@@ -268,5 +268,5 @@ getGCT_CLSfiles <- function(){
     
     
     
-    myGlobalEnv$PhenoData <- PhenoData
+    ENV$PhenoData <- PhenoData
 }

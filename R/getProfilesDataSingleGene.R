@@ -5,10 +5,10 @@
 #' @examples 
 #' readRDS(paste(path.package("canceR"),"/extdata/rdata/brca_tcga73genes.rds", sep=""))
 #' ## Select Case from Breast Cancer
-#'  myGlobalEnv <- new.env(parent = emptyenv())
-#' myGlobalEnv$curselectCases <- 9
+#'  ENV <- new.env(parent = emptyenv())
+#' ENV$curselectCases <- 9
 #' ##Select Genetic Profile from Breast Cancer
-#' myGlobalEnv$curselectGenProfs <- 4
+#' ENV$curselectGenProfs <- 4
 #' ## get Specific Mutation data for 73 Genes list
 #' \dontrun{
 #' getProfilesDataSingleGene()
@@ -21,9 +21,9 @@ getProfilesDataSingleGene <-function(){
     testCheckedCaseGenProf()
     
 
-    Lchecked_Studies <- myGlobalEnv$lchecked_Studies_forCases
-    Lchecked_Cases <- length(myGlobalEnv$curselectCases)
-    Lchecked_GenProf <- length(myGlobalEnv$curselectGenProfs)
+    Lchecked_Studies <- ENV$lchecked_Studies_forCases
+    Lchecked_Cases <- length(ENV$curselectCases)
+    Lchecked_GenProf <- length(ENV$curselectGenProfs)
     
     ############################
     ProfDataAll<-0
@@ -32,30 +32,30 @@ getProfilesDataSingleGene <-function(){
     LengthCases<-0
     
     for (s in 1:Lchecked_Studies){
-        Si =myGlobalEnv$checked_StudyIndex[s]
+        Si =ENV$checked_StudyIndex[s]
         GenProfS=0
-        GenProfS<- getGeneticProfiles.CGDS(myGlobalEnv$cgds, myGlobalEnv$checked_Studies_forGenProf[s])[,1]
+        GenProfS<- getGeneticProfiles.CGDS(ENV$cgds, ENV$checked_Studies_forGenProf[s])[,1]
         
         ## Wich Cases are checked and for any study and Genetic Profiles? 
         LastLengthCases <- LengthCases
-        LengthCases <- LengthCases + myGlobalEnv$LCases[s]+1
+        LengthCases <- LengthCases + ENV$LCases[s]+1
         for(c in 1: Lchecked_Cases){
-            if(myGlobalEnv$curselectCases[c] <= LengthCases && myGlobalEnv$curselectCases[c]>LastLengthCases){
-                print(paste("Case",myGlobalEnv$curselectCases[c],"<",LengthCases,myGlobalEnv$curselectCases[c],">",LastLengthCases ))   
+            if(ENV$curselectCases[c] <= LengthCases && ENV$curselectCases[c]>LastLengthCases){
+                print(paste("Case",ENV$curselectCases[c],"<",LengthCases,ENV$curselectCases[c],">",LastLengthCases ))   
                 
-                CaseS<- myGlobalEnv$CasesRefStudies[myGlobalEnv$curselectCases[c]]
+                CaseS<- ENV$CasesRefStudies[ENV$curselectCases[c]]
                 
                 launchDialog <- function(){
                     
-                    Dialog_Title<- paste("STUDY:", Si,"CASE:", myGlobalEnv$curselectCases_forStudy[c], sep=" ")
+                    Dialog_Title<- paste("STUDY:", Si,"CASE:", ENV$curselectCases_forStudy[c], sep=" ")
                     GENE <- modalDialog(Dialog_Title, "Enter HUGO Gene Symbol", "MDM4")
                     if (GENE == "ID_CANCEL") return()
                     
-                    ProfDataS<-getProfileData(myGlobalEnv$cgds,GENE, GenProfS,CaseS)
+                    ProfDataS<-getProfileData(ENV$cgds,GENE, GenProfS,CaseS)
                     
                     
                     ttProfData_cb <- tktoplevel()
-                    tktitle(ttProfData_cb) <- paste(myGlobalEnv$StudyRefCase[c],myGlobalEnv$CaseChoice[c], sep=": ")
+                    tktitle(ttProfData_cb) <- paste(ENV$StudyRefCase[c],ENV$CaseChoice[c], sep=": ")
                     #tkwm.geometry(ttProfData_cb,"300x300")
                     
                     cbAll <- tkcheckbutton(ttProfData_cb)
@@ -91,7 +91,7 @@ getProfilesDataSingleGene <-function(){
                             }
                             
                             ProfDataS <- t(t(ProfDataS))
-                            title<-paste(myGlobalEnv$StudyRefCase[c],myGlobalEnv$CaseChoice[c], sep=": ")
+                            title<-paste(ENV$StudyRefCase[c],ENV$CaseChoice[c], sep=": ")
                             getInTable(ProfDataS, title)
                             
                             
@@ -123,7 +123,7 @@ getProfilesDataSingleGene <-function(){
                             }
                            
                             ProfDataSSub <- t(t(ProfDataSSub))
-                            title=paste(myGlobalEnv$StudyRefCase[c],myGlobalEnv$CaseChoice[c], sep=": ")
+                            title=paste(ENV$StudyRefCase[c],ENV$CaseChoice[c], sep=": ")
                             getInTable(ProfDataSSub, title)
                             
                         }

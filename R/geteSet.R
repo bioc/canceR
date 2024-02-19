@@ -22,47 +22,47 @@ geteSet <- function(){
         testCheckedCaseGenProf()
        
         
-        Lchecked_Studies <- myGlobalEnv$lchecked_Studies_forCases
-        Lchecked_Cases <- length(myGlobalEnv$curselectCases)
-        Lchecked_GenProf <- length(myGlobalEnv$curselectGenProfs)
+        Lchecked_Studies <- ENV$lchecked_Studies_forCases
+        Lchecked_Cases <- length(ENV$curselectCases)
+        Lchecked_GenProf <- length(ENV$curselectGenProfs)
         
         ProfDataAll=0
         ProfData=0
         LengthGenProfs=0
         LengthCases=0
         for (i in 1:Lchecked_Studies){
-            Si = myGlobalEnv$checked_StudyIndex[i]
-            progressBar_ProfilesData <- tkProgressBar(title = myGlobalEnv$Studies[Si], min = 0,
+            Si = ENV$checked_StudyIndex[i]
+            progressBar_ProfilesData <- tkProgressBar(title = ENV$Studies[Si], min = 0,
                                                       max = Lchecked_GenProf, width = 400)
             
             #tkfocus(progressBar_ProfilesData)
             LastLengthGenProfs = LengthGenProfs
-            LengthGenProfs = LengthGenProfs + myGlobalEnv$LGenProfs[i]+1
+            LengthGenProfs = LengthGenProfs + ENV$LGenProfs[i]+1
             LastLengthCases = LengthCases
-            LengthCases= LengthCases + myGlobalEnv$LCases[i]+1
+            LengthCases= LengthCases + ENV$LCases[i]+1
             
-            for (k in 1:length(myGlobalEnv$curselectCases)){
+            for (k in 1:length(ENV$curselectCases)){
                 
                 Sys.sleep(0.1)
                 setTkProgressBar(progressBar_ProfilesData, k, label=paste( round(k/Lchecked_GenProf*100, 0),
                                                                            "% of Expression Set"))
                 
-                if (myGlobalEnv$curselectGenProfs[k] <= LengthGenProfs && myGlobalEnv$curselectGenProfs[k]>LastLengthGenProfs){    
+                if (ENV$curselectGenProfs[k] <= LengthGenProfs && ENV$curselectGenProfs[k]>LastLengthGenProfs){    
                     
-                    GenProf<- myGlobalEnv$GenProfsRefStudies[myGlobalEnv$curselectGenProfs[k]]
+                    GenProf<- ENV$GenProfsRefStudies[ENV$curselectGenProfs[k]]
                     
-                    Case<- myGlobalEnv$CasesRefStudies[myGlobalEnv$curselectCases[k]]
+                    Case<- ENV$CasesRefStudies[ENV$curselectCases[k]]
                     
                     
                     
-                    if(length(myGlobalEnv$GeneList)>500){
-                        ProfData <- getMegaProfData(myGlobalEnv$GeneList,k )
+                    if(length(ENV$GeneList)>500){
+                        ProfData <- getMegaProfData(ENV$GeneList,k )
                     } else{
-                        ProfData<-getProfileData(myGlobalEnv$cgds,myGlobalEnv$GeneList, GenProf,Case)
+                        ProfData<-getProfileData(ENV$cgds,ENV$GeneList, GenProf,Case)
                         print(ncol(ProfData))
                     }
                     
-                    #ProfData<- getProfileData(myGlobalEnv$cgds,myGlobalEnv$GeneList, GenProf,Case)
+                    #ProfData<- getProfileData(ENV$cgds,ENV$GeneList, GenProf,Case)
                     #ProfData <-rbind.na(colnames(ProfData), ProfData)
                     
                     print("getting Profile Data and removing all NAs rows...")
@@ -71,13 +71,13 @@ geteSet <- function(){
                     
                     
                     ## Display AssyData with Tcl Table
-                    title <- paste(myGlobalEnv$StudyRefGenProf[k],":",myGlobalEnv$CasesStudies[myGlobalEnv$curselectCases[k]+1])
+                    title <- paste(ENV$StudyRefGenProf[k],":",ENV$CasesStudies[ENV$curselectCases[k]+1])
                     getInTable(ProfData, title)
                     
                     #####nicData_MultipleCases function
-                    Case<- myGlobalEnv$CasesRefStudies[myGlobalEnv$curselectCases[k]]
+                    Case<- ENV$CasesRefStudies[ENV$curselectCases[k]]
                     
-                    ClinicalData<-getClinicalData(myGlobalEnv$cgds,Case)
+                    ClinicalData<-getClinicalData(ENV$cgds,Case)
 
                     matrix <-rbind.na(colnames(ClinicalData), ClinicalData)
                     rnames <- rownames(ClinicalData)
@@ -106,12 +106,12 @@ geteSet <- function(){
                    
                     if(length(ClinicalData[1,])==0){
                         msgNoClinData=paste("No Clinical Data are Available for\n", CasesStudies[curselectCases[k]+1])
-                        tkmessageBox(message=msgNoClinData, title= paste("Study: ",myGlobalEnv$StudyRefCase[k]))
+                        tkmessageBox(message=msgNoClinData, title= paste("Study: ",ENV$StudyRefCase[k]))
                         close(progressBar_ProfilesData)
                         break
                     } 
                     
-                    title <- paste(myGlobalEnv$StudyRefCase[k],myGlobalEnv$GenProfChoice[k], sep=": ")
+                    title <- paste(ENV$StudyRefCase[k],ENV$GenProfChoice[k], sep=": ")
                     getInTable(matrix,title)
                     
                   
@@ -143,9 +143,9 @@ geteSet <- function(){
                     
                 
 
-                    myGlobalEnv$ClinicalData <- ClinicalData
-                    myGlobalEnv$ProfData <- ProfData
-                    myGlobalEnv$AssayData <- AssayData
+                    ENV$ClinicalData <- ClinicalData
+                    ENV$ProfData <- ProfData
+                    ENV$AssayData <- AssayData
                     
                     
                     #Test if the same length cases for phenoData and AssayData
@@ -162,7 +162,7 @@ geteSet <- function(){
                         phenoData<-new("AnnotatedDataFrame", data=ClinicalData, varMetadata=metaData)    
                         
                         ##Assembling an ExpressionSet  
-                        myGlobalEnv$eSet<-Biobase::ExpressionSet(assayData=AssayData, phenoData=phenoData, annotation="GO") 
+                        ENV$eSet<-Biobase::ExpressionSet(assayData=AssayData, phenoData=phenoData, annotation="GO") 
                         print(paste("End of building eSet..."))
                         
                         #             for (i in 1:length(names(pData(eSet)))){

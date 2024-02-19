@@ -11,8 +11,8 @@
 #' ##Load Session
 #' readRDS(paste(path.package("canceR"),"/extdata/rdata/brca_tcga73genes.rds", sep=""))
 #' ## Select Case
-#' myGlobalEnv <- new.env(parent = emptyenv())
-#' myGlobalEnv$curselectCases <- 2
+#' ENV <- new.env(parent = emptyenv())
+#' ENV$curselectCases <- 2
 #' ## get Clinical data
 #' \dontrun{
 #' getClinicData_MultipleCases(getSummaryGSEAExists = 0)
@@ -21,7 +21,7 @@
 getClinicData_MultipleCases<- function(getSummaryGSEAExists){
     
     ##getSummaryGSEAExists is an argument for the function getSummaryGSEA(). this function accept only one clinical dats.
-    if(getSummaryGSEAExists ==1 && length(myGlobalEnv$curselectCases)>1){
+    if(getSummaryGSEAExists ==1 && length(ENV$curselectCases)>1){
         
         tkmessageBox(message=paste("Multiple Cases are loaded. To get Summary of GSEA Results, Select only the Clinical data of study on which are you working."), icon="warning")
         stop("Multiple Cases are loaded. To get Summary of GSEA Results, Select only the Clinical data of study on which are you working.")
@@ -33,25 +33,25 @@ getClinicData_MultipleCases<- function(getSummaryGSEAExists){
     ClinicalDataSub <-NULL
     ClinicalDataSub_All <- NULL
     
-    if(length(grep("curselectCases",ls(myGlobalEnv)))==0){
+    if(length(grep("curselectCases",ls(ENV)))==0){
         msgNoCases <- "Select at less one Case"
         tkmessageBox(message=msgNoCases)
         stop(msgNoCases)
     }
     
-    for(c in 1:length(myGlobalEnv$curselectCases)){
-        Case<- myGlobalEnv$CasesRefStudies[myGlobalEnv$curselectCases[c]]
+    for(c in 1:length(ENV$curselectCases)){
+        Case<- ENV$CasesRefStudies[ENV$curselectCases[c]]
         
-        ClinicalData<-getClinicalData(myGlobalEnv$cgds,Case)
+        ClinicalData<-getClinicalData(ENV$cgds,Case)
         
         
         if(length(ClinicalData[1,])==0){
-            msgNoClinData=paste("No Clinical Data are Available for\n", myGlobalEnv$CasesStudies[myGlobalEnv$curselectCases[c]+1])
-            tkmessageBox(message=msgNoClinData, title= paste("Study: ",myGlobalEnv$StudyRefCase[c]))
+            msgNoClinData=paste("No Clinical Data are Available for\n", ENV$CasesStudies[ENV$curselectCases[c]+1])
+            tkmessageBox(message=msgNoClinData, title= paste("Study: ",ENV$StudyRefCase[c]))
         } else{
             
             ttClin<-tktoplevel()
-            tktitle(ttClin) <- paste("Clinical Data of", myGlobalEnv$CaseChoice[c], sep=" ")
+            tktitle(ttClin) <- paste("Clinical Data of", ENV$CaseChoice[c], sep=" ")
             tkwm.geometry(ttClin, "430x420")
             yscr1 <- tkscrollbar(ttClin, repeatinterval=2,
                                  command=function(...)tkyview(ttc,...))
@@ -72,21 +72,21 @@ getClinicData_MultipleCases<- function(getSummaryGSEAExists){
             }
             
             OnOK <- function(){
-                myGlobalEnv$curselect <- as.numeric(tkcurselection(ttc))+1
+                ENV$curselect <- as.numeric(tkcurselection(ttc))+1
                 
-                if(myGlobalEnv$curselect[1]=="1"){
-                    myGlobalEnv$ClinicalData <- ClinicalData
+                if(ENV$curselect[1]=="1"){
+                    ENV$ClinicalData <- ClinicalData
                     
-                    title=paste(myGlobalEnv$StudyRefCase[c],myGlobalEnv$CasesStudies[myGlobalEnv$curselectCases[c]+1], sep=": ")
-                    getInTable(myGlobalEnv$ClinicalData, title)
+                    title=paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+1], sep=": ")
+                    getInTable(ENV$ClinicalData, title)
                     tkdestroy(ttClin)
                 } else{
-                    #myGlobalEnv$ClinicalData <- ClinicalData[!(is.na(ClinicalData[,myGlobalEnv$curselect]) | ClinicalData[,myGlobalEnv$curselect]==""), ] 
-                    myGlobalEnv$ClinicalData <- ClinicalData[myGlobalEnv$curselect-1]
+                    #ENV$ClinicalData <- ClinicalData[!(is.na(ClinicalData[,ENV$curselect]) | ClinicalData[,ENV$curselect]==""), ] 
+                    ENV$ClinicalData <- ClinicalData[ENV$curselect-1]
                     
                     
-                    title=paste(myGlobalEnv$StudyRefCase[c],myGlobalEnv$CasesStudies[myGlobalEnv$curselectCases[c]+1], sep=": ")
-                    getInTable(myGlobalEnv$ClinicalData, title)
+                    title=paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+1], sep=": ")
+                    getInTable(ENV$ClinicalData, title)
                     
                     tkdestroy(ttClin)
                     
@@ -105,7 +105,7 @@ getClinicData_MultipleCases<- function(getSummaryGSEAExists){
         
         ##getSummaryGSEA funtion needs return(ClinicalSub_All)
         if(getSummaryGSEAExists==1){
-            return(myGlobalEnv$ClinicalData)
+            return(ENV$ClinicalData)
         }
     }
     

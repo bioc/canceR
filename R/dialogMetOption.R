@@ -22,7 +22,7 @@ dialogMetOption <- function(ProfData,k){
     ttMethData <- tktoplevel()
     #tkwm.geometry(ttMethData,"180x250")
     
-    tktitle(ttMethData) <- paste(myGlobalEnv$StudyRefCase[k],myGlobalEnv$GenProfChoice[k], sep=" ")
+    tktitle(ttMethData) <- paste(ENV$StudyRefCase[k],ENV$GenProfChoice[k], sep=" ")
     
     
     rEntry  = tclVar(.8)
@@ -56,7 +56,7 @@ dialogMetOption <- function(ProfData,k){
         
         colnames(mergeTable) <- c("Gene","Mean", "Median")
         
-        title <- paste (myGlobalEnv$StudyRefCase[k],":","Correlation of silencing gene expression by Methylation","r(met/mRNA)>",seuilRVal,myGlobalEnv$GenProfChoice[k], sep=" " )
+        title <- paste (ENV$StudyRefCase[k],":","Correlation of silencing gene expression by Methylation","r(met/mRNA)>",seuilRVal,ENV$GenProfChoice[k], sep=" " )
         
         getInTable(mergeTable, title=title)
         
