@@ -9,12 +9,12 @@
 #' }
 testCheckedCaseGenProf <- function(){
     
-if(!exists("curselectCases", envir = myGlobalEnv)){
+if(!exists("curselectCases", envir = ENV)){
     msgNoCaseChoice= paste("Select at least ONE Case and ONE Genetic Profile")
     tkmessageBox(message= msgNoCaseChoice)
     stop(msgNoCaseChoice)
     
-} else if (!exists("curselectGenProfs", envir = myGlobalEnv)){
+} else if (!exists("curselectGenProfs", envir = ENV)){
     
     msgNoGenProfChoice= paste("Select at least ONE Genetic Profile")
     tkmessageBox(message= msgNoGenProfChoice)
@@ -22,15 +22,15 @@ if(!exists("curselectCases", envir = myGlobalEnv)){
     
     
     
-} else if (!exists("GeneList", envir = myGlobalEnv)){
+} else if (!exists("GeneList", envir = ENV)){
     msgNoGeneList= paste("Load Gene List (HUGO)")
     tkmessageBox(message= msgNoGeneList, icon="info")
     stop(msgNoGeneList)
 } else {
     
-    Lchecked_Studies <- myGlobalEnv$lchecked_Studies_forCases
-    Lchecked_Cases <- length(myGlobalEnv$curselectCases)
-    Lchecked_GenProf <- length(myGlobalEnv$curselectGenProfs)
+    Lchecked_Studies <- ENV$lchecked_Studies_forCases
+    Lchecked_Cases <- length(ENV$curselectCases)
+    Lchecked_GenProf <- length(ENV$curselectGenProfs)
     
     ######## Verify the number of checked cases and checked GenProfs.
     #If they not have the same length, take this message:
@@ -45,11 +45,11 @@ if(!exists("curselectCases", envir = myGlobalEnv)){
     
     ######### Test if all cases were corresponded to appropriate Gen profs (same Study)
     for (i in 1:Lchecked_Cases){
-        if(myGlobalEnv$StudyRefCase[i]!= myGlobalEnv$StudyRefGenProf[i]){
+        if(ENV$StudyRefCase[i]!= ENV$StudyRefGenProf[i]){
             
             msgBadChoice="Correpond the Genetic Profile to the Case for the same Study"
             tkmessageBox(message=msgBadChoice, icon="warning")
-            tkfocus(myGlobalEnv$ttCasesGenProfs)
+            tkfocus(ENV$ttCasesGenProfs)
             stop("Correspond the Genetic Profile to the Case for the same Study")
             
         } 

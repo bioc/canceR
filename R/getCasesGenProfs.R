@@ -2,29 +2,36 @@
 #' @usage getCasesGenProfs()
 #' @return This function is run by the "Get Cases and Genetic Profiles for selected Studies in starting window. This function needs to select at least one study and display Cases and genetic profiles in the main window.
 #' @examples
-#' ##Load Session
-#' readRDS(paste(path.package("canceR"),"/extdata/rdata/brca_tcga73genes.rds", sep=""))
-#' ## load Cases and Genetic Profiles 
+#' cgds <- cBioPortal(
+#' hostname = "www.cbioportal.org",
+#' protocol = "https",
+#' api = "/api/v2/api-docs"
+#' )
 #' \dontrun{
-#' getCasesGenProfs()
-#' }
+#' getDataByGenes( api =  cgds,
+#' studyId = "gbm_tcga_pub",
+#' genes = c("NF1", "TP53", "ABL1"),
+#' by = "hugoGeneSymbol",
+#' molecularProfileIds = "gbm_tcga_pub_mrna"
+#' )
+#'}
 #' @export
 #' 
 getCasesGenProfs <- function(){
     
-    tclRequire("Tktable")
+    #tclRequire("Tktable")
     
-    if(exists("ttCasesGenProfs", envir = myGlobalEnv)){
-        tkdestroy(myGlobalEnv$ttCasesGenProfs)
+    if(exists("ttCasesGenProfs", envir = ENV)){
+        tkdestroy(ENV$ttCasesGenProfs)
     }
     
-    myGlobalEnv$ttCasesGenProfs<-tktoplevel()
-    tktitle(myGlobalEnv$ttCasesGenProfs) <- "Cases list and Genetic Profiles"
-    #tkwm.geometry(myGlobalEnv$ttCasesGenProfs, "550x420")
+    ENV$ttCasesGenProfs<-tktoplevel()
+    tktitle(ENV$ttCasesGenProfs) <- "Cases list and Genetic Profiles"
+    #tkwm.geometry(ENV$ttCasesGenProfs, "550x420")
     
     ##MENU
-    topMenu <- tkmenu(myGlobalEnv$ttCasesGenProfs)           # Create a menu
-    tkconfigure(myGlobalEnv$ttCasesGenProfs, menu = topMenu) # Add it to the 'myGlobalEnv$ttCasesGenProfs' window
+    topMenu <- tkmenu(ENV$ttCasesGenProfs)           # Create a menu
+    tkconfigure(ENV$ttCasesGenProfs, menu = topMenu) # Add it to the 'ENV$ttCasesGenProfs' window
     
     OpenMenu <- tkmenu(topMenu, tearoff=FALSE)
     
@@ -75,7 +82,7 @@ getCasesGenProfs <- function(){
     tkadd(ClinMenu, "command", label = "Multiple Cases", command = function() getClinicData_MultipleCases(getSummaryGSEAExists=0))
     #tkadd(ClinMenu, "command", label = "All", command = function() getClinicData_MultipleCases())
     #tkadd(ClinMenu, "command", label = "Single Case", command = function() getClinicData_SingleCase())
-    #tkadd(ClinMenu, "command", label = "Quit", command = function() tkdestroy(myGlobalEnv$ttCasesGenProfs))
+    #tkadd(ClinMenu, "command", label = "Quit", command = function() tkdestroy(ENV$ttCasesGenProfs))
     tkadd(MutMenu, "command", label = "All", command=function()getMutData())
     tkadd(MutMenu, "command", label = "Specific", command= function()getSpecificMut())
     tkadd(ProfMenu, "command", label = "Single Gene", command= function() getProfilesDataSingleGene())
@@ -95,7 +102,7 @@ getCasesGenProfs <- function(){
     tkadd(get, "command", label= "Results", command= function()Run.GSEA())
     tkadd(get, "command", label= "Summary", command= function()getSummaryGSEA())
     tkadd(GSEAlm, "command", label = "Which MSig for gene list", command= function()Match_GeneList_MSigDB())
-    tkadd(GSEAlm, "command", label= "SubMSigDB/eSet", command= function()getMSigDB(myGlobalEnv$eSet,1))
+    tkadd(GSEAlm, "command", label= "SubMSigDB/eSet", command= function()getMSigDB(ENV$eSet,1))
     tkadd(GSEAlm, "command", label= "Phenotypes into Disease", command= function()getGSEAlm_Variables())
     tkadd(GSEAlm, "command", label= "Disease vs Disease", command= function()getGSEAlm_Diseases())
     
@@ -113,25 +120,25 @@ getCasesGenProfs <- function(){
     tkadd(HelpMenu, "command", label = "About", command= function() about())
     
     
-    # Take LABELS in myGlobalEnv$ttCasesGenProfs
-    tklabel0 = tklabel(myGlobalEnv$ttCasesGenProfs, text= "The Cases (Samples)")
-    tklabel1 =tklabel(myGlobalEnv$ttCasesGenProfs,text="The Genetic Profiles")
+    # Take LABELS in ENV$ttCasesGenProfs
+    tklabel0 = tklabel(ENV$ttCasesGenProfs, text= "The Cases (Samples)")
+    tklabel1 =tklabel(ENV$ttCasesGenProfs,text="The Genetic Profiles")
     tkgrid(tklabel0,tklabel1, columnspan=2, pady = 10)
     
     #Define Scrolls
-    yscr1 <- tkscrollbar(myGlobalEnv$ttCasesGenProfs, repeatinterval=2,
-                         command=function(...)tkyview(myGlobalEnv$tc,...))
-    xscr1 <- tkscrollbar(myGlobalEnv$ttCasesGenProfs, repeatinterval=2,orient="horizontal",
-                         command=function(...)tkxview(myGlobalEnv$tc,...))
+    yscr1 <- tkscrollbar(ENV$ttCasesGenProfs, repeatinterval=2,
+                         command=function(...)tkyview(ENV$tc,...))
+    xscr1 <- tkscrollbar(ENV$ttCasesGenProfs, repeatinterval=2,orient="horizontal",
+                         command=function(...)tkxview(ENV$tc,...))
     
-    yscr2 <- tkscrollbar(myGlobalEnv$ttCasesGenProfs, repeatinterval=2,
-                         command=function(...)tkyview(myGlobalEnv$tl,...))
-    xscr2 <- tkscrollbar(myGlobalEnv$ttCasesGenProfs, repeatinterval=2,orient="horizontal",
-                         command=function(...)tkxview(myGlobalEnv$tl,...))
+    yscr2 <- tkscrollbar(ENV$ttCasesGenProfs, repeatinterval=2,
+                         command=function(...)tkyview(ENV$tl,...))
+    xscr2 <- tkscrollbar(ENV$ttCasesGenProfs, repeatinterval=2,orient="horizontal",
+                         command=function(...)tkxview(ENV$tl,...))
     
-    xscr1Info <- tkscrollbar(myGlobalEnv$ttCasesGenProfs, repeatinterval=2,orient="horizontal",
+    xscr1Info <- tkscrollbar(ENV$ttCasesGenProfs, repeatinterval=2,orient="horizontal",
                              command=function(...)tkxview(tInfoC,...))
-    xscr2Info <- tkscrollbar(myGlobalEnv$ttCasesGenProfs, repeatinterval=2,orient="horizontal",
+    xscr2Info <- tkscrollbar(ENV$ttCasesGenProfs, repeatinterval=2,orient="horizontal",
                              command=function(...)tkxview(tInfoG,...))
     
     
@@ -140,29 +147,29 @@ getCasesGenProfs <- function(){
     
     
     #Define Frame and LISTBOX
-    #frameOverall <- tkframe(myGlobalEnv$ttCasesGenProfs)
-    #frame1 <- tkframe(myGlobalEnv$ttCasesGenProfs,relief="groove",borderwidth=5, height = 100, width = 500)
-    myGlobalEnv$tc<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=15, width= 68 ,
+    #frameOverall <- tkframe(ENV$ttCasesGenProfs)
+    #frame1 <- tkframe(ENV$ttCasesGenProfs,relief="groove",borderwidth=5, height = 100, width = 500)
+    ENV$tc<-tklistbox(ENV$ttCasesGenProfs,height=15, width= 68 ,
                               selectmode="multiple",
                               xscrollcommand=function(...)tkset(xscr1,...),
                               yscrollcommand=function(...)tkset(yscr1,...),background="white")
-    myGlobalEnv$tl<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=15, width= 68,
+    ENV$tl<-tklistbox(ENV$ttCasesGenProfs,height=15, width= 68,
                               selectmode="multiple",xscrollcommand=function(...)tkset(xscr2,...),
                               yscrollcommand=function(...)tkset(yscr2,...),background="white")
     
-    tInfoC<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=2, width= 68,
+    tInfoC<-tklistbox(ENV$ttCasesGenProfs,height=2, width= 68,
                       selectmode="multiple",
                       xscrollcommand=function(...)tkset(xscr1Info,...),
                       background="white")
     #tkconfigure(tInfoC, foreground="blue", font=policeInfo)
     
-    tInfoG<-tklistbox(myGlobalEnv$ttCasesGenProfs,height=2, width= 68,
+    tInfoG<-tklistbox(ENV$ttCasesGenProfs,height=2, width= 68,
                       selectmode="multiple",xscrollcommand=function(...)tkset(xscr2Info,...),
                       background="white")
     #tkconfigure(tInfoG, foreground="blue", font=policeInfo)
     
     
-    tkgrid(yscr1,myGlobalEnv$tc,myGlobalEnv$tl,yscr2, columnspan=1)
+    tkgrid(yscr1,ENV$tc,ENV$tl,yscr2, columnspan=1)
     tkgrid.configure(yscr1,rowspan=20, columnspan=1,sticky="nsw")
     tkgrid.configure(yscr2,rowspan=20,sticky="nsw")
     
@@ -170,8 +177,8 @@ getCasesGenProfs <- function(){
     tkgrid.configure(xscr1,rowspan=2,columnspan=2,sticky="ew")
     tkgrid.configure(xscr2,rowspan=2,columnspan= 4,sticky="ew")
     
-    tklabel2 = tklabel(myGlobalEnv$ttCasesGenProfs, text= "Selected Cases (Samples)")
-    tklabel3 =tklabel(myGlobalEnv$ttCasesGenProfs,text="Selected Genetic Profiles")
+    tklabel2 = tklabel(ENV$ttCasesGenProfs, text= "Selected Cases (Samples)")
+    tklabel3 =tklabel(ENV$ttCasesGenProfs,text="Selected Genetic Profiles")
     tkgrid(tklabel2,tklabel3, columnspan=2, pady = 10)
     
     tkgrid(tInfoC, tInfoG, columnspan=2)
@@ -186,11 +193,11 @@ getCasesGenProfs <- function(){
     
     
     loadSelectedCases <- function(){  
-        curselectCases <- as.numeric(tkcurselection(myGlobalEnv$tc))+1
+        curselectCases <- as.numeric(tkcurselection(ENV$tc))+1
         lcurselectCases <- length(curselectCases)
         
-        myGlobalEnv$curselectCases <- curselectCases
-        myGlobalEnv$CaseChoice <- myGlobalEnv$CasesStudies[curselectCases+1]
+        ENV$curselectCases <- curselectCases
+        ENV$CaseChoice <- ENV$CasesStudies[curselectCases+1]
         
         if (lcurselectCases ==0){
             msgSelectCase="Select at least one Case"
@@ -201,48 +208,48 @@ getCasesGenProfs <- function(){
             StudyRefCase = 0
             for( k in 1: lcurselectCases){
                 h<-1
-                while (curselectCases[k] >  (myGlobalEnv$LCases[h]+1)){
-                    curselectCases[k] <- curselectCases[k] - myGlobalEnv$LCases[h] - 1
+                while (curselectCases[k] >  (ENV$LCases[h]+1)){
+                    curselectCases[k] <- curselectCases[k] - ENV$LCases[h] - 1
                     h<- h+1
                 }  
-                StudyRefCase <- cbind(StudyRefCase,myGlobalEnv$checked_Studies_forCases[h])
+                StudyRefCase <- cbind(StudyRefCase,ENV$checked_Studies_forCases[h])
             }
-            myGlobalEnv$StudyRefCase <-StudyRefCase[-1]
+            ENV$StudyRefCase <-StudyRefCase[-1]
             
             #redefine curselectCases
-            myGlobalEnv$curselectCases <- as.numeric(tkcurselection(myGlobalEnv$tc))+1
-            lcurselectCases <- length(myGlobalEnv$curselectCases)
+            ENV$curselectCases <- as.numeric(tkcurselection(ENV$tc))+1
+            lcurselectCases <- length(ENV$curselectCases)
             
             ##loop converting curselectCases value of case to index value of the same case
             
             LCases_sum<-0
             
             for( j in 1:lcurselectCases){
-                for (i in 1:(myGlobalEnv$lchecked_Studies_forCases)){
+                for (i in 1:(ENV$lchecked_Studies_forCases)){
                     
-                    if (curselectCases[j] < (LCases_sum + myGlobalEnv$LCases[i]+ i)){
+                    if (curselectCases[j] < (LCases_sum + ENV$LCases[i]+ i)){
                         curselectCases[j] <- curselectCases[j]  - 1
                         break
                     } 
                     
-                    LCases_sum<- LCases_sum+myGlobalEnv$LCases[i]+1
+                    LCases_sum<- LCases_sum+ENV$LCases[i]+1
                 }
             }
-            myGlobalEnv$curselectCases_forStudy<-curselectCases
+            ENV$curselectCases_forStudy<-curselectCases
             tkdelete(tInfoC,0,1)
-            tkinsert(tInfoC,"end",myGlobalEnv$curselectCases_forStudy)
-            tkinsert(tInfoC,"end",myGlobalEnv$CaseChoice)
-            tkfocus(myGlobalEnv$ttCasesGenProfs)
+            tkinsert(tInfoC,"end",ENV$curselectCases_forStudy)
+            tkinsert(tInfoC,"end",ENV$CaseChoice)
+            tkfocus(ENV$ttCasesGenProfs)
         }
         
     }
     
     loadSelectedGenProfs <- function(){
-        curselectGenProfs = as.numeric(tkcurselection(myGlobalEnv$tl))+1
+        curselectGenProfs = as.numeric(tkcurselection(ENV$tl))+1
         lcurselectGenProfs = length(curselectGenProfs)
         
-        myGlobalEnv$curselectGenProfs <- curselectGenProfs
-        myGlobalEnv$GenProfChoice <- myGlobalEnv$GenProfsStudies[curselectGenProfs+1]
+        ENV$curselectGenProfs <- curselectGenProfs
+        ENV$GenProfChoice <- ENV$GenProfsStudies[curselectGenProfs+1]
         
         
         if (lcurselectGenProfs ==0){
@@ -254,45 +261,45 @@ getCasesGenProfs <- function(){
             for( k in 1: lcurselectGenProfs){
                 h=1
                 
-                while (curselectGenProfs[k] >  (myGlobalEnv$LGenProfs[h]+1)){
-                    curselectGenProfs[k] = curselectGenProfs[k] - myGlobalEnv$LGenProfs[h] - 1
+                while (curselectGenProfs[k] >  (ENV$LGenProfs[h]+1)){
+                    curselectGenProfs[k] = curselectGenProfs[k] - ENV$LGenProfs[h] - 1
                     h= h+1
                 } 
                 #Cancer Reference (StudyRefGenProf) were compared before to get Profile Data
-                StudyRefGenProf = cbind(StudyRefGenProf, myGlobalEnv$checked_Studies_forGenProf[h]) 
+                StudyRefGenProf = cbind(StudyRefGenProf, ENV$checked_Studies_forGenProf[h]) 
             }
             
-            myGlobalEnv$StudyRefGenProf<-StudyRefGenProf[-1]
+            ENV$StudyRefGenProf<-StudyRefGenProf[-1]
             
             
             ##loop converting curselectGenProfs value of Genetic profile to index value of the same genetic profile in cgds
             LGenProfs_sum<-0
             
             for( j in 1: lcurselectGenProfs){
-                for (i in 1:(myGlobalEnv$lchecked_Studies_forGenProf)){
+                for (i in 1:(ENV$lchecked_Studies_forGenProf)){
                     
                     
-                    if (curselectGenProfs[j] < (LGenProfs_sum + myGlobalEnv$LGenProfs[i]+i)){
+                    if (curselectGenProfs[j] < (LGenProfs_sum + ENV$LGenProfs[i]+i)){
                         curselectGenProfs[j] <- curselectGenProfs[j] - 1
                         break
                     } 
-                    LGenProfs_sum<- LGenProfs_sum+myGlobalEnv$LGenProfs[i]+1
+                    LGenProfs_sum<- LGenProfs_sum+ENV$LGenProfs[i]+1
                 }
                 
             }
-            myGlobalEnv$curselectGenProfs_forStudy <- curselectGenProfs
+            ENV$curselectGenProfs_forStudy <- curselectGenProfs
             
             tkdelete(tInfoG,0,1)
-            tkinsert(tInfoG,"end",myGlobalEnv$curselectGenProfs_forStudy)
-            tkinsert(tInfoG,"end",myGlobalEnv$GenProfChoice)
-            tkfocus(myGlobalEnv$ttCasesGenProfs)
+            tkinsert(tInfoG,"end",ENV$curselectGenProfs_forStudy)
+            tkinsert(tInfoG,"end",ENV$GenProfChoice)
+            tkfocus(ENV$ttCasesGenProfs)
         }
     }
     
-    LoadCases.but <-tkbutton(myGlobalEnv$ttCasesGenProfs, text="   Load selected Cases   ",
+    LoadCases.but <-tkbutton(ENV$ttCasesGenProfs, text="   Load selected Cases   ",
                              command=loadSelectedCases)
     
-    LoadGenProf.but <-tkbutton(myGlobalEnv$ttCasesGenProfs, text="   Load selected Genetic Profiles   ",
+    LoadGenProf.but <-tkbutton(ENV$ttCasesGenProfs, text="   Load selected Genetic Profiles   ",
                                command=loadSelectedGenProfs)
     
     

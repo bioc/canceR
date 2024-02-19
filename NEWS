@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.36.4 (19 February 2024)
+--------------------------------------------
++ modify getCases(), getGenProfs()
+
 CHANGES IN VERSION 1.36.3 (18 February 2024)
 --------------------------------------------
 + update welcome panel. get all studies

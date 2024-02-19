@@ -1,4 +1,4 @@
-myGlobalEnv <- new.env(parent = emptyenv())
+ENV <- new.env(parent = emptyenv())
 #' main function
 #' @usage
 #' canceR()
@@ -7,7 +7,7 @@ myGlobalEnv <- new.env(parent = emptyenv())
 #' @export
 #'
 #' @examples
-#' myGlobalEnv <- new.env(parent = emptyenv())
+#' ENV <- new.env(parent = emptyenv())
 #' \dontrun{
 #' canceR()
 #'}
@@ -28,24 +28,24 @@ canceR <- function(){
     #if (!require("cgdsr")) devtools::install_version("cgdsr",version="1.3")
     
     ## connect to cBioPortal API
-    myGlobalEnv$cgds <- cBioPortal(
+    ENV$cgds <- cBioPortal(
         hostname = "www.cbioportal.org",
         protocol = "https",
         api = "/api/v2/api-docs"
     )
 
     ## Get all Cancer Studies using column 2 (description)
-    myGlobalEnv$Studies <- cBioPortalData::getStudies(myGlobalEnv$cgds) 
-    myGlobalEnv$Studies_name <- myGlobalEnv$Studies |> pull('name')
+    ENV$Studies <- cBioPortalData::getStudies(ENV$cgds) 
+    ENV$Studies_name <- ENV$Studies |> pull('name')
     
     ## first dialog START or CANCEL
-    myGlobalEnv$ttMain <- tktoplevel()
-    tktitle(myGlobalEnv$ttMain) <- "Search for Cancer Studies"
-    #tkwm.resizable(myGlobalEnv$ttMain, FALSE, TRUE)
-    #tkwm.geometry(myGlobalEnv$ttMain, "300x170")
+    ENV$ttMain <- tktoplevel()
+    tktitle(ENV$ttMain) <- "Search for Cancer Studies"
+    #tkwm.resizable(ENV$ttMain, FALSE, TRUE)
+    #tkwm.geometry(ENV$ttMain, "300x170")
     
-    topMenu <- tkmenu(myGlobalEnv$ttMain)           # Create a menu
-    tkconfigure(myGlobalEnv$ttMain, menu = topMenu) # Add it to the 'tt' window
+    topMenu <- tkmenu(ENV$ttMain)           # Create a menu
+    tkconfigure(ENV$ttMain, menu = topMenu) # Add it to the 'tt' window
     fileMenu <- tkmenu(topMenu, tearoff = FALSE)
     HelpMenu<- tkmenu(topMenu, tearoff = FALSE)
     
@@ -60,11 +60,11 @@ canceR <- function(){
         QuitMsg <- tkmessageBox(message="Are you sure want to quit?",
                                 icon="question",type="yesnocancel",default="yes")   
         if ( tclvalue(QuitMsg )== "yes") {
-            tkdestroy(myGlobalEnv$ttMain)
+            tkdestroy(ENV$ttMain)
             Sys.chmod(getwd(), mode = "0777", use_umask = TRUE)
             rm(list=ls(), envir=.GlobalEnv)
         }
-        else {tkfocus(myGlobalEnv$ttMain)}
+        else {tkfocus(ENV$ttMain)}
     }
     
     
@@ -80,25 +80,22 @@ canceR <- function(){
     
     loadAllStudies <- function(){
         #delete last search by key words
-        if(exists("n_studies", envir = myGlobalEnv)){
-            rm(n_studies, envir=myGlobalEnv)
-            rm(Studies_name, envir=myGlobalEnv)
-        }else if(exists("Matched_index", envir = myGlobalEnv)){
-            rm(Matched_index, envir=myGlobalEnv)
-            rm(matched_studies, envir = myGlobalEnv)
+        if(exists("Matched_index", envir = ENV)){
+            rm("Matched_index", envir=ENV)
+            rm("matched_studies", envir = ENV)
         }
         
-        myGlobalEnv$n_studies <- nrow(myGlobalEnv$Studies)
-        myGlobalEnv$Studies_name <- myGlobalEnv$Studies$name
+        ENV$n_studies <- nrow(ENV$Studies)
+        ENV$Studies_name <- ENV$Studies$name
         
-        nbrStudies <- paste("Query result: ", myGlobalEnv$n_studies,
+        nbrStudies <- paste("Query result: ", ENV$n_studies,
                             " Studies were loaded. Select one or more Studies to get Data Profiles.",
                             sep="")
-        #tkgrid(tklabel(myGlobalEnv$ttMain,text= nbrStudies ))
+        #tkgrid(tklabel(ENV$ttMain,text= nbrStudies ))
         ##Insert ListBox
         tkdelete(tlMain,0,600)
         tkdelete(tlInfo,0,1)
-        for(s in myGlobalEnv$Studies_name)
+        for(s in ENV$Studies_name)
         {
             tkinsert(tlMain,"end", s )
         }
@@ -110,33 +107,31 @@ canceR <- function(){
         tkdelete(tlInfo,0)
     }
     
-    loadAllStudies.button <- tkbutton(myGlobalEnv$ttMain,
-                                      text = "Load all Studies", command = loadAllStudies)
+    loadAllStudies.button <- tkbutton(ENV$ttMain,
+                                      text = "Load all Studies", 
+                                      command = loadAllStudies)
     
     loadMatchStudies <- function(Word){
         #delete last load of all Studies
-        if(exists("n_studies", envir = myGlobalEnv)){
-            rm(n_studies, envir=myGlobalEnv)
-            rm(Studies_name, envir=myGlobalEnv)
-        }else if(exists("Matched_index", envir = myGlobalEnv)){
-            rm(Matched_index, envir=myGlobalEnv)
-            rm(matched_studies, envir = myGlobalEnv)
+        if(exists("n_studies", envir = ENV)){
+            rm("n_studies", envir=ENV)
+            rm("Studies_name", envir=ENV)
         }
         # select raw with matched "string"
-        myGlobalEnv$Matched_index <- grep(Word, myGlobalEnv$Studies$name, ignore.case=TRUE) 
+        ENV$Matched_index <- grep(Word, ENV$Studies$name, ignore.case=TRUE) 
         
-        #myGlobalEnv$matched_studies <- myGlobalEnv$Studies[myGlobalEnv$Matched_index, "name"] |> pull()
-        myGlobalEnv$matched_studies <- myGlobalEnv$Studies$name[myGlobalEnv$Matched_index]
+        #ENV$matched_studies <- ENV$Studies[ENV$Matched_index, "name"] |> pull()
+        ENV$matched_studies <- ENV$Studies$name[ENV$Matched_index]
         
         ##Count the nomber of Matched Studies and return the number.
        nbrMatchedStudies_msg <- paste("Query result: ",
-                                   length(myGlobalEnv$Matched_index), 
+                                   length(ENV$Matched_index), 
                                    " Studies were Matched. Select one or more to get its features.",
                                    sep="")
-        #tkgrid(tklabel(myGlobalEnv$ttMain,text= nbrMatchedStudies_msg ))
+        #tkgrid(tklabel(ENV$ttMain,text= nbrMatchedStudies_msg ))
         tkdelete(tlMain,0,600)
         tkdelete(tlInfo,0,1)
-        for( m in myGlobalEnv$matched_studies){ 
+        for( m in ENV$matched_studies){ 
             tkinsert(tlMain,"end", m)
         }
         tkselection.set(tlMain,2)  # Default selection.  Indexing starts at zero.
@@ -153,8 +148,9 @@ canceR <- function(){
     }
     
     
-    loadMatchStudies.button <- tkbutton(myGlobalEnv$ttMain,
-                                        text = "Search by key words", command = launchDialog)
+    loadMatchStudies.button <- tkbutton(ENV$ttMain,
+                                        text = "Search by key words", 
+                                        command = launchDialog)
     
     tkgrid(loadAllStudies.button,loadMatchStudies.button, column=0)
     tkgrid.configure(loadAllStudies.button, sticky="w")
@@ -162,20 +158,22 @@ canceR <- function(){
     
     
     
-    tlInfo<-tklistbox(myGlobalEnv$ttMain,height=1, width= 65 ,selectmode="multiple",xscrollcommand=function(...)tkset(xscrInfo,...),background="white", foreground="blue")
+    tlInfo<-tklistbox(ENV$ttMain,height=1, width= 65, selectmode="multiple",
+                      xscrollcommand=function(...)tkset(xscrInfo,...),
+                      background="white", foreground="blue")
     
-    xscrInfo <- tkscrollbar(myGlobalEnv$ttMain, repeatinterval=2,orient="horizontal",
+    xscrInfo <- tkscrollbar(ENV$ttMain, repeatinterval=2,orient="horizontal",
                             command=function(...)tkxview(tlInfo,...))
     
     tkgrid(tlInfo)
     
     ##Define ListBox of Studies
-    tlMain<-tklistbox(myGlobalEnv$ttMain,height=18, width= 65 ,selectmode="multiple",
+    tlMain<-tklistbox(ENV$ttMain,height=18, width= 65 ,selectmode="multiple",
                       xscrollcommand=function(...)tkset(xscr,...),
-                      yscrollcommand=function(...)tkset(yscr,...),background="white")
-    yscr <- tkscrollbar(myGlobalEnv$ttMain, repeatinterval=2,
+                      yscrollcommand=function(...)tkset(yscr,...), background="white")
+    yscr <- tkscrollbar(ENV$ttMain, repeatinterval=2,
                         command=function(...)tkyview(tlMain,...))
-    xscr <- tkscrollbar(myGlobalEnv$ttMain, repeatinterval=2,orient="horizontal",
+    xscr <- tkscrollbar(ENV$ttMain, repeatinterval=2,orient="horizontal",
                         command=function(...)tkxview(tlMain,...))
     
     tkgrid(tlMain,yscr)
@@ -189,20 +187,20 @@ canceR <- function(){
     ##listbox Info
     
     loadCasesGenProfs <- function(){ 
-        if(exists("n_studies", envir = myGlobalEnv)){
-            myGlobalEnv$StudyChoice <- myGlobalEnv$Studies_name[as.numeric(tkcurselection(tlMain))+1]
-            myGlobalEnv$checked_StudyIndex <- as.numeric(tkcurselection(tlMain))+1
+        if(exists("n_studies", envir = ENV)){
+            ENV$StudyChoice <- ENV$Studies_name[as.numeric(tkcurselection(tlMain))+1]
+            ENV$checked_StudyIndex <- as.numeric(tkcurselection(tlMain))+1
             
-        } else if (exists("matched_studies", envir=myGlobalEnv)){
-            myGlobalEnv$StudyChoice <- myGlobalEnv$matched_studies[as.numeric(tkcurselection(tlMain))+1]
-            myGlobalEnv$checked_StudyIndex <- myGlobalEnv$StudyIndex[as.numeric(tkcurselection(tlMain))+1]
+        } else if(exists("matched_studies", envir=ENV)){
+            ENV$StudyChoice <- ENV$matched_studies[as.numeric(tkcurselection(tlMain))+1]
+            ENV$checked_StudyIndex <- ENV$Matched_index[as.numeric(tkcurselection(tlMain))+1]
         }
-        
+        print(ENV$checked_StudyIndex)
         #Identify checked Studies and its Index in cgds
-        myGlobalEnv$checked_Studies_id <- myGlobalEnv$Studies[myGlobalEnv$checked_StudyIndex,"studyId"] 
+        ENV$checked_Studies_id <- ENV$Studies[ENV$checked_StudyIndex,"studyId"] |> pull()
 
         ###tkmessageBox if No Study was selected
-        if(length(myGlobalEnv$checked_Studies_id) ==0){
+        if(length(ENV$checked_Studies_id) ==0){
             msgStudies <- paste("You need to select at less one Study")
             tkmessageBox(title = "Greetings from R TclTk", message=msgStudies, icon = "Info" )
         } else {
@@ -212,10 +210,11 @@ canceR <- function(){
         }
     }
     
-    getCasesGenProfs.but <-tkbutton(myGlobalEnv$ttMain,
-                                    text="Get Cases and Genetic Profiles for selected Studies",command=loadCasesGenProfs)
+    getCasesGenProfs.but <-tkbutton(ENV$ttMain,
+                                    text="Get Cases and Genetic Profiles for selected Studies",
+                                    command=loadCasesGenProfs)
     tkgrid(getCasesGenProfs.but)
-    tkfocus(myGlobalEnv$ttMain)
+    tkfocus(ENV$ttMain)
     
 }
 
