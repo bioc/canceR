@@ -79,15 +79,19 @@ getCasesGenProfs <- function(){
     tkadd(GeneListMenu, "command", label = "File", command = function() getGeneList())
     tkadd(GeneListMenu, "command", label = "Example", command = function() getGeneListExample())
     tkadd(GeneListMenu, "command", label = "MSigDB", command = function() getGeneListFromMSigDB())
-    tkadd(ClinMenu, "command", label = "Multiple Cases", command = function() getClinicData_MultipleCases(getSummaryGSEAExists=0))
+    tkadd(ClinMenu, "command", label = "Multiple Cases", 
+          command = function() getClinicData_MultipleCases(getSummaryGSEAExists=0))
     #tkadd(ClinMenu, "command", label = "All", command = function() getClinicData_MultipleCases())
     #tkadd(ClinMenu, "command", label = "Single Case", command = function() getClinicData_SingleCase())
     #tkadd(ClinMenu, "command", label = "Quit", command = function() tkdestroy(ENV$ttCasesGenProfs))
     tkadd(MutMenu, "command", label = "All", command=function()getMutData())
     tkadd(MutMenu, "command", label = "Specific", command= function()getSpecificMut())
-    tkadd(ProfMenu, "command", label = "Single Gene", command= function() getProfilesDataSingleGene())
-    tkadd(ProfMenu, "command", label = "Multiple Genes", command= function() getProfilesDataMultipleGenes(getSummaryGSEAExists=0))
-    tkadd(ProfMenu, "command", label = "ListProfData", command= function() getListProfData())
+    tkadd(ProfMenu, "command", label = "Single Gene", 
+          command= function() getProfilesDataSingleGene()) # getProfilesDataMultipleGenes(getSummaryGSEAExists=0)
+    tkadd(ProfMenu, "command", label = "Multiple Genes", 
+          command= function() getProfilesDataMultipleGenes(getSummaryGSEAExists=0))
+    tkadd(ProfMenu, "command", label = "ListProfData", 
+          command= function() getListProfData(ENV$checked_Studies_id, ENV$GeneList))
     
     tkadd(Gene1, "command", label = "2 Gen. Profiles",  command = function() plot_1Gene_2GenProfs())
     tkadd(Gene2, "command", label = "1 Gen. Profile", command = function() plot_2Genes_1GenProf())

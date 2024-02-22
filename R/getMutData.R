@@ -19,8 +19,8 @@ getMutData <- function(){
         testCheckedCaseGenProf()
        
         Lchecked_Studies <- ENV$curselectCases
-        Lchecked_Cases <- length(ENV$curselectCases_forStudy)
-        Lchecked_GenProf <- length(ENV$curselectGenProfs_forStudy)
+        Lchecked_Cases <- length(ENV$curselectCases)
+        Lchecked_GenProf <- length(ENV$curselectGenProfs)
         
         MutData=0
         MutData_All <-NULL
@@ -30,14 +30,26 @@ getMutData <- function(){
         for(c in 1:length(ENV$curselectCases)){
             
             GenProf<-ENV$GenProfsRefStudies[ENV$curselectGenProfs[c]]
+            
             if (length(grep("mutation", GenProf))==0){
                 msgNoMut <- "Select Mutation data from Genetics Profiles"
                 tkmessageBox(message = msgNoMut, icon='info')
                 break
             }
-            Case<- ENV$CasesRefStudies[ENV$curselectCases[c]]
-         
-            MutData <- getMutationData(ENV$cgds,Case, GenProf, ENV$GeneList)
+            Study_id <- ENV$CasesRefStudies[ENV$curselectCases[c]]
+            print(Study_id)
+           # MutData <- getMutationData(ENV$cgds,Study_id, GenProf, ENV$GeneList)
+            
+            MutData <- getDataByGenes(
+                api = ENV$cgds,
+                studyId = Study_id,
+                genes = ENV$GeneList,
+                by = "hugoGeneSymbol",
+                molecularProfileIds = GenProf) |>
+                unname() |>
+                as.data.frame() |>
+                select(-c("uniqueSampleKey", "uniquePatientKey", "molecularProfileId", "sampleId", "studyId"))
+            
             
             if(length(MutData[,1])==0){
                 msgNoMutData=paste("No Mutation Data are Available for\n", ENV$CasesStudies[ENV$curselectCases[c]+1])

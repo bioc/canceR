@@ -19,39 +19,29 @@ getProfilesDataSingleGene <-function(){
     tclRequire("Tktable")
     
     testCheckedCaseGenProf()
-    
 
-    Lchecked_Studies <- ENV$lchecked_Studies_forCases
-    Lchecked_Cases <- length(ENV$curselectCases)
-    Lchecked_GenProf <- length(ENV$curselectGenProfs)
     
-    ############################
-    ProfDataAll<-0
-    ProfData<-0
-    LengthGenProfs<-0
-    LengthCases<-0
-    
-    for (s in 1:Lchecked_Studies){
-        Si =ENV$checked_StudyIndex[s]
-        GenProfS=0
-        GenProfS<- getGeneticProfiles.CGDS(ENV$cgds, ENV$checked_Studies_forGenProf[s])[,1]
+    for (s in ENV$checked_Studies_id){
         
-        ## Wich Cases are checked and for any study and Genetic Profiles? 
-        LastLengthCases <- LengthCases
-        LengthCases <- LengthCases + ENV$LCases[s]+1
-        for(c in 1: Lchecked_Cases){
-            if(ENV$curselectCases[c] <= LengthCases && ENV$curselectCases[c]>LastLengthCases){
-                print(paste("Case",ENV$curselectCases[c],"<",LengthCases,ENV$curselectCases[c],">",LastLengthCases ))   
-                
-                CaseS<- ENV$CasesRefStudies[ENV$curselectCases[c]]
+        for(c in seq(length(ENV$curselectGenProfs))){
+
                 
                 launchDialog <- function(){
                     
-                    Dialog_Title<- paste("STUDY:", Si,"CASE:", ENV$curselectCases_forStudy[c], sep=" ")
+                    Dialog_Title<- paste("STUDY:", s ,"CASE:", ENV$curselectCases_forStudy[c], sep=" ")
                     GENE <- modalDialog(Dialog_Title, "Enter HUGO Gene Symbol", "MDM4")
                     if (GENE == "ID_CANCEL") return()
                     
-                    ProfDataS<-getProfileData(ENV$cgds,GENE, GenProfS,CaseS)
+                    #ProfDataS<-getProfileData(ENV$cgds, GENE, GenProfS, Study_id)
+                    print(ENV$GenProfsRefStudies[ENV$curselectGenProfs[c]])
+                    print(s)
+                    ProfDataS <- cBioPortalData::getDataByGenes(api =  ENV$cgds,
+                                                                studyId = s,
+                                                                genes = GENE,
+                                                                by = "hugoGeneSymbol", 
+                                                                molecularProfileIds = ENV$GenProfsRefStudies[ENV$curselectGenProfs[c]]) |>
+                        unname() |>
+                        as.data.frame()
                     
                     
                     ttProfData_cb <- tktoplevel()
@@ -60,12 +50,12 @@ getProfilesDataSingleGene <-function(){
                     
                     cbAll <- tkcheckbutton(ttProfData_cb)
                     cbAllValue <- tclVar("0")
-                    tkconfigure(cbAll,variable=cbAllValue)
-                    labelAll<- tklabel(ttProfData_cb,text= "All")
+                    tkconfigure(cbAll, variable = cbAllValue)
+                    labelAll<- tklabel(ttProfData_cb, text= "All")
                     tkgrid(labelAll, cbAll)
                     
                     cbIValue=0
-                    for(i in 1: length(names(ProfDataS))){
+                    for(i in seq(ncol(ProfDataS))){
                         
                         cbi <- paste ("cb", i, sep="")  
                         cbi <- tkcheckbutton(ttProfData_cb)
@@ -93,8 +83,7 @@ getProfilesDataSingleGene <-function(){
                             ProfDataS <- t(t(ProfDataS))
                             title<-paste(ENV$StudyRefCase[c],ENV$CaseChoice[c], sep=": ")
                             getInTable(ProfDataS, title)
-                            
-                            
+ 
                         } else{
                             
                             for (i in 1: length(names(ProfDataS))){
@@ -111,17 +100,15 @@ getProfilesDataSingleGene <-function(){
                                     ProfDataS[,i]= gsub("\\[Not Available\\]","NA", ProfDataS[,i])
                                     
                                     ProfDataSSub<- cbind(ProfDataSSub,ProfDataS[i])
-                                    
                                 }
-                                
                             }
-                            ProfDataSSub<-ProfDataSSub[-1]
+                            ProfDataSSub <- ProfDataSSub[-1]
                             
                             if(length(ProfDataSSub)==0){
                                 tkmessageBox(message= paste("Select at least one data type"), icon="warning")
                                 stop("Select at least one data type")
                             }
-                           
+                            
                             ProfDataSSub <- t(t(ProfDataSSub))
                             title=paste(ENV$StudyRefCase[c],ENV$CaseChoice[c], sep=": ")
                             getInTable(ProfDataSSub, title)
@@ -136,13 +123,10 @@ getProfilesDataSingleGene <-function(){
                     
                     ##Waiting to checkbox before to access to the next clinical data
                     tkwait.window(ttProfData_cb)
-                    
-                    
-                    
                 }
                 launchDialog()
                 
-            }
+#            }
         }   
         
     }

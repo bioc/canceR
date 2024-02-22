@@ -47,7 +47,7 @@ plot_2Genes_1GenProf <- function(){
                 for (i in 1:Lchecked_GenProfs){
                     if(ENV$StudyRefCase[i]!=ENV$StudyRefGenProf[i]){
                         
-                        msgBadChoice="Correpond the Genetic Profile to the Case for the same Study"
+                        msgBadChoice="Correspond the Genetic Profile to the Case for the same Study"
                         tkmessageBox(message=msgBadChoice, icon="warning")
                         
                         #stop("Correpond the Genetic Profile to the Case for the same Study")

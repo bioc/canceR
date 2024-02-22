@@ -20,41 +20,30 @@ if(!exists("curselectCases", envir = ENV)){
     tkmessageBox(message= msgNoGenProfChoice)
     stop(msgNoGenProfChoice)
     
-    
-    
 } else if (!exists("GeneList", envir = ENV)){
     msgNoGeneList= paste("Load Gene List (HUGO)")
     tkmessageBox(message= msgNoGeneList, icon="info")
     stop(msgNoGeneList)
+    
 } else {
-    
-    Lchecked_Studies <- ENV$lchecked_Studies_forCases
-    Lchecked_Cases <- length(ENV$curselectCases)
-    Lchecked_GenProf <- length(ENV$curselectGenProfs)
-    
     ######## Verify the number of checked cases and checked GenProfs.
     #If they not have the same length, take this message:
-    if(Lchecked_Cases != Lchecked_GenProf)
+    if(length(ENV$curselectCases) != length(ENV$curselectGenProfs))
     {
         msgNotEqual<-"Select EQUAL number of Cases and Genetic Profiles for every Study!"
         tkmessageBox(message=msgNotEqual, icon="warning")
-        tkfocus(ttCasesGenProfs)
+        tkfocus(ENV$ttCasesGenProfs)
         stop("Select EQUAL number of Cases and Genetic Profiles for every Study!")
-        
     } 
-    
     ######### Test if all cases were corresponded to appropriate Gen profs (same Study)
-    for (i in 1:Lchecked_Cases){
+    for (i in 1:length(ENV$curselectCases)){
         if(ENV$StudyRefCase[i]!= ENV$StudyRefGenProf[i]){
             
-            msgBadChoice="Correpond the Genetic Profile to the Case for the same Study"
+            msgBadChoice="Correspond the Genetic Profile to the Case for the same Study"
             tkmessageBox(message=msgBadChoice, icon="warning")
             tkfocus(ENV$ttCasesGenProfs)
             stop("Correspond the Genetic Profile to the Case for the same Study")
-            
         } 
-        
     }
-    
 }
 }

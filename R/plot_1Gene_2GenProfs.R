@@ -36,7 +36,7 @@ plot_1Gene_2GenProfs <- function(){
         ## Test if all Cases were corresponded to TWO appropriate Genetic profiles (same Study)
         for (i in 0:(length(ENV$StudyRefCase)-1)){
             if(ENV$StudyRefCase[i+1] != ENV$StudyRefGenProf[(i*2)+1] || ENV$StudyRefCase[i+1] != ENV$StudyRefGenProf[(i*2)+2]){
-                msgBadChoice="Correpond two Genetic Profiles to one Case for the same Study"
+                msgBadChoice="Correspond two Genetic Profiles to one Case for the same Study"
                 tkmessageBox(message=msgBadChoice, icon="warning")
                 stop(msgBadChoice)
                 

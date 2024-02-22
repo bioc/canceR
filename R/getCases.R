@@ -61,14 +61,13 @@ getCases <- function(){
         
         j=0
         CasesStudy = 0
-        CaseRefStudy =0
+        CaseRefStudy = 0
         CasesRefStudy = 0
         for (j in seq(ENV$n_Cases[i])){
             Sys.sleep(0.1)
             setTkProgressBar(progressBar_Cases, j, 
                              label=paste(round(j/ENV$n_Cases[i]*100, 0),
                                                                 "% of Cases"))
-            
             CaseStudy <- ENV$Cases[[i]][["description"]][j]
             #print(CaseStudy)
             #CaseStudy <- getCaseLists(ENV$cgds,checked_Studies_id[i])[,3][j]
@@ -80,12 +79,9 @@ getCases <- function(){
             
             CasesStudy <- c(CasesStudy, CaseStudy)
             CasesRefStudy <- c(CasesRefStudy,CaseRefStudy)
-            
         }
         ##Close ProgressBar_Cases
         close(progressBar_Cases)
-        
-        
         CasesStudies <- c(CasesStudies, CasesStudy)
         CasesRefStudies <- c(CasesRefStudies, CasesRefStudy)
         

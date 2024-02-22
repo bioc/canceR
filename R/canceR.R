@@ -100,7 +100,8 @@ canceR <- function(){
             tkinsert(tlMain,"end", s )
         }
         # Default selection.  Indexing starts at zero.
-        tkselection.set(tlMain,2) 
+
+        tkselection.set(tlMain,86)  #:356
         
         
         tkinsert(tlInfo,"end",text= nbrStudies )
@@ -195,7 +196,7 @@ canceR <- function(){
             ENV$StudyChoice <- ENV$matched_studies[as.numeric(tkcurselection(tlMain))+1]
             ENV$checked_StudyIndex <- ENV$Matched_index[as.numeric(tkcurselection(tlMain))+1]
         }
-        print(ENV$checked_StudyIndex)
+
         #Identify checked Studies and its Index in cgds
         ENV$checked_Studies_id <- ENV$Studies[ENV$checked_StudyIndex,"studyId"] |> pull()
 

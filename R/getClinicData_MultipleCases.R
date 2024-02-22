@@ -40,10 +40,19 @@ getClinicData_MultipleCases<- function(getSummaryGSEAExists){
     }
     
     for(c in 1:length(ENV$curselectCases)){
-        Case<- ENV$CasesRefStudies[ENV$curselectCases[c]]
+        Study_id <- ENV$CasesRefStudies[ENV$curselectCases[c]]
         
-        ClinicalData<-getClinicalData(ENV$cgds,Case)
+        #study_id <- gsub('_[a-z]*[0-9]*$', '', Study_id)
+        ## extract only abbreviation of studies
+        # unique(
+        #     grep(paste(
+        #         unique(unlist(lapply(selected_by_curser, 
+        #                              function(x) unlist(strsplit(x,split = "_"))[1]))),
+        #         collapse = "|"), checked_Studies, value=TRUE)
+        # )
         
+        ClinicalData <- cBioPortalData::clinicalData(ENV$cgds, Study_id) 
+
         
         if(length(ClinicalData[1,])==0){
             msgNoClinData=paste("No Clinical Data are Available for\n", ENV$CasesStudies[ENV$curselectCases[c]+1])
@@ -57,7 +66,9 @@ getClinicData_MultipleCases<- function(getSummaryGSEAExists){
                                  command=function(...)tkyview(ttc,...))
             xscr1 <- tkscrollbar(ttClin, repeatinterval=2,orient="horizontal",
                                  command=function(...)tkxview(ttc,...))
-            ttc<-tklistbox(ttClin,height=20, width= 50 ,selectmode="multiple",xscrollcommand=function(...)tkset(xscr1,...),yscrollcommand=function(...)tkset(yscr1,...),background="white")
+            ttc<-tklistbox(ttClin,height=20, width= 50 ,selectmode="multiple",
+                           xscrollcommand=function(...)tkset(xscr1,...),
+                           yscrollcommand=function(...)tkset(yscr1,...),background="white")
             
             tkgrid(ttc,yscr1, columnspan=1)
             tkgrid.configure(yscr1,rowspan=20, columnspan=1,sticky="nsw")

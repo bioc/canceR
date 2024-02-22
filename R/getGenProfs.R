@@ -31,24 +31,21 @@ getGenProfs <- function(){
 
     GenProfsStudies = 0
     GenProfsRefStudies = 0
-    LGenProfs= 0
     for (i in seq(length(ENV$checked_StudyIndex))){
 
         Si = ENV$checked_StudyIndex[i]
 
-        tkinsert(ENV$tl,"end",paste("***** Study ", Si ," : ", ENV$Studies$name[Si],"******"))
+        tkinsert(ENV$tl,"end", paste("***** Study ", Si ," : ", ENV$Studies$name[Si],"******"))
         
         ENV$GenProfs[[i]] <- cBioPortalData::molecularProfiles(ENV$cgds, ENV$checked_Studies_id[i])
         
         ENV$n_GenProfs[i] <- nrow(ENV$GenProfs[[i]])
 
-        print(paste("There are", ENV$n_GenProfs[i],"Genetics Profiles in", ENV$checked_Studies_id[i], sep=" "))
+        print(paste("There are", ENV$n_GenProfs[i], "Genetics Profiles in", ENV$checked_Studies_id[i], sep=" "))
 
         # create progress bar
         progressBar_GenProfs <- tkProgressBar(title = ENV$Studies$name[Si], min = 0,
                                               max = ENV$n_GenProfs[i], width = 400)
-
-
         GenProfRefStudy =0
         GenProfsStudy = 0
         GenProfsRefStudy =0
@@ -65,7 +62,8 @@ getGenProfs <- function(){
             GenProfRefStudy <- ENV$GenProfs[[i]][["molecularProfileId"]][j]
             #GenProfRefStudy <- getGeneticProfiles.CGDS(ENV$cgds, ENV$checked_Studies_forGenProf[i])[,1][j]
 
-            tkinsert(ENV$tl,"end",paste(j,":",GenProfStudy))
+            tkinsert(ENV$tl,"end", paste(j,":", GenProfStudy))
+            
             GenProfsStudy <- cbind(GenProfsStudy, GenProfStudy)
             GenProfsRefStudy <- cbind(GenProfsRefStudy, GenProfRefStudy)
         }
@@ -74,11 +72,7 @@ getGenProfs <- function(){
         GenProfsStudies <- cbind(GenProfsStudies, GenProfsStudy)
         GenProfsRefStudies <- cbind(GenProfsRefStudies, GenProfsRefStudy)
     }
-
-
     GenProfsRefStudies <- GenProfsRefStudies[-1]
     ENV$GenProfsRefStudies <- GenProfsRefStudies
-    ENV$GenProfsStudies <-GenProfsStudies
-
-
+    ENV$GenProfsStudies <- GenProfsStudies
 }
