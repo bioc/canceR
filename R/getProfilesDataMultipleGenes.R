@@ -52,11 +52,13 @@ getProfilesDataMultipleGenes <-function(getSummaryGSEAExists){
     tkgrid(xScr)
     tkgrid.configure(xScr,stick="new")
     ###
-    ProfDataAll=0
+    #ProfDataAll=0
     ProfData=0
-    LengthGenProfs=0
-    LengthCases=0
-    for (i in seq(length(ENV$checked_Studies_id))){
+    #LengthGenProfs=0
+    #LengthCases=0
+    i<-0
+    for (s in ENV$checked_Studies_id){
+        i<-i+1
         Si = ENV$checked_StudyIndex[i]
         progressBar_ProfilesData <- tkProgressBar(title = ENV$Studies$name[Si], min = 0,
                                                   max = length(ENV$curselectGenProfs), width = 400)
@@ -73,11 +75,10 @@ getProfilesDataMultipleGenes <-function(getSummaryGSEAExists){
         
         tkinsert(treeWidget, "end", "root", StudyiChoice, text= ENV$StudyChoice[i])
         
-        
 
         study_desc_position_in_genProfs <- 0
         for (k in 1:length(ENV$curselectGenProfs)){
-    
+            
             Sys.sleep(0.1)
             setTkProgressBar(progressBar_ProfilesData, k, 
                              label=paste(round(k/length(ENV$curselectGenProfs)*100, 0),
@@ -105,7 +106,7 @@ getProfilesDataMultipleGenes <-function(getSummaryGSEAExists){
                     #ProfData <- getProfileData(ENV$cgds,ENV$GeneList, GenProf,Case)
                     ProfData <- getDataByGenes(
                                     api =  ENV$cgds,
-                                    studyId = ENV$checked_Studies_id[i],
+                                    studyId = s,
                                     genes = ENV$GeneList,  #c("NF1", "TP53", "ABL1")
                                     by = "hugoGeneSymbol",
                                     molecularProfileIds = GenProf)  |>
@@ -113,7 +114,7 @@ getProfilesDataMultipleGenes <-function(getSummaryGSEAExists){
                                     as.data.frame() |>
                                     select("hugoGeneSymbol","sampleId", "value") |>
                                     tidyr::spread("hugoGeneSymbol", "value") |>
-                                    tibble::column_to_rownames("sampleId")
+                                    data.frame(row.names = 1)
                         
                  
                 ##Convert data frame to numeric structure

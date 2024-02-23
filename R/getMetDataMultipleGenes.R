@@ -17,46 +17,42 @@ getMetDataMultipleGenes <-function(){
     
     testCheckedCaseGenProf()
     
-    
-    Lchecked_Studies <- length(ENV$checked_Studies_id)
-    Lchecked_Cases <- length(ENV$curselectCases)
-    Lchecked_GenProf <- length(ENV$curselectGenProfs)
     ######### Test if all cases were corresponded to appropriate Gen profs (same Study)
-    for (i in 1:Lchecked_Cases){
-        if(ENV$StudyRefCase[i]!=ENV$StudyRefGenProf[i]){
-            
-            msgBadChoice="Correspond the Genetic Profile to the Case for the same Study"
-            tkmessageBox(message=msgBadChoice, icon="warning")
-            tkfocus(ENV$ttCasesGenProfs)
-            stop("Correspond the Genetic Profile to the Case for the same Study")
-            
-        }
-    }
+    # for (i in 1:length(ENV$curselectCases)){
+    #     if(ENV$StudyRefCase[i]!=ENV$StudyRefGenProf[i]){
+    #         
+    #         msgBadChoice="Correspond the Genetic Profile to the Case for the same Study"
+    #         tkmessageBox(message=msgBadChoice, icon="warning")
+    #         tkfocus(ENV$ttCasesGenProfs)
+    #         stop("Correspond the Genetic Profile to the Case for the same Study")
+    #         
+    #     }
+    # }
     
-    ProfDataAll=0
-    ProfData=0
-    LengthGenProfs=0
-    LengthCases=0
-    for (i in 1:Lchecked_Studies){
-        
+    #ProfDataAll =0
+    ProfData = 0
+    i <- 0
+    for (s in ENV$checked_Studies_id){
+        i<-i+1
         Si =ENV$checked_StudyIndex[i]
         progressBar_ProfilesData <- tkProgressBar(title = ENV$Studies$name[Si], min = 0,
-                                                  max = Lchecked_GenProf, width = 400)
+                                                  max = length(ENV$curselectGenProfs), width = 400)
         
         #tkfocus(progressBar_ProfilesData)
-        LastLengthGenProfs = LengthGenProfs
-        LengthGenProfs = LengthGenProfs + ENV$n_GenProfs[i]+1
-        LastLengthCases = LengthCases
-        LengthCases = LengthCases + ENV$n_Cases[i]+1
         
-        for (k in 1:Lchecked_GenProf){
+        study_desc_position_in_genProfs <- 0
+        for (k in 1:length(ENV$curselectGenProfs)){
             Sys.sleep(0.1)
-            setTkProgressBar(progressBar_ProfilesData, k, label=paste( round(k/Lchecked_GenProf*100, 0),
+            setTkProgressBar(progressBar_ProfilesData, k, 
+                             label=paste( round(k/length(ENV$curselectGenProfs)*100, 0),
                                                                        "% of Methylation Data"))
             
             
-            if(ENV$curselectGenProfs[k] <= LengthGenProfs && 
-               ENV$curselectGenProfs[k] > LastLengthGenProfs){    
+            # Avoid to select study description  
+            if (ENV$curselectGenProfs[k] <= ENV$n_GenProfs[i] && 
+                ENV$curselectGenProfs[k] > study_desc_position_in_genProfs){ 
+                
+                study_desc_position_in_genProfs <- study_desc_position_in_genProfs + ENV$n_GenProfs[i]
                 
                 GenProf <- ENV$GenProfsRefStudies[ENV$curselectGenProfs[k]]
                 
@@ -66,9 +62,7 @@ getMetDataMultipleGenes <-function(){
                     break
                 }
                 
-                Study_id <- ENV$CasesRefStudies[ENV$curselectCases[k]]
-                
-                # if (length(grep("methylation", Study_id))==0){
+                # if (length(grep("methylation", s ))==0){
                 #     msgNoMeth <- "Select Methylation data from Cases"
                 #     tkmessageBox(message = msgNoMeth, icon='info')
                 #     break
@@ -77,7 +71,7 @@ getMetDataMultipleGenes <-function(){
                 
                 #ProfData <- getProfileData(ENV$cgds,ENV$GeneList, GenProf,Study_id)
                 ProfData <-  cBioPortalData::getDataByGenes(api = ENV$cgds,
-                                               studyId = Study_id,
+                                               studyId = s,
                                                genes = ENV$GeneList,
                                                by = "hugoGeneSymbol",
                                                molecularProfileIds = GenProf) |>
@@ -85,9 +79,9 @@ getMetDataMultipleGenes <-function(){
                     as.data.frame()|>
                     select("sampleId", "hugoGeneSymbol", "value") |>
                     tidyr::spread("hugoGeneSymbol", "value") |>
-                   # `rownames<-`("sampleId")
-                   tibble::column_to_rownames("sampleId")
-                
+                    data.frame(row.names = 1)
+                   #tibble::column_to_rownames("sampleId")
+
                 ##convert data frame to numeric structure
                 #if( !is.numeric(ProfData[1,1])){
                 #    for(i in 1:ncol(ProfData)){

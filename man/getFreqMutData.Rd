@@ -4,12 +4,12 @@
 \alias{getFreqMutData}
 \title{get mutation frequency}
 \usage{
-getFreqMutData(list, geneList)
+getFreqMutData(list, GeneList)
 }
 \arguments{
 \item{list}{a list of data frame with mutation data. Each data frame is for one study}
 
-\item{geneList}{file name of geneList examples: "73"}
+\item{GeneList}{file name of GeneList examples: "73"}
 }
 \value{
 a data frame with mutation frequency. gene is in rows and study is in column

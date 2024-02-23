@@ -41,7 +41,7 @@ getClinicData_MultipleCases<- function(getSummaryGSEAExists){
     
     for(c in 1:length(ENV$curselectCases)){
         Study_id <- ENV$CasesRefStudies[ENV$curselectCases[c]]
-        
+
         #study_id <- gsub('_[a-z]*[0-9]*$', '', Study_id)
         ## extract only abbreviation of studies
         # unique(

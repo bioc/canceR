@@ -70,7 +70,7 @@ getProfData<-function(study, genProf, listGenProf, GeneList, Mut){
                 #.[[1]] |>
                 select("sampleId", "hugoGeneSymbol", "value") |>
                 tidyr::spread("hugoGeneSymbol", "value") |>
-                tibble::column_to_rownames("sampleId")
+                data.frame(row.names = 1)
             ##  check the order of geneList and add gene with empty data NA.
             missing <- setdiff(GeneList[order(GeneList)], names(ProfData_X))
             ProfData_X[missing] <- NA
