@@ -52,10 +52,8 @@ getProfilesDataMultipleGenes <-function(getSummaryGSEAExists){
     tkgrid(xScr)
     tkgrid.configure(xScr,stick="new")
     ###
-    #ProfDataAll=0
+    
     ProfData=0
-    #LengthGenProfs=0
-    #LengthCases=0
     i<-0
     for (s in ENV$checked_Studies_id){
         i<-i+1
@@ -83,8 +81,8 @@ getProfilesDataMultipleGenes <-function(getSummaryGSEAExists){
             setTkProgressBar(progressBar_ProfilesData, k, 
                              label=paste(round(k/length(ENV$curselectGenProfs)*100, 0),
                                                                        "% of Profiles Data"))
-            print(paste(ENV$curselectGenProfs[k], "<=", ENV$n_GenProfs[i]))
-            print(paste(ENV$curselectGenProfs[k], ">", study_desc_position_in_genProfs))
+            # print(paste(ENV$curselectGenProfs[k], "<=", ENV$n_GenProfs[i]))
+            # print(paste(ENV$curselectGenProfs[k], ">", study_desc_position_in_genProfs))
             
             # Avoid to select study description  
             if (ENV$curselectGenProfs[k] <= ENV$n_GenProfs[i] && 

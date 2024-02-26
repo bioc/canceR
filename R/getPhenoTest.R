@@ -21,7 +21,8 @@ getPhenoTest <- function(){
     geteSet()
     
     
-    Biobase::pData(ENV$eSet)<- as.data.frame(lapply(Biobase::pData(ENV$eSet),function(x) if(is.character(x)|is.factor(x)) gsub("N/A","NA",x,  ignore.case = TRUE) else x))
+    Biobase::pData(ENV$eSet)<- as.data.frame(lapply(Biobase::pData(ENV$eSet),
+                                                    function(x) if(is.character(x)|is.factor(x)) gsub("N/A","NA",x,  ignore.case = TRUE) else x))
     
     
     ##popup select variable
@@ -37,13 +38,15 @@ getPhenoTest <- function(){
     }
     
     
-    if (inherits(try(epheno <- phenoTest::ExpressionPhenoTest(ENV$eSet, ENV$var2test, p.adjust.method=ENV$p.adjustChoice, approach="frequentist"), silent=TRUE),"try-error"))
+    if (inherits(try(epheno <- phenoTest::ExpressionPhenoTest(ENV$eSet, ENV$var2test,
+                                                              p.adjust.method=ENV$p.adjustChoice, approach="frequentist"), silent=TRUE),"try-error"))
     {
         msgBadCovariables <- paste("There is incompatible variables. Select another Formula.")
         tkmessageBox(message=msgBadCovariables, icon="warning")
         stop(msgBadCovariables)
     } else{         
-        epheno <- phenoTest::ExpressionPhenoTest(ENV$eSet, ENV$var2test, p.adjust.method=ENV$p.adjustChoice, approach="frequentist", continuousCategories= length(table(pData(ENV$eSet)[ENV$Category])))
+        epheno <- phenoTest::ExpressionPhenoTest(ENV$eSet, ENV$var2test,
+                                                 p.adjust.method=ENV$p.adjustChoice, approach="frequentist", continuousCategories= length(table(pData(ENV$eSet)[ENV$Category])))
         
         
     }
