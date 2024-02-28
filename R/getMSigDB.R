@@ -29,7 +29,8 @@ getMSigDB <- function(eSet,k){
     
     #list of GO terms (biological processes) acquired from MSigDB
     #http://www.broadinstitute.org/gsea/downloads.jsp
-    mSigDBPath <- tclvalue(tkgetOpenFile(filetypes = "{{GMT Files} {.gmt}} {{All files} *}", title="load MSigDB for Gene Symbol List ")) # Very simple, isn't it?
+    mSigDBPath <- tclvalue(tkgetOpenFile(filetypes = "{{GMT Files} {.gmt}} {{All files} *}",
+                                         title="load MSigDB for Gene Symbol List ")) # Very simple, isn't it?
     if (!nchar(mSigDBPath)) {
         tkmessageBox(message = "No file was selected!")
     } else {

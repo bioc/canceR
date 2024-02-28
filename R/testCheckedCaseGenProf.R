@@ -1,13 +1,15 @@
 #' Testing checked appropriate Cases for appropriate Genetic profiles.
+#' @param singleGene specify if the check for querying genetic profile for a specific gene or not (0,1).
 #' @usage testCheckedCaseGenProf()
 #' @return dialog box with warning message
-#' @export
+#' 
 #' @examples 
 #' readRDS(paste(path.package("canceR"),"/extdata/rdata/brca_tcga73genes.rds", sep=""))
 #' \dontrun{
 #' testCheckedCaseGenProf()
 #' }
-testCheckedCaseGenProf <- function(){
+#' @export
+testCheckedCaseGenProf <- function(singleGene=0){
     
 if(!exists("curselectCases", envir = ENV)){
     msgNoCaseChoice= paste("Select at least ONE Case and ONE Genetic Profile")
@@ -20,7 +22,7 @@ if(!exists("curselectCases", envir = ENV)){
     tkmessageBox(message= msgNoGenProfChoice)
     stop(msgNoGenProfChoice)
     
-} else if (!exists("GeneList", envir = ENV)){
+} else if (!exists("GeneList", envir = ENV) && singleGene==0){
     msgNoGeneList= paste("Load Gene List (HUGO)")
     tkmessageBox(message= msgNoGeneList, icon="info")
     stop(msgNoGeneList)
@@ -36,7 +38,7 @@ if(!exists("curselectCases", envir = ENV)){
         stop("Select EQUAL number of Cases and Genetic Profiles for every Study!")
     } 
     ######### Test if all cases were corresponded to appropriate Gen profs (same Study)
-    for (i in 1:length(ENV$curselectCases)){
+    for (i in seq(ENV$curselectCases)){
         if(ENV$StudyRefCase[i]!= ENV$StudyRefGenProf[i]){
             
             msgBadChoice="Correspond the Genetic Profile to the Case for the same Study"

@@ -75,6 +75,7 @@ getProfilesDataMultipleGenes <-function(getSummaryGSEAExists){
         
 
         study_desc_position_in_genProfs <- 0
+        
         for (k in 1:length(ENV$curselectGenProfs)){
             
             Sys.sleep(0.1)

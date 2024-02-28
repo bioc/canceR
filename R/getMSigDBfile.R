@@ -15,7 +15,8 @@
 getMSigDBfile <- function(){
     
     Sys.chmod(getwd(), mode = "0777", use_umask = TRUE)
-    ENV$MSigDBPath <- tclvalue(tkgetOpenFile(filetypes = "{{gmt Files} {.gmt}} {{All files} *}", title="Select MSigDB with Symbol Gene")) 
+    ENV$MSigDBPath <- tclvalue(tkgetOpenFile(filetypes = "{{gmt Files} {.gmt}} {{All files} *}", 
+                                             title="Select MSigDB with Symbol Gene")) 
     
     if (!nchar(ENV$MSigDBPath)) {
         tkmessageBox(message = "No file was selected!")

@@ -6,6 +6,9 @@
 \usage{
 testCheckedCaseGenProf()
 }
+\arguments{
+\item{singleGene}{specify if the check for querying genetic profile for a specific gene or not (0,1).}
+}
 \value{
 dialog box with warning message
 }

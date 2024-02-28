@@ -18,7 +18,7 @@ getProfilesDataSingleGene <-function(){
     tclRequire("BWidget")
     tclRequire("Tktable")
     
-    testCheckedCaseGenProf()
+    testCheckedCaseGenProf(singleGene=1)
 
     
     for (s in ENV$checked_Studies_id){
@@ -41,7 +41,10 @@ getProfilesDataSingleGene <-function(){
                                                                 by = "hugoGeneSymbol", 
                                                                 molecularProfileIds = ENV$GenProfsRefStudies[ENV$curselectGenProfs[c]]) |>
                         unname() |>
-                        as.data.frame()
+                        as.data.frame() |>
+                        select("hugoGeneSymbol","sampleId", "value") |>
+                        tidyr::spread("hugoGeneSymbol", "value") 
+                        #data.frame(row.names = 1)
                     
                     
                     ttProfData_cb <- tktoplevel()
@@ -80,9 +83,10 @@ getProfilesDataSingleGene <-function(){
                                 ProfDataS[,i]<- gsub("\\[Not Available\\]","NA", ProfDataS[,i])
                             }
                             
-                            ProfDataS <- t(t(ProfDataS))
-                            title<-paste(ENV$StudyRefCase[c],ENV$CaseChoice[c], sep=": ")
-                            getInTable(ProfDataS, title)
+                            #ProfDataS <- t(t(ProfDataS))
+                            getInTable(ProfDataS,
+                                       title= paste0(ENV$StudyRefCase[c],": ",
+                                                    ENV$CaseChoice[c]))
  
                         } else{
                             
@@ -97,9 +101,9 @@ getProfilesDataSingleGene <-function(){
                                 if (cbIVal[i]=="1"){
                                     
                                     ## convert metacharacter "[""]" not supported by tclarray()
-                                    ProfDataS[,i]= gsub("\\[Not Available\\]","NA", ProfDataS[,i])
+                                    ProfDataS[,i] <- gsub("\\[Not Available\\]","NA", ProfDataS[,i])
                                     
-                                    ProfDataSSub<- cbind(ProfDataSSub,ProfDataS[i])
+                                    ProfDataSSub <- cbind(ProfDataSSub, ProfDataS[i])
                                 }
                             }
                             ProfDataSSub <- ProfDataSSub[-1]
@@ -109,9 +113,10 @@ getProfilesDataSingleGene <-function(){
                                 stop("Select at least one data type")
                             }
                             
-                            ProfDataSSub <- t(t(ProfDataSSub))
-                            title=paste(ENV$StudyRefCase[c],ENV$CaseChoice[c], sep=": ")
-                            getInTable(ProfDataSSub, title)
+                            #ProfDataSSub <- t(t(ProfDataSSub))
+                            getInTable(ProfDataSSub, 
+                                       title= paste0(ENV$StudyRefCase[c],": ",
+                                                     ENV$CaseChoice[c]))
                             
                         }
                         tkdestroy(ttProfData_cb)

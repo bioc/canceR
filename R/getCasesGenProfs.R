@@ -84,8 +84,8 @@ getCasesGenProfs <- function(){
     #tkadd(ClinMenu, "command", label = "All", command = function() getClinicData_MultipleCases())
     #tkadd(ClinMenu, "command", label = "Single Case", command = function() getClinicData_SingleCase())
     #tkadd(ClinMenu, "command", label = "Quit", command = function() tkdestroy(ENV$ttCasesGenProfs))
-    tkadd(MutMenu, "command", label = "All", command=function()getMutData())
-    tkadd(MutMenu, "command", label = "Specific", command= function()getSpecificMut())
+    tkadd(MutMenu, "command", label = "All", command=function() getMutData())
+    tkadd(MutMenu, "command", label = "Specific", command= function() getSpecificMut())
     tkadd(ProfMenu, "command", label = "Single Gene", 
           command= function() getProfilesDataSingleGene()) # getProfilesDataMultipleGenes(getSummaryGSEAExists=0)
     tkadd(ProfMenu, "command", label = "Multiple Genes", 
@@ -102,13 +102,13 @@ getCasesGenProfs <- function(){
     
     #tkadd(get, "command", label = "CLS file", command= function()getCLSfile())
     #tkadd(get, "command", label = "GCT file", command= function()getGCTfile())
-    tkadd(get, "command", label = "GCT,CLS files", command= function()getGCT_CLSfiles())
-    tkadd(get, "command", label= "Results", command= function()Run.GSEA())
-    tkadd(get, "command", label= "Summary", command= function()getSummaryGSEA())
-    tkadd(GSEAlm, "command", label = "Which MSig for gene list", command= function()Match_GeneList_MSigDB())
-    tkadd(GSEAlm, "command", label= "SubMSigDB/eSet", command= function()getMSigDB(ENV$eSet,1))
-    tkadd(GSEAlm, "command", label= "Phenotypes into Disease", command= function()getGSEAlm_Variables())
-    tkadd(GSEAlm, "command", label= "Disease vs Disease", command= function()getGSEAlm_Diseases())
+    tkadd(get, "command", label = "GCT,CLS files", command= function() getGCT_CLSfiles())
+    tkadd(get, "command", label= "Results", command= function() Run.GSEA())
+    tkadd(get, "command", label= "Summary", command= function() getSummaryGSEA())
+    tkadd(GSEAlm, "command", label = "Which MSig for gene list", command= function() Match_GeneList_MSigDB())
+    tkadd(GSEAlm, "command", label= "SubMSigDB/eSet", command= function() getMSigDB(ENV$eSet,1))
+    tkadd(GSEAlm, "command", label= "Phenotypes into Disease", command= function() getGSEAlm_Variables())
+    tkadd(GSEAlm, "command", label= "Disease vs Disease", command= function() getGSEAlm_Diseases())
     
     
     #tkadd(GSEAMenu, "command", label= "GSEAlm", command= function()getGSEAlm())
@@ -116,10 +116,10 @@ getCasesGenProfs <- function(){
     # tkadd(ClassMenu, "command", label= "Genes/Pheno Single", command= function() getGenesTree_SingleCase())
     #tkadd(ClassMenu, "command", label= "Genes/Pheno Multiple", command= function() getGenesTree_MultipleCases())
     tkadd(ClassMenu, "cascade", label= "Genes/Pheno Tree", menu=TreeClass)
-    tkadd(TreeClass, "command", label= "Single", command= function()getGenesTree_SingleCase())
-    tkadd(TreeClass, "command", label= "Multiple", command= function()getGenesTree_MultipleCases())
+    tkadd(TreeClass, "command", label= "Single", command= function() getGenesTree_SingleCase())
+    tkadd(TreeClass, "command", label= "Multiple", command= function() getGenesTree_MultipleCases())
     
-    tkadd(HelpMenu, "command", label="Vignette", command= function()canceR_Vignette())
+    tkadd(HelpMenu, "command", label="Vignette", command= function() canceR_Vignette())
     tkadd(HelpMenu, "command", label= "Issue", command = function() canceR_Issue())
     tkadd(HelpMenu, "command", label = "About", command= function() about())
     
@@ -175,14 +175,14 @@ getCasesGenProfs <- function(){
     
     tkgrid(yscr1,ENV$tc,ENV$tl,yscr2, columnspan=1)
     tkgrid.configure(yscr1,rowspan=20, columnspan=1,sticky="nsw")
-    tkgrid.configure(yscr2,rowspan=20,sticky="nsw")
+    tkgrid.configure(yscr2,rowspan=20, sticky="nsw")
     
     tkgrid(xscr1,xscr2,columnspan=2)
-    tkgrid.configure(xscr1,rowspan=2,columnspan=2,sticky="ew")
-    tkgrid.configure(xscr2,rowspan=2,columnspan= 4,sticky="ew")
+    tkgrid.configure(xscr1,rowspan=2, columnspan=2,sticky="ew")
+    tkgrid.configure(xscr2,rowspan=2, columnspan= 4,sticky="ew")
     
     tklabel2 = tklabel(ENV$ttCasesGenProfs, text= "Selected Cases (Samples)")
-    tklabel3 =tklabel(ENV$ttCasesGenProfs,text="Selected Genetic Profiles")
+    tklabel3 = tklabel(ENV$ttCasesGenProfs,text="Selected Genetic Profiles")
     tkgrid(tklabel2,tklabel3, columnspan=2, pady = 10)
     
     tkgrid(tInfoC, tInfoG, columnspan=2)
@@ -202,47 +202,48 @@ getCasesGenProfs <- function(){
         
         ENV$curselectCases <- curselectCases
         ENV$CaseChoice <- ENV$CasesStudies[curselectCases+1]
-        
-        if (lcurselectCases ==0){
+                          
+        if (lcurselectCases == 0){
+            #tkdelete(tInfoC,0,1)
+            #ENV$curselectCases <- NULL
             msgSelectCase="Select at least one Case"
             tkmessageBox(message=msgSelectCase)
             
         } else {
             ## correspond each case  to its study
-            StudyRefCase = 0
+            StudyRefCase = NULL
             for( k in 1: lcurselectCases){
-                h<-1
-                while (curselectCases[k] >  (ENV$n_Cases[h]+1)){
+                h <- 1
+                while (curselectCases[k] >  (ENV$n_Cases[h] + 1)){
                     curselectCases[k] <- curselectCases[k] - ENV$n_Cases[h] - 1
-                    h<- h+1
+                    h <- h + 1
                 }  
-                StudyRefCase <- cbind(StudyRefCase,ENV$checked_Studies_id[h])
+                StudyRefCase <- cbind(StudyRefCase, ENV$checked_Studies_id[h])
             }
-            ENV$StudyRefCase <-StudyRefCase[-1]
+            ENV$StudyRefCase <- StudyRefCase
             
             #redefine curselectCases
-            ENV$curselectCases <- as.numeric(tkcurselection(ENV$tc))+1
+            ENV$curselectCases <- as.numeric(tkcurselection(ENV$tc)) + 1
             lcurselectCases <- length(ENV$curselectCases)
             
             ##loop converting curselectCases value of case to index value of the same case
             
-            n_Cases_sum<-0
+            n_Cases_sum <- 0
             
             for( j in 1:lcurselectCases){
-                for (i in seq(length(ENV$checked_Studies_id))){
+                for (i in seq(ENV$checked_Studies_id)){
                     
-                    if (curselectCases[j] < (n_Cases_sum + ENV$n_Cases[i]+ i)){
+                    if (curselectCases[j] <= (n_Cases_sum + ENV$n_Cases[i] + i)){
                         curselectCases[j] <- curselectCases[j]  - 1
                         break
                     } 
-                    
-                    n_Cases_sum<- n_Cases_sum+ENV$n_Cases[i]+1
+                    n_Cases_sum <- n_Cases_sum + ENV$n_Cases[i] + 1
                 }
             }
-            ENV$curselectCases_forStudy<-curselectCases
-            tkdelete(tInfoC,0,1)
-            tkinsert(tInfoC,"end",ENV$curselectCases_forStudy)
-            tkinsert(tInfoC,"end",ENV$CaseChoice)
+            ENV$curselectCases <-curselectCases
+            tkdelete(tInfoC, 0, 1)
+            tkinsert(tInfoC, "end", ENV$curselectCases)
+            tkinsert(tInfoC, "end", ENV$CaseChoice)
             tkfocus(ENV$ttCasesGenProfs)
         }
         
@@ -257,23 +258,26 @@ getCasesGenProfs <- function(){
         
         
         if (lcurselectGenProfs ==0){
-            msgSelectCase="Select at least one Genetic Profil"; tkmessageBox(message=msgSelectCase)
+            #tkdelete(tInfoG,0,1)
+            #ENV$curselectGenProfs <- NULL
+            msgSelectCase="Select at least one Genetic Profil"; 
+            tkmessageBox(message=msgSelectCase)
         } else {
             
             ## group selected Cases by study. To  avoid corresponding Genetic Profile and Case from different Study
-            StudyRefGenProf = 0
+            StudyRefGenProf <- NULL
             for( k in 1: lcurselectGenProfs){
                 h=1
                 
                 while (curselectGenProfs[k] >  (ENV$n_GenProfs[h]+1)){
-                    curselectGenProfs[k] = curselectGenProfs[k] - ENV$n_GenProfs[h] - 1
+                    curselectGenProfs[k] <- curselectGenProfs[k] - ENV$n_GenProfs[h] - 1
                     h= h+1
                 } 
                 #Cancer Reference (StudyRefGenProf) were compared before to get Profile Data
                 StudyRefGenProf = cbind(StudyRefGenProf, ENV$checked_Studies_id[h]) 
             }
             
-            ENV$StudyRefGenProf<-StudyRefGenProf[-1]
+            ENV$StudyRefGenProf<-StudyRefGenProf
             
             
             ##loop converting curselectGenProfs value of Genetic profile to index value of the same genetic profile in cgds
@@ -283,18 +287,18 @@ getCasesGenProfs <- function(){
                 for (i in seq(length(ENV$checked_Studies_id))){
                     
                     
-                    if (curselectGenProfs[j] < (n_GenProfs_sum + ENV$n_GenProfs[i]+i)){
+                    if (curselectGenProfs[j] <= (n_GenProfs_sum + ENV$n_GenProfs[i] + i)){
                         curselectGenProfs[j] <- curselectGenProfs[j] - 1
                         break
                     } 
-                    n_GenProfs_sum<- n_GenProfs_sum+ENV$n_GenProfs[i]+1
+                    n_GenProfs_sum <- n_GenProfs_sum + ENV$n_GenProfs[i] + 1
                 }
                 
             }
-            ENV$curselectGenProfs_forStudy <- curselectGenProfs
+            ENV$curselectGenProfs <- curselectGenProfs
             
             tkdelete(tInfoG,0,1)
-            tkinsert(tInfoG,"end",ENV$curselectGenProfs_forStudy)
+            tkinsert(tInfoG,"end",ENV$curselectGenProfs)
             tkinsert(tInfoG,"end",ENV$GenProfChoice)
             tkfocus(ENV$ttCasesGenProfs)
         }

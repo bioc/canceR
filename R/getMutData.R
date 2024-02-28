@@ -31,7 +31,7 @@ getMutData <- function(){
             Sys.sleep(0.1)
             setTkProgressBar(progressBar_ProfilesData, c, 
                              label=paste( round(c/length(ENV$curselectGenProfs)*100, 0),
-                                                                       "% of Mutation Data"))
+                                          "% of Mutation Data"))
             
             # Avoid to select study description  
             if (ENV$curselectGenProfs[c] <= ENV$n_GenProfs[i] && 
@@ -63,16 +63,16 @@ getMutData <- function(){
                 
                 if(length(MutData[,1])==0){
                     msgNoMutData=paste("No Mutation Data are Available for\n",
-                                       ENV$CasesStudies[ENV$curselectCases[c]+1])
+                                       ENV$CasesStudies[ENV$curselectCases[c]+2])
                     tkmessageBox(message=msgNoMutData, 
-                                 title= paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+1], 
+                                 title= paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+2], 
                                               ENV$GenProfsStudies[ENV$curselectGenProfs[c]+1], sep=": "))
                     
                     
                 } else{
                     ttMutData_cb <- tktoplevel()
-                    tktitle(ttMutData_cb) <- paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+1],
-                                                   ENV$GenProfsStudies[ENV$curselectGenProfs[c]+1], sep=": ")
+                    tktitle(ttMutData_cb) <- paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+2],
+                                                   ENV$GenProfsStudies[ENV$curselectGenProfs[c]+2], sep=": ")
                     
                     cbAll <- tkcheckbutton(ttMutData_cb)
                     cbAllValue <- tclVar("0")
@@ -101,8 +101,8 @@ getMutData <- function(){
                         cbAllVal <- as.character(tclvalue(cbAllValue))
                         if(cbAllVal =="1"){
                             
-                            title=paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+1], 
-                                        ENV$GenProfsStudies[ENV$curselectGenProfs[c]+1], sep=": ")
+                            title=paste(ENV$StudyRefCase[c],ENV$CasesStudies[ENV$curselectCases[c]+2], 
+                                        ENV$GenProfsStudies[ENV$curselectGenProfs[c]+2], sep=": ")
                             getInTable(MutData, title=title)
                             
                         } else{

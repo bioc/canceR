@@ -21,9 +21,7 @@
 #'}
 #'   
 getCases <- function(){
-    
-    
-    
+
     #get Study Index 
     #StudiesRef <- ENV$Studies |> pull("studyId")
     #checked_StudyIndex
@@ -39,10 +37,9 @@ getCases <- function(){
     police <- tkfont.create(family="arial", size=11)
     tkconfigure(ENV$tc, foreground="black", font=police)
     
-    CasesStudies = 0
-    CasesRefStudies=0
-    CasesRefStudy=0
-    ENV$Cases <- NULL
+    CasesStudies <- 0
+    CasesRefStudies <- NULL
+    #ENV$Cases <- NULL
     for (i in seq(length(ENV$checked_StudyIndex))){
         
         Si <- ENV$checked_StudyIndex[i]
@@ -59,10 +56,10 @@ getCases <- function(){
         progressBar_Cases <- tkProgressBar(title = ENV$Studies$name[Si], min = 0,
                                            max = ENV$n_Cases[i], width = 400)
         
-        j=0
-        CasesStudy = 0
-        CaseRefStudy = 0
-        CasesRefStudy = 0
+        j <- 0
+        CasesStudy <- 0
+        CaseRefStudy <- NULL
+        CasesRefStudy <-  NULL
         for (j in seq(ENV$n_Cases[i])){
             Sys.sleep(0.1)
             setTkProgressBar(progressBar_Cases, j, 

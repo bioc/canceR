@@ -1,5 +1,11 @@
 CHANGES IN VERSION 1.36.5 (26 February 2024)
-------------------- -------------------------
+--------------------------------------------
++ fix issues with indexing Id of Cases and Genetic Profiles
++ Update functionnnalities of GSEA
++ add an example of GCT and CSL fiiles to use in GSEA
+
+CHANGES IN VERSION 1.36.5 (26 February 2024)
+--------------------------------------------
 + fix phenoTest analysis
 
 CHANGES IN VERSION 1.36.4 (22 February 2024)

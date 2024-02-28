@@ -101,7 +101,7 @@ canceR <- function(){
         }
         # Default selection.  Indexing starts at zero.
 
-        tkselection.set(tlMain,86)  #:356
+        tkselection.set(tlMain,{30;86})  #:356, 30
         
         
         tkinsert(tlInfo,"end",text= nbrStudies )

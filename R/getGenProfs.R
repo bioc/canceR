@@ -29,8 +29,8 @@ getGenProfs <- function(){
    police <- tkfont.create(family="arial", size=11)
    tkconfigure(ENV$tl, foreground="black", font=police)
 
-    GenProfsStudies = 0
-    GenProfsRefStudies = 0
+    GenProfsStudies <- 0
+    GenProfsRefStudies <- NULL
     for (i in seq(length(ENV$checked_StudyIndex))){
 
         Si = ENV$checked_StudyIndex[i]
@@ -41,15 +41,15 @@ getGenProfs <- function(){
         
         ENV$n_GenProfs[i] <- nrow(ENV$GenProfs[[i]])
 
-        print(paste("There are", ENV$n_GenProfs[i], "Genetics Profiles in", ENV$checked_Studies_id[i], sep=" "))
+        print(paste0("There are ", ENV$n_GenProfs[i], " Genetics Profiles in ", ENV$checked_Studies_id[i]))
 
         # create progress bar
         progressBar_GenProfs <- tkProgressBar(title = ENV$Studies$name[Si], min = 0,
                                               max = ENV$n_GenProfs[i], width = 400)
-        GenProfRefStudy =0
-        GenProfsStudy = 0
-        GenProfsRefStudy =0
         j=0
+        GenProfsStudy <- 0
+        GenProfRefStudy <- NULL
+        GenProfsRefStudy <- NULL
         for(j in seq(ENV$n_GenProfs[i])){
 
             Sys.sleep(0.1)
@@ -72,7 +72,6 @@ getGenProfs <- function(){
         GenProfsStudies <- cbind(GenProfsStudies, GenProfsStudy)
         GenProfsRefStudies <- cbind(GenProfsRefStudies, GenProfsRefStudy)
     }
-    GenProfsRefStudies <- GenProfsRefStudies[-1]
     ENV$GenProfsRefStudies <- GenProfsRefStudies
     ENV$GenProfsStudies <- GenProfsStudies
 }

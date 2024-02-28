@@ -78,7 +78,7 @@ geteSet <- function(){
                     ProfData <- ProfData[which( apply(!( apply(ProfData,1,is.na) ),2,sum)!=0 ),]
 
                     ## Display AssyData with Tcl Table
-                    title <- paste(ENV$StudyRefGenProf[k],": ", ENV$CasesStudies[ENV$curselectCases[k]+1])
+                    title <- paste0(ENV$StudyRefGenProf[k],": ", ENV$GenProfChoice[k])
                     getInTable(ProfData, title)
                     
                     #####nicData_MultipleCases function
@@ -88,7 +88,7 @@ geteSet <- function(){
                         select("sampleId", dplyr::everything()) 
                         #data.frame(row.names = 1)
                    
-                    ClinicalData <<- ClinicalData
+                    #ClinicalData <<- ClinicalData
                     
                     if(nrow(ClinicalData)==0){
                         msgNoClinData=paste("No Clinical Data are Available for\n", CasesStudies[curselectCases[k]+1])
@@ -109,7 +109,8 @@ geteSet <- function(){
                         #         ClinicalData[,i] <- as.numeric(ClinicalData[,i])
                         #     }
                         # }
-                        title <- paste(ENV$StudyRefCase[k],ENV$GenProfChoice[k], sep=": ")
+                        
+                        title <- paste(ENV$StudyRefCase[k],": ", ENV$CaseChoice[k])
                         getInTable(ClinicalData,title)
                     }       
                     
