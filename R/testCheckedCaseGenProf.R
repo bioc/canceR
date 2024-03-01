@@ -1,12 +1,12 @@
 #' Testing checked appropriate Cases for appropriate Genetic profiles.
 #' @param singleGene specify if the check for querying genetic profile for a specific gene or not (0,1).
-#' @usage testCheckedCaseGenProf()
+#' @usage testCheckedCaseGenProf(singleGene=0)
 #' @return dialog box with warning message
 #' 
 #' @examples 
 #' readRDS(paste(path.package("canceR"),"/extdata/rdata/brca_tcga73genes.rds", sep=""))
 #' \dontrun{
-#' testCheckedCaseGenProf()
+#' testCheckedCaseGenProf(singleGene=0)
 #' }
 #' @export
 testCheckedCaseGenProf <- function(singleGene=0){

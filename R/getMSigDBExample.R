@@ -9,7 +9,7 @@
 #'  }
 getMSigDBExample <- function(){
     
-    ifrm <- function(obj, env = ENV()) {
+    ifrm <- function(obj, env) {
         obj <- deparse(substitute(obj))
         if(exists(obj, envir = env)) {
             rm(list = obj, envir = env)

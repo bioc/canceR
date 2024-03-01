@@ -28,7 +28,7 @@ canceR <- function(){
     #if (!require("cgdsr")) devtools::install_version("cgdsr",version="1.3")
     
     ## connect to cBioPortal API
-    ENV$cgds <- cBioPortal(
+    ENV$cgds <- cBioPortalData::cBioPortal(
         hostname = "www.cbioportal.org",
         protocol = "https",
         api = "/api/v2/api-docs"
