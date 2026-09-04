@@ -73,59 +73,77 @@ import(plyr)
 import(rpart)
 import(tcltk)
 import(tkrplot)
-importFrom(Biobase,ExpressionSet)
-importFrom(Biobase,exprs)
-importFrom(Biobase,openPDF)
-importFrom(Biobase,pData)
-importFrom(Biobase,varLabels)
-importFrom(GSEABase,GeneSet)
-importFrom(GSEABase,GeneSetCollection)
+importFrom(Biobase,
+  ExpressionSet,
+  exprs,
+  openPDF,
+  pData,
+  varLabels
+)
+importFrom(GSEABase,
+  GeneSet,
+  GeneSetCollection
+)
 importFrom(R.methodsS3,setMethodS3)
-importFrom(geNetClassifier,calculateGenesRanking)
-importFrom(geNetClassifier,genesDetails)
-importFrom(grDevices,colors)
-importFrom(grDevices,dev.cur)
-importFrom(grDevices,dev.new)
-importFrom(grDevices,dev.off)
-importFrom(grDevices,graphics.off)
-importFrom(grDevices,jpeg)
-importFrom(grDevices,pdf)
-importFrom(grDevices,png)
-importFrom(grDevices,rainbow)
-importFrom(grDevices,savePlot)
-importFrom(graphics,axis)
-importFrom(graphics,image)
-importFrom(graphics,layout)
-importFrom(graphics,legend)
-importFrom(graphics,lines)
-importFrom(graphics,par)
-importFrom(graphics,plot)
-importFrom(graphics,points)
-importFrom(graphics,text)
-importFrom(phenoTest,ExpressionPhenoTest)
-importFrom(phenoTest,getFc)
-importFrom(phenoTest,getSignif)
-importFrom(stats,as.formula)
-importFrom(stats,cor)
-importFrom(stats,density)
-importFrom(stats,dist)
-importFrom(stats,hclust)
-importFrom(stats,median)
-importFrom(stats,model.matrix)
-importFrom(stats,na.exclude)
-importFrom(stats,p.adjust)
-importFrom(stats,pnorm)
-importFrom(stats,sd)
-importFrom(stats,setNames)
-importFrom(stats,window)
-importFrom(survival,Surv)
-importFrom(survival,cox.zph)
-importFrom(survival,coxph)
-importFrom(survival,survfit)
-importFrom(utils,browseURL)
-importFrom(utils,capture.output)
-importFrom(utils,memory.limit)
-importFrom(utils,read.delim)
-importFrom(utils,read.table)
-importFrom(utils,vignette)
-importFrom(utils,write.table)
+importFrom(geNetClassifier,
+  calculateGenesRanking,
+  genesDetails
+)
+importFrom(grDevices,
+  colors,
+  dev.cur,
+  dev.new,
+  dev.off,
+  graphics.off,
+  jpeg,
+  pdf,
+  png,
+  rainbow,
+  savePlot
+)
+importFrom(graphics,
+  axis,
+  image,
+  layout,
+  legend,
+  lines,
+  par,
+  plot,
+  points,
+  text
+)
+importFrom(phenoTest,
+  ExpressionPhenoTest,
+  getFc,
+  getSignif
+)
+importFrom(stats,
+  as.formula,
+  cor,
+  density,
+  dist,
+  hclust,
+  median,
+  model.matrix,
+  na.exclude,
+  p.adjust,
+  pnorm,
+  sd,
+  setNames,
+  window
+)
+importFrom(survival,
+  Surv,
+  cox.zph,
+  coxph,
+  survfit
+)
+importFrom(utils,
+  browseURL,
+  capture.output,
+  memory.limit,
+  read.delim,
+  read.table,
+  vignette,
+  write.table
+)

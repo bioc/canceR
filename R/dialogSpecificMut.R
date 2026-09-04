@@ -1,6 +1,4 @@
 #' dialog box to Specify Mutation using Regular Expression. Search specific mutation using regular expression.
-#' @usage
-#' getSpecificMut()
 #'
 #' @return a a dataframe with specific mutation informations
 #' @export

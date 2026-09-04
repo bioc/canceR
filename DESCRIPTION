@@ -1,7 +1,7 @@
 Package: canceR
 Type: Package
 Title: A Graphical User Interface for accessing and modeling the Cancer Genomics Data of MSKCC
-Version: 1.47.0
+Version: 1.47.1
 Date: 2024-02-28
 Author: Karim Mezhoud.
     Nuclear Safety & Security Department.
@@ -44,9 +44,9 @@ Suggests:
     knitr,
     rmarkdown,
     BiocStyle
-SystemRequirements: Tktable, BWidget
+SystemRequirements: Tktable, BWidget, pandoc (>= 2.8)
 VignetteBuilder: knitr
 BugReports: https://github.com/kmezhoud/canceR/issues
 biocViews: GUI, GeneExpression, Clustering, GO, GeneSetEnrichment, KEGG, MultipleComparison
-RoxygenNote: 7.3.1
 Encoding: UTF-8
+Config/roxygen2/version: 8.1.0
