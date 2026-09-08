@@ -1,3 +1,7 @@
+CHANGES IN VERSION 1.47.2 (07 September 2026)
+--------------------------------------------
++ add param for dialogSpecificMut
+
 CHANGES IN VERSION 1.47.1 (03 September 2026)
 --------------------------------------------
 + update DESCRIPTION file and add pandoc dependency

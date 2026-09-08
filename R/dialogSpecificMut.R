@@ -1,12 +1,18 @@
 #' dialog box to Specify Mutation using Regular Expression. Search specific mutation using regular expression.
 #'
+#' @usage getSpecificMut(MutData, c)
+#' 
+#' @param MutData Mutation Dataframe
+#' @param c index of checked case 
+#' 
+#' 
 #' @return a a dataframe with specific mutation informations
-#' @export
+#' @export 
 #'
 #' @examples
 #' readRDS(paste(path.package("canceR"),"/extdata/rdata/ucec_tcga_pubGSEA1021.rds", sep=""))
 #' \dontrun{
-#' getSpecificMut()
+#' getSpecificMut(MutData, c)
 #' }
 dialogSpecificMut <- function(MutData, c) {
     

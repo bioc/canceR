@@ -4,7 +4,12 @@
 \alias{dialogSpecificMut}
 \title{dialog box to Specify Mutation using Regular Expression. Search specific mutation using regular expression.}
 \usage{
-getSpecificMut()
+getSpecificMut(MutData, c)
+}
+\arguments{
+\item{MutData}{Mutation Dataframe}
+
+\item{c}{index of checked case}
 }
 \value{
 a a dataframe with specific mutation informations
@@ -15,6 +20,6 @@ dialog box to Specify Mutation using Regular Expression. Search specific mutatio
 \examples{
 readRDS(paste(path.package("canceR"),"/extdata/rdata/ucec_tcga_pubGSEA1021.rds", sep=""))
 \dontrun{
-getSpecificMut()
+getSpecificMut(MutData, c)
 }
 }
